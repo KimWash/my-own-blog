@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# my-own-blog
+-----
 
-## Getting Started
+Next.js를 이용한 마크다운 기반 블로그를 만들어 보고 있어요.
 
-First, run the development server:
+### 이딴거 왜함? 그냥 있던거 쓰지
+음.. vuepress로 기존에 이용하던 블로그의 디자인을 바꿔보려다가 썸네일 등 한계에 부딪혔어요. 그래서 좀 갈아엎어보려고요.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+아.. 그냥 상용 블로그를 쓰면 되지 않냐고요..? 재미 없잖아요! 실력 안 녹슬 겸 토이 느낌으로 계속 들고 가보려고요.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 개발 계획
+기존에 마크다운으로 작성된 글을 모두 안전하게 이전할 수 있도록 준비중이에요. 그리고 순수 Static Page로 관리 되던 기존의 블로그와 다르게 아마 글을 저장하는 서버가 있긴 해야할 것 같아요.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+그리고 에디터도 만들어서 넣어볼 생각입니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+개발 얘기가 아닌 사적인 얘기들도 담아보기 위해서 비밀글 기능 등도 생각중이고요.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+전역할때쯤이면.. 완성되어 있지 않을까요..?
