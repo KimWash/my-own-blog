@@ -19,7 +19,10 @@ Date.prototype.tokenize = function (dateToken: string) {
     s: () => this.getSeconds(),
     a: () => this.getHours() < 12 ? 'AM' : 'PM'
   };
-  let dateString = dateGetterMap[dateToken[0] as DateToken]().toString();
+  const dateGetter = dateGetterMap[dateToken[0] as DateToken]
+  if (typeof dateGetter !== 'function') return dateToken
+
+  let dateString = dateGetter().toString();
   const dateLength = dateString.length;
   // Date 객체에서 가져온 문자열이 포맷 토큰보다 짧으면 앞에 0 추가, 길면 그만큼 제거
   // 오전/오후는 제외.
@@ -32,10 +35,10 @@ Date.prototype.tokenize = function (dateToken: string) {
 };
 
 Date.prototype.format = function (formatString: string) {
+  if (isNaN(this.getDate())) throw new Error('Invalid date')
   let formattedDate = formatString;
   const dateTokens = formatString.split(/[-:,\/ ]/g).filter(token => token.length != 0);
   const dateTokenPattern = /^(\S)\1*$/; // check if all characters are same.
-  console.log(dateTokens)
   if (dateTokens.every((token) => dateTokenPattern.test(token)))
     for (let token of dateTokens) {
 
