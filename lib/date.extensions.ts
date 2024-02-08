@@ -37,7 +37,7 @@ Date.prototype.tokenize = function (dateToken: string) {
 Date.prototype.format = function (formatString: string) {
   if (isNaN(this.getDate())) throw new Error('Invalid date')
   let formattedDate = formatString;
-  const dateTokens = formatString.split(/[-:,\/ ]/g).filter(token => token.length != 0);
+  const dateTokens = formatString.split(/[-:,\/ㄱ-ㅎㅏ-ㅣ가-힣a-ce-ln-rt-wz ]/g).filter(token => token.length != 0);
   const dateTokenPattern = /^(\S)\1*$/; // check if all characters are same.
   if (dateTokens.every((token) => dateTokenPattern.test(token)))
     for (let token of dateTokens) {

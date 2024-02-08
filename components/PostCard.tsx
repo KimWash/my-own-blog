@@ -2,34 +2,59 @@ import { Post } from "@/api/model/Post";
 import Tag from "./Tag";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
+import Link from "next/link";
+
+export type PostCardProps = Post & {
+  containerStyle?: {};
+  containerClassName?: string;
+};
 
 export default function PostCard({
+  id,
   title,
   date,
   description,
   tags,
   thumbnailUrl,
-}: Post) {
+  containerStyle,
+  containerClassName,
+}: PostCardProps) {
   return (
-    <div className="flex flex-col justify-end relative w-full">
-      <Image
-        src={thumbnailUrl ?? placeHolderImage}
-        alt="placeholder"
-        className="w-full opacity-70 backdrop-brightness-50"
-      />
-      <div className="absolute bottom-0 w-full">
-        <div className="flex flex-row justify-between">
-          <p>{title}</p>
-          <p>{date.format("yyyy-MM-dd HH:mm")}</p>
+    <div
+      className="flex flex-col justify-end relative w-full"
+      style={containerStyle}
+    >
+      <Link href={`/post/${id}`}>
+        <div className="relative">
+          <Image
+            draggable={false}
+            src={thumbnailUrl ?? placeHolderImage}
+            alt="placeholder"
+            width="300"
+            height="200"
+            className="w-full opacity-100 "
+          />
+          <div className="bg-black absolute w-full h-full opacity-30 top-0"></div>
         </div>
-        <hr className="border-black" />
-        <div className="flex flex-row justify-between">
-          <p>{description}</p>
+
+        <div className="absolute bottom-0 w-full p-4">
+          <div className="flex flex-row justify-between items-end gap-2">
+            <p className="text-white">{title}</p>
+            <p className="text-nowrap text-white">{date.format("yyyy-MM-dd")}</p>
+          </div>
+          <hr className="border-white" />
+          <div className="flex flex-row justify-between items-center gap-1 pt-1">
+            <p className="text-ellipsis text-nowrap overflow-hidden text-white">
+              {description}
+            </p>
             {tags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
+              <Tag size="sm" key={tag} color="lightgreen">
+                {tag}
+              </Tag>
             ))}
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

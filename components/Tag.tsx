@@ -19,10 +19,12 @@ export default function Tag({
 }: TagProps) {
   return (
     <div
+      className="w-max text-nowrap"
       style={{
         backgroundColor: color,
         borderRadius,
         padding: sizeMap[size],
+        fontSize: sizeMap[size] + 8
       }}
     >
       {children}
