@@ -14,7 +14,7 @@ img.hover-animation:hover {
 
 @media screen and (max-width: 767px) {
   .flex-grid {
-    flex: 0 1 calc(50%);
+    flex: 0 1 calc(100%);
   }
 }
 @media screen and (min-width: 768px) {

@@ -21,9 +21,9 @@ export default function FeaturedBanner({
         <h1 className="font-bold text-3xl pb-2">Featured #{no}</h1>
         <div className="flex flex-row">
           <Image
-            width={200}
-            height={180}
-            className="hover-animation"
+            width={100}
+            height={100}
+            className="hover-animation flex-1 max-w-64 aspect-square"
             src={thumbnailUrl ?? placeHolderImage}
             alt="Thumbnail Image"
           ></Image>

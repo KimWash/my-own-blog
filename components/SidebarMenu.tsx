@@ -26,7 +26,7 @@ export default function SidebarMenu() {
             if (e.target === e.currentTarget) onClose();
           }}
         >
-          <div className="w-1/3 h-full bg-white p-4">
+          <div className="w-80 h-full bg-white p-4">
             <div className="flex justify-between items-center">
               <p className="text-xl font-extrabold">Wh@t !s development?</p>
               <FontAwesomeIcon
