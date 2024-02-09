@@ -18,17 +18,17 @@ export default function FeaturedBanner({
   return (
     <div className="p-5">
       <Link href={`/post/${id}`}>
-        <h1 className="font-bold text-3xl">Featured #{no}</h1>
+        <h1 className="font-bold text-3xl pb-2">Featured #{no}</h1>
         <div className="flex flex-row">
           <Image
-          width={200}
+            width={200}
             height={180}
             className="hover-animation"
             src={thumbnailUrl ?? placeHolderImage}
             alt="Thumbnail Image"
           ></Image>
-          <div className="px-4 flex flex-col justify-between">
-            <div>
+          <div className="px-4 flex flex-col justify-between ">
+            <div className="hover:underline">
               <h2 className="font-bold text-2xl">{title}</h2>
               <h4>{description}</h4>
             </div>

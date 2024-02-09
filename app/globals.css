@@ -19,7 +19,7 @@ img.hover-animation:hover {
 }
 @media screen and (min-width: 768px) {
   .flex-grid {
-    flex: 0 1 calc(33.3333%); /* <-- adjusting for margin */
+    flex: 0 1 calc(100% / 3); /* <-- adjusting for margin */
   }
 }
 @media screen and (min-width: 1024px) {
@@ -30,10 +30,11 @@ img.hover-animation:hover {
 
 .search-box {
   border: none;
+  transition: width 1s ease;
 }
 
 .search-field {
-  display: none;
+  width: 0
 }
 
 .search-box:hover {
@@ -43,7 +44,7 @@ img.hover-animation:hover {
 }
 
 .search-box:hover > .search-field {
-  display:block
+  width:auto
 }
 
 .search-box:has(.search-field:focus) {
@@ -51,6 +52,17 @@ img.hover-animation:hover {
   border-style: solid;
   border-color: rgb(209 213 219);
 }
+
 .search-field:focus {
-  display:block
+  width: auto
+}
+
+.post-card:hover .image-box {
+  transform: scale(1.2) rotate(2deg);
+}
+
+.image-box {
+  object-fit: cover;
+  transition: width,height,transform .7s ease;
+  will-change: width,height,transform;
 }
