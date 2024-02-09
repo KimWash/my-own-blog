@@ -21,7 +21,7 @@ export default function PostCard({
 }: PostCardProps) {
   return (
     <div
-      className="flex flex-col justify-end relative w-full"
+      className={`flex flex-col justify-end relative w-full ${containerClassName}`}
       style={containerStyle}
     >
       <Link href={`/post/${id}`}>

@@ -1,4 +1,5 @@
 import FeaturedBanner from "@/components/FeaturedBanner";
+import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import Image from "next/image";
 
@@ -16,6 +17,7 @@ const generateRandomString = (length: number) => {
 export default function Home() {
   return (
     <div className="flex flex-col">
+      <Header />
       <FeaturedBanner
         title="사지방에서 코딩하기 - VSCode Tunneling"
         description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
@@ -29,20 +31,22 @@ export default function Home() {
         className="flex flex-row flex-wrap w-full relative"
         style={{ flexFlow: "row wrap" }}
       >
-        {Array(6).fill(1).map((_, i) => (
-          <PostCard
-            key={i}
-            id={i}
-            title="사지방에서 코딩하기 - VSCode Tunneling"
-            description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
-            date={new Date()}
-            tags={["코딩"]}
-            thumbnailUrl={`https://picsum.photos/seed/${generateRandomString(
-              10
-            )}/400/280`}
-            containerStyle={{ flex: "0 1 calc(33.333333%)" }}
-          />
-        ))}
+        {Array(6)
+          .fill(1)
+          .map((_, i) => (
+            <PostCard
+              key={i}
+              id={i}
+              title="사지방에서 코딩하기 - VSCode Tunneling"
+              description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
+              date={new Date()}
+              tags={["코딩"]}
+              thumbnailUrl={`https://picsum.photos/seed/${generateRandomString(
+                10
+              )}/400/280`}
+              containerClassName="flex-grid"
+            />
+          ))}
       </div>
       <div></div>
       <div></div>

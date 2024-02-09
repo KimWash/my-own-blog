@@ -1,8 +1,56 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
+
+
 img.hover-animation:hover {
   transform: scale(1.04);
   transition: width,height,transform .3s ease;
+}
+
+@media screen and (max-width: 767px) {
+  .flex-grid {
+    flex: 0 1 calc(50%);
+  }
+}
+@media screen and (min-width: 768px) {
+  .flex-grid {
+    flex: 0 1 calc(33.3333%); /* <-- adjusting for margin */
+  }
+}
+@media screen and (min-width: 1024px) {
+  .flex-grid {
+    flex: 0 1 calc(25%); /* <-- adjusting for margin */
+  }
+}
+
+.search-box {
+  border: none;
+}
+
+.search-field {
+  display: none;
+}
+
+.search-box:hover {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(209 213 219);
+}
+
+.search-box:hover > .search-field {
+  display:block
+}
+
+.search-box:has(.search-field:focus) {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(209 213 219);
+}
+.search-field:focus {
+  display:block
 }
