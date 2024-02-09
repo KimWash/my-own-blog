@@ -1,6 +1,8 @@
 # my-own-blog
 -----
 
+https://my-own-blog-xi.vercel.app/ 에서 진행 현황 지켜보기
+
 Next.js를 이용한 마크다운 기반 블로그를 만들어 보고 있어요.
 
 ### 이딴거 왜함? 그냥 있던거 쓰지
