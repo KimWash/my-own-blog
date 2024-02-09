@@ -66,3 +66,11 @@ img.hover-animation:hover {
   transition: width,height,transform .7s ease;
   will-change: width,height,transform;
 }
+
+
+ul.sidebar-menu li {
+  margin-top: 1rem
+}
+ul.sidebar-menu li:hover {
+  text-decoration: underline;
+}

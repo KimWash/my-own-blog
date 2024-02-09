@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import SidebarMenu from "./SidebarMenu";
 
 export default function Header() {
   return (
@@ -21,7 +22,7 @@ export default function Header() {
             </button>
           </div>
         </form>
-        <FontAwesomeIcon icon={faBars} size="xl" />
+        <SidebarMenu/>
       </div>
     </div>
   );
