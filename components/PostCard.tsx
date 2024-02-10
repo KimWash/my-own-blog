@@ -40,20 +40,22 @@ export default function PostCard({
           <div className="absolute bottom-0 w-full p-4">
             <div className="flex flex-row justify-between items-end gap-2">
               <p className="text-white">{title}</p>
-              <p className="text-nowrap text-white">
+              <p className="whitespace-nowrap text-white">
                 {date.format("yyyy-MM-dd")}
               </p>
             </div>
             <hr className="border-white" />
             <div className="flex flex-row justify-between items-center gap-1 pt-1">
-              <p className="text-ellipsis text-nowrap overflow-hidden text-white">
+              <p className="text-ellipsis whitespace-nowrap overflow-hidden text-white">
                 {description}
               </p>
-              {tags.map((tag) => (
-                <Tag size="sm" key={tag} color="lightgreen">
-                  {tag}
-                </Tag>
-              ))}
+              <div>
+                {tags.map((tag) => (
+                  <Tag size="sm" key={tag} color="lightgreen">
+                    {tag}
+                  </Tag>
+                ))}
+              </div>
             </div>
           </div>
         </div>

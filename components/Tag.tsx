@@ -19,7 +19,7 @@ export default function Tag({
 }: TagProps) {
   return (
     <div
-      className="w-max text-nowrap"
+      className="inline-block whitespace-nowrap"
       style={{
         backgroundColor: color,
         borderRadius,

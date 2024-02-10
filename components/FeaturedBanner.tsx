@@ -33,7 +33,7 @@ export default function FeaturedBanner({
               <h4>{description}</h4>
             </div>
             <div className="flex flex-row justify-between items-center gap-1 pt-1">
-              <p className="text-ellipsis text-nowrap overflow-hidden">
+              <p className="text-ellipsis whitespace-nowrap overflow-hidden">
                 {date.format("yyyy년 MM월 dd일")} 게시
               </p>
               {tags.map((tag) => (

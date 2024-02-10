@@ -1,11 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {  faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import SidebarMenu from "./SidebarMenu";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center p-4 border border-b-gray-300">
+    <div
+      className="flex justify-between items-center p-4 border-b-gray-300"
+      style={{ borderBottomWidth: 1 }}
+    >
       <Link href="/" className="font-extrabold text-3xl">
         Wh@t !s development?
       </Link>
@@ -22,7 +25,7 @@ export default function Header() {
             </button>
           </div>
         </form>
-        <SidebarMenu/>
+        <SidebarMenu />
       </div>
     </div>
   );
