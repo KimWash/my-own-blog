@@ -5,17 +5,17 @@ import UAParser from "ua-parser-js";
 
 export default function usePlatform() {
   const ua = useMemo(
-    () => new UAParser(window.navigator.userAgent).getResult(),
+    () => typeof window !== 'undefined' ? new UAParser(window.navigator.userAgent).getResult() : undefined,
     []
   );
 
   const isMobile = useMemo(
     () =>
-      ua.device.type === "mobile" ||
+      ua !== undefined ? ua.device.type === "mobile" ||
       ua.device.type === "tablet" ||
       ua.os.name === "Android" ||
-      ua.os.name === "iOS",
-    [ua.device.type, ua.os.name]
+      ua.os.name === "iOS": undefined,
+    [ua]
   );
 
   return {

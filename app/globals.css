@@ -36,36 +36,24 @@ img.hover-animation:hover {
     transition: width 1s ease;
   }
   
-  .search-field {
-    width: 0
-  }
-  
-  .search-box:hover {
+  .search-box:hover,  .search-box:has(.search-field:focus) {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(209 213 219);
   }
   
-  .search-box:hover > .search-field {
+  .search-box:hover > .search-field,  .search-field:focus  {
     width:auto
   }
-  
-  .search-box:has(.search-field:focus) {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(209 213 219);
-  }
-  
-  .search-field:focus {
-    width: auto
-  }
+
+
 }
-.search-box .search-close {
+.search-area .search-close {
   display:  none
 }
 
 @media screen and (max-width: 768px) {
-  .search-box.opened {
+  .search-area.opened {
     position: fixed;
     top:0;
     left: 0;
@@ -74,16 +62,24 @@ img.hover-animation:hover {
     z-index: 30;
     background: white;
     border-radius: 0;
+    align-items: center;
+    justify-content: center;
   }
-  .search-box.opened .search-close {
+  .search-area.opened .search-close {
     display:  block
   }
-  .search-box.opened .search-field {
+  .search-area.opened .search-box {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(209 213 219);
     border-radius: 9999px;
-    width: auto
+  }
+  .search-area.opened .search-field {
+    width: auto;
+  }
+
+  .search-close {
+    float:right
   }
 }
 

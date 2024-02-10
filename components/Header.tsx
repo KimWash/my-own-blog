@@ -12,16 +12,23 @@ export default function Header() {
   const router = useRouter();
   const { isMobile } = usePlatform();
 
-  const onSearchButtonClicked = (e: FormEvent<HTMLFormElement>) => {
+  const search = (query: string) => router.push("/search?query=" + query);
+
+  /**
+   * Todo: handleSubmit이 모바일인 경우 submit을 검색 버튼 클릭으로 간주하고
+   * 검색영역 확대를 시행하는 것 자체가 SRP 위반.
+   * 따라서 어차피 server component가 아닌 client component로 관리할 것이라면
+   * 그냥 form submit 이벤트와 구분하자~
+   */
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!isMobile)
-      router.push(
-        "/search?query=" + new FormData(e.currentTarget).get("query")
-      );
+    const query = new FormData(e.currentTarget).get("query")?.toString();
+    if (!isMobile && query) search(query);
     else {
       const searchBoxClassList = searchBoxRef.current?.classList;
       if (searchBoxClassList?.contains("opened"))
-        searchBoxClassList?.remove("opened");
+        if (query) search(query);
+        else alert("검색어를 입력하세요.");
       else searchBoxClassList?.add("opened");
     }
   };
@@ -37,23 +44,25 @@ export default function Header() {
         Wh@t !s development?
       </Link>
       <div className="flex gap-4 items-center">
-        <form onSubmit={onSearchButtonClicked}>
+        <form onSubmit={handleSubmit}>
           <div
             ref={searchBoxRef}
-            className="search-box flex items-center relative p-1 pl-3 pr-2 rounded-full"
+            className="search-area flex flex-row justify-start items-center gap-2"
           >
-            <input
-              placeholder="무엇을 검색해볼까요.."
-              className="search-field w-0"
-              name="query"
-            ></input>
-            <button type="submit" className="search-icon">
-              <FontAwesomeIcon icon={faSearch} size="lg" />
-            </button>
+            <div className="search-box flex items-center relative p-1 pl-3 pr-2 rounded-full">
+              <input
+                placeholder="무엇을 검색해볼까요.."
+                className="search-field outline-none w-0"
+                name="query"
+              ></input>
+              <button type="submit" className="search-icon">
+                <FontAwesomeIcon icon={faSearch} size="lg" />
+              </button>
+            </div>
             <FontAwesomeIcon
-            className='search-close'
+              className="search-close"
               icon={faClose}
-              size="lg"
+              size="xl"
               onClick={() => {
                 const searchBoxClassList = searchBoxRef.current?.classList;
                 searchBoxClassList?.remove("opened");
