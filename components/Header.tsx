@@ -6,7 +6,8 @@ import Link from "next/link";
 import SidebarMenu from "./SidebarMenu";
 import { useRouter } from "next/navigation";
 import usePlatform from "@/lib/usePlatform";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
+import FullScreenSearch from "./FullScreenSearch";
 
 export default function Header() {
   const router = useRouter();
@@ -25,16 +26,14 @@ export default function Header() {
     const query = new FormData(e.currentTarget).get("query")?.toString();
     if (!isMobile && query) search(query);
     else {
-      const searchBoxClassList = searchBoxRef.current?.classList;
-      if (searchBoxClassList?.contains("opened"))
+      if (isFullScreenSearch)
         if (query) search(query);
         else alert("검색어를 입력하세요.");
-      else searchBoxClassList?.add("opened");
+      else setIsFullScreenSearch(true);
     }
   };
 
-  const searchBoxRef = useRef<HTMLDivElement>(null);
-
+  const [isFullScreenSearch, setIsFullScreenSearch] = useState(false);
   return (
     <div
       className="flex justify-between items-center p-4 border-b-gray-300"
@@ -45,10 +44,11 @@ export default function Header() {
       </Link>
       <div className="flex gap-4 items-center">
         <form onSubmit={handleSubmit}>
-          <div
-            ref={searchBoxRef}
-            className="search-area flex flex-row justify-start items-center gap-2"
-          >
+          {isFullScreenSearch && (
+            <FullScreenSearch onClose={() => setIsFullScreenSearch(false)} />
+          )}
+
+          <div className="search-area flex flex-row justify-start items-center gap-2">
             <div className="search-box flex items-center relative p-1 pl-3 pr-2 rounded-full">
               <input
                 placeholder="무엇을 검색해볼까요.."
@@ -59,15 +59,6 @@ export default function Header() {
                 <FontAwesomeIcon icon={faSearch} size="lg" />
               </button>
             </div>
-            <FontAwesomeIcon
-              className="search-close"
-              icon={faClose}
-              size="xl"
-              onClick={() => {
-                const searchBoxClassList = searchBoxRef.current?.classList;
-                searchBoxClassList?.remove("opened");
-              }}
-            />
           </div>
         </form>
         <SidebarMenu />

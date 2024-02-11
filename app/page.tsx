@@ -1,7 +1,6 @@
 import FeaturedBanner from "@/components/FeaturedBanner";
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
-import Image from "next/image";
 
 const generateRandomString = (length: number) => {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
