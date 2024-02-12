@@ -53,14 +53,9 @@ img.hover-animation:hover {
 }
 
 @media screen and (max-width: 768px) {
-  .search-area {
-    position:unset;
-    width: 100%
-  }
-
   .search-area.opened {
     position: fixed;
-    top: 0;
+    top:0;
     left: 0;
     right: 0;
     bottom: 0;
