@@ -29,21 +29,22 @@ img.hover-animation:hover {
 }
 
 @media screen and (min-width: 768px) {
-
-  
   .search-box {
     border: none;
-    transition: width 1s ease;
   }
   
-  .search-box:hover,  .search-box:has(.search-field:focus) {
+  .search-box:hover, 
+  .search-box:has(.search-field:focus) {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(209 213 219);
   }
   
   .search-box:hover > .search-field,  .search-field:focus  {
-    width:auto
+    display:block
+  }
+  .search-box .search-field {
+    display:none
   }
 
 
@@ -53,9 +54,27 @@ img.hover-animation:hover {
 }
 
 @media screen and (max-width: 768px) {
+  .search-area {
+    width: unset;
+    position: unset;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    z-index: unset;
+    background: unset;
+    border-radius: unset;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .search-area .search-field {
+    visibility: hidden;
+  }
+
   .search-area.opened {
+    width: auto;
     position: fixed;
-    top:0;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -74,8 +93,9 @@ img.hover-animation:hover {
     border-bottom-color: lightgray;
     border-radius: 0;
   }
+
   .search-area.opened .search-field {
-    width: 50vw;
+    visibility: visible;
     font-size: x-large;
     font-weight: bold;
   }

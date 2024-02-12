@@ -12,7 +12,7 @@ export default function SidebarMenu() {
   const onClose = () => setSidebarOpened(false);
 
   return (
-    <div>
+    <>
       <FontAwesomeIcon
         icon={faBars}
         size="xl"
@@ -37,8 +37,12 @@ export default function SidebarMenu() {
               />
             </div>
             <ul className="sidebar-menu">
-              <li><Link href='/'>Home</Link></li>
-              <li><Link href='/about'>About Me</Link></li>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/about">About Me</Link>
+              </li>
               {menus.map((menu) => (
                 <li key={menu.id}>
                   <Link href={menu.id}>{menu.name}</Link>
@@ -48,6 +52,6 @@ export default function SidebarMenu() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

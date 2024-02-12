@@ -12,7 +12,6 @@ const SearchBox = dynamic(() => import("./SearchBox"), { ssr: false });
 export default function Header() {
   const router = useRouter();
 
-  const search = (query: string) => router.push("/search?query=" + query);
 
   /**
    * Todo: handleSubmit이 모바일인 경우 submit을 검색 버튼 클릭으로 간주하고
@@ -29,7 +28,7 @@ export default function Header() {
       <Link href="/" className="font-extrabold text-xl">
         Wh@t !s development?
       </Link>
-      <div className="flex gap-4 items-center">
+      <div className="flex gap-4 items-center relative">
         <SearchBox />
         <SidebarMenu />
       </div>
