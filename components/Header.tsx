@@ -5,12 +5,12 @@ import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import SidebarMenu from "./SidebarMenu";
 import { useRouter } from "next/navigation";
-import usePlatform from "@/lib/usePlatform";
-import { FormEvent, useRef } from "react";
+import dynamic from "next/dynamic";
+
+const SearchBox = dynamic(() => import("./SearchBox"), { ssr: false });
 
 export default function Header() {
   const router = useRouter();
-  const { isMobile } = usePlatform();
 
   const search = (query: string) => router.push("/search?query=" + query);
 
@@ -20,20 +20,6 @@ export default function Header() {
    * 따라서 어차피 server component가 아닌 client component로 관리할 것이라면
    * 그냥 form submit 이벤트와 구분하자~
    */
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const query = new FormData(e.currentTarget).get("query")?.toString();
-    if (!isMobile && query) search(query);
-    else {
-      const searchBoxClassList = searchBoxRef.current?.classList;
-      if (searchBoxClassList?.contains("opened"))
-        if (query) search(query);
-        else alert("검색어를 입력하세요.");
-      else searchBoxClassList?.add("opened");
-    }
-  };
-
-  const searchBoxRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -44,32 +30,7 @@ export default function Header() {
         Wh@t !s development?
       </Link>
       <div className="flex gap-4 items-center">
-        <form onSubmit={handleSubmit}>
-          <div
-            ref={searchBoxRef}
-            className="search-area flex flex-row justify-start items-center gap-2"
-          >
-            <div className="search-box flex items-center relative p-1 pl-3 pr-2 rounded-full">
-              <input
-                placeholder="무엇을 검색해볼까요.."
-                className="search-field outline-none w-0"
-                name="query"
-              ></input>
-              <button type="submit" className="search-icon">
-                <FontAwesomeIcon icon={faSearch} size="lg" />
-              </button>
-            </div>
-            <FontAwesomeIcon
-              className="search-close"
-              icon={faClose}
-              size="xl"
-              onClick={() => {
-                const searchBoxClassList = searchBoxRef.current?.classList;
-                searchBoxClassList?.remove("opened");
-              }}
-            />
-          </div>
-        </form>
+        <SearchBox />
         <SidebarMenu />
       </div>
     </div>

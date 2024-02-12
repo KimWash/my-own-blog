@@ -69,17 +69,20 @@ img.hover-animation:hover {
     display:  block
   }
   .search-area.opened .search-box {
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(209 213 219);
-    border-radius: 9999px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+    border-radius: 0;
+
   }
   .search-area.opened .search-field {
     width: auto;
+    font-size: x-large;
+    font-weight: bold;
   }
-
-  .search-close {
-    float:right
+  
+  .search-area.opened .search-close {
+    
   }
 }
 
