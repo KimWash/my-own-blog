@@ -4,12 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
-* { font-family: 'Spoqa Han Sans Neo', 'sans-serif'; }
-
+* {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
 
 img.hover-animation:hover {
   transform: scale(1.04);
-  transition: width,height,transform .3s ease;
+  transition: width, height, transform 0.3s ease;
 }
 
 @media screen and (max-width: 767px) {
@@ -32,25 +33,24 @@ img.hover-animation:hover {
   .search-box {
     border: none;
   }
-  
-  .search-box:hover, 
+
+  .search-box:hover,
   .search-box:has(.search-field:focus) {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(209 213 219);
   }
-  
-  .search-box:hover > .search-field,  .search-field:focus  {
-    display:block
+
+  .search-box:hover > .search-field,
+  .search-field:focus {
+    display: block;
   }
   .search-box .search-field {
-    display:none
+    display: none;
   }
-
-
 }
 .search-area .search-close {
-  display:  none
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -68,7 +68,7 @@ img.hover-animation:hover {
     justify-content: unset;
   }
   .search-area .search-field {
-    visibility: hidden;
+    display: none;
   }
 
   .search-area.opened {
@@ -85,7 +85,7 @@ img.hover-animation:hover {
     justify-content: center;
   }
   .search-area.opened .search-close {
-    display:  block
+    display: block;
   }
   .search-area.opened .search-box {
     border-bottom-width: 2px;
@@ -95,11 +95,11 @@ img.hover-animation:hover {
   }
 
   .search-area.opened .search-field {
-    visibility: visible;
-    font-size: x-large;
+    display: block;
+    width: 50vw;
+    font-size: large;
     font-weight: bold;
   }
-  
 }
 
 .post-card:hover .image-box {
@@ -108,13 +108,12 @@ img.hover-animation:hover {
 
 .image-box {
   object-fit: cover;
-  transition: width,height,transform .7s ease;
-  will-change: width,height,transform;
+  transition: width, height, transform 0.7s ease;
+  will-change: width, height, transform;
 }
 
-
 ul.sidebar-menu li {
-  margin-top: 1rem
+  margin-top: 1rem;
 }
 ul.sidebar-menu li:hover {
   text-decoration: underline;
