@@ -73,17 +73,13 @@ img.hover-animation:hover {
     border-bottom-style: solid;
     border-bottom-color: lightgray;
     border-radius: 0;
-
   }
   .search-area.opened .search-field {
-    width: auto;
+    width: 50vw;
     font-size: x-large;
     font-weight: bold;
   }
   
-  .search-area.opened .search-close {
-    
-  }
 }
 
 .post-card:hover .image-box {
