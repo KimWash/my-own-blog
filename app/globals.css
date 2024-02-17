@@ -118,3 +118,39 @@ ul.sidebar-menu li {
 ul.sidebar-menu li:hover {
   text-decoration: underline;
 }
+
+.animated-sidebar-appear {
+  opacity: 0;
+}
+
+.animated-sidebar-enter {
+  opacity: 0;
+}
+.animated-sidebar-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.animated-sidebar-exit {
+  opacity: 1;
+}
+.animated-sidebar-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+.animated-sidebar-exit-done {
+  display:none;
+}
+.animated-sidebar .sidebar-content {
+  transform: translate(20rem)
+}
+.animated-sidebar-enter .sidebar-content {
+  transform: translate(0);
+}
+/* .animated-sidebar-exit .sidebar-content {
+  transform: translate(20rem);
+}
+.animated-sidebar-exit-active .sidebar-content {
+  transform: translate(0, 0);
+  transition: transform 200ms;
+} */

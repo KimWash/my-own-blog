@@ -6,6 +6,7 @@ import Link from "next/link";
 import SidebarMenu from "./SidebarMenu";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import SidebarDemo from "./SidebarDemo";
 
 const SearchBox = dynamic(() => import("./SearchBox"), { ssr: false });
 
@@ -31,6 +32,7 @@ export default function Header() {
       <div className="flex gap-4 items-center relative">
         <SearchBox />
         <SidebarMenu />
+        {/* <SidebarDemo/> */}
       </div>
     </div>
   );
