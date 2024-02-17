@@ -157,3 +157,7 @@ ul.sidebar-menu li:hover {
   transform: translate(0, 0);
   transition: transform 200ms;
 } */
+
+.specs p {
+  margin-bottom: 0.5rem
+}

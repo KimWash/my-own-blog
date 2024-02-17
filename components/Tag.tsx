@@ -1,6 +1,7 @@
 export interface TagProps {
   children: React.ReactNode;
   color?: string;
+  fontColor?: string;
   size?: "sm" | "md" | "lg";
   borderRadius?: number;
 }
@@ -13,7 +14,8 @@ const sizeMap = {
 
 export default function Tag({
   children,
-  color = "lightgray",
+  color = "#4781ff",
+  fontColor = "white",
   size = "md",
   borderRadius = 10,
 }: TagProps) {
@@ -23,8 +25,9 @@ export default function Tag({
       style={{
         backgroundColor: color,
         borderRadius,
+        color: fontColor,
         padding: sizeMap[size],
-        fontSize: sizeMap[size] + 8
+        fontSize: sizeMap[size] + 8,
       }}
     >
       {children}
