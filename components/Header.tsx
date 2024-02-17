@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <div
-      className="flex justify-between items-center p-4 border-b-gray-300"
+      className="flex w-full justify-between items-center p-4 border-b-gray-300"
       style={{ borderBottomWidth: 1 }}
     >
       <Link href="/" className="font-extrabold text-xl">

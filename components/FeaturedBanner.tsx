@@ -37,7 +37,7 @@ export default function FeaturedBanner({
                 {date.format("yyyy년 MM월 dd일")} 게시
               </p>
               {tags.map((tag) => (
-                <Tag size="sm" key={tag} color="lightgreen">
+                <Tag size="sm" key={tag} color="lightgreen" fontColor="black">
                   {tag}
                 </Tag>
               ))}

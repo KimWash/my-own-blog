@@ -8,6 +8,14 @@
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 
+html {
+  height: 100%
+}
+
+body { 
+  height: 100%
+}
+
 img.hover-animation:hover {
   transform: scale(1.04);
   transition: width, height, transform 0.3s ease;
@@ -150,14 +158,11 @@ ul.sidebar-menu li:hover {
 .animated-sidebar-enter .sidebar-content {
   transform: translate(0);
 }
-/* .animated-sidebar-exit .sidebar-content {
-  transform: translate(20rem);
-}
-.animated-sidebar-exit-active .sidebar-content {
-  transform: translate(0, 0);
-  transition: transform 200ms;
-} */
 
-.specs p {
-  margin-bottom: 0.5rem
+.specs * {
+  margin-bottom: 0.3rem
 }
+.specs * a:hover {
+  text-decoration: underline;
+}
+

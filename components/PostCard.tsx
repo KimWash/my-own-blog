@@ -51,7 +51,7 @@ export default function PostCard({
               </p>
               <div>
                 {tags.map((tag) => (
-                  <Tag size="sm" key={tag} color="lightgreen">
+                  <Tag size="sm" key={tag} color="lightgreen" fontColor="black">
                     {tag}
                   </Tag>
                 ))}
