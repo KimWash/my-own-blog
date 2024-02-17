@@ -32,6 +32,8 @@ img.hover-animation:hover {
 @media screen and (min-width: 768px) {
   .search-box {
     border: none;
+    width: min-content;
+    transition: width 0.2s ease-in-out;
   }
 
   .search-box:hover,
@@ -43,10 +45,11 @@ img.hover-animation:hover {
 
   .search-box:hover > .search-field,
   .search-field:focus {
-    display: block;
+    width: 240px;
   }
   .search-box .search-field {
-    display: none;
+    width:0;
+    transition: width 0.2s ease-in-out
   }
 }
 .search-area .search-close {
