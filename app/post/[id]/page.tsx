@@ -7,9 +7,13 @@ import { remark } from "remark";
 import html from "remark-html";
 
 export default async function Page({ params }: { params: { id: number } }) {
+  console.log(params, getBaseUrl())
   const posts = (await fetch(getBaseUrl() + "/api/post/" + params.id, {
     cache: "no-cache",
-  }).then((res) => res.json())) as PostDetail;
+  }).then((res) => {
+    console.log(res)
+    return res.json()
+  })) as PostDetail;
   const matterResult = matter(posts.content);
   const postContent = await (await remark().use(html).process(matterResult.content)).toString();
   return (
