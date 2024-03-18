@@ -37,10 +37,7 @@ export default function SidebarMenu() {
             if (target === currentTarget) onClose();
           }}
         >
-          <div
-            className="w-80 h-full bg-white p-4 sidebar-content"
-
-          >
+          <div className="w-80 h-full bg-white p-4 sidebar-content">
             <div className="flex justify-between items-center">
               <p className="text-xl font-extrabold">Wh@t !s development?</p>
               <FontAwesomeIcon
@@ -52,14 +49,35 @@ export default function SidebarMenu() {
             </div>
             <ul className="sidebar-menu">
               <li>
-                <Link href="/">Home</Link>
+                <Link
+                  href="/"
+                  onClick={() => {
+                    setSidebarOpened(false);
+                  }}
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link href="/about">About Me</Link>
+                <Link
+                  href="/about"
+                  onClick={() => {
+                    setSidebarOpened(false);
+                  }}
+                >
+                  About Me
+                </Link>
               </li>
               {menus.map((menu) => (
                 <li key={menu.id}>
-                  <Link href={menu.id}>{menu.name}</Link>
+                  <Link
+                    href={menu.id}
+                    onClick={() => {
+                      setSidebarOpened(false);
+                    }}
+                  >
+                    {menu.name}
+                  </Link>
                 </li>
               ))}
             </ul>

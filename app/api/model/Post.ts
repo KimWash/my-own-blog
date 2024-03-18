@@ -6,4 +6,5 @@ export interface Post {
   description: string
   tags: string[]
   thumbnailUrl?: string
+  content: string
 }

@@ -74,36 +74,12 @@ export default function AboutMe() {
         </div>
       </FullScreen.Page>
       <FullScreen.Page style={{ background: whiteToBlack }}>
-        <div className="flex-1 flex flex-wrap flex-row p-3 gap-3">
-          <PanelItem style={{ scale: three }}>
-            인천대학교
-            <br />
-            2학년
-            <br />
-            휴학중
+        <motion.div style={{ opacity: scrollYProgress }} className="flex-1 flex flex-wrap flex-row p-3 gap-3">
+
+          <PanelItem>
+            인천대학교 2학년 재학중
           </PanelItem>
-          <PanelItem style={{ scale: two }}>
-            인천대학교
-            <br />
-            2학년
-            <br />
-            휴학중
-          </PanelItem>
-          <PanelItem style={{ scale: one }}>
-            인천대학교
-            <br />
-            2학년
-            <br />
-            휴학중
-          </PanelItem>
-          <PanelItem style={{ scale: scrollYProgress }}>
-            인천대학교
-            <br />
-            2학년
-            <br />
-            휴학중
-          </PanelItem>
-        </div>
+        </motion.div>
       </FullScreen.Page>
     </FullScreen.Container>
   );
