@@ -6,5 +6,8 @@ export interface Post {
   description: string
   tags: string[]
   thumbnailUrl?: string
-  content: string
+  content?: string
 }
+
+export type PostDetail = Post & {content: string};
+export type PostBannerDto = Post
