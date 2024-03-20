@@ -1,4 +1,4 @@
-import { Post } from "@/app/api/model/Post";
+import { Post } from "@/lib/model/Post";
 import Tag from "./Tag";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";

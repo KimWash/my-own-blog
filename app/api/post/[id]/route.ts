@@ -1,4 +1,4 @@
-import { Post } from "../../model/Post";
+import { PostDetail } from "../../../../lib/model/Post";
 
 export async function GET(
   request: Request,
@@ -13,6 +13,6 @@ export async function GET(
     tags: ['태그1', '태그2'],
     content: `# 1\n## 2\n### 3\n개행 안된거\n\n개행 된거\n\n\`This is code\``,
     thumbnailUrl: 'https://picsum.photos/seed/picsum/400/280'
-  } as Post;
+  } as PostDetail;
   return Response.json(post)
 }

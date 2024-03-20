@@ -1,18 +1,20 @@
-import { MongoClient } from 'mongodb'
+import mongoose, { Mongoose } from "mongoose";
+let connectDB: Promise<Mongoose>;
 
-const url =
-  'mongodb+srv://ckm0728wash:QsNasozTHxE2vIg4@my-own-blog.1nd5me2.mongodb.net/?retryWrites=true&w=majority&appName=my-own-blog'
-const options: any = { useNewUrlParser: true }
-let connectDB: Promise<MongoClient>
-
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   // 개발 중 재실행을 막음
   if (!global._mongo) {
-    global._mongo = new MongoClient(url, options).connect()
+    global._mongo = mongoose
+    .set({ debug: true, strictQuery: false })
+    .connect(process.env.NEXT_MONGO_URL)
+    .then((mongoose) => mongoose);
   }
-  connectDB = global._mongo
+  connectDB = global._mongo;
 } else {
-  connectDB = new MongoClient(url, options).connect()
+  connectDB = mongoose
+    .set({ debug: true, strictQuery: false })
+    .connect(process.env.NEXT_MONGO_URL)
+    .then((mongoose) => mongoose);
 }
 
-export { connectDB }
+export { connectDB };

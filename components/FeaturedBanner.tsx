@@ -1,6 +1,6 @@
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
-import {  PostBannerDto } from "@/app/api/model/Post";
+import { PostBannerDto } from "@/lib/model/Post";
 import Link from "next/link";
 import Tag from "./Tag";
 
