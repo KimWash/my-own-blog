@@ -17,10 +17,13 @@ export default async function Page({ params }: { params: { id: number } }) {
   //   return res.json()
   // })) as PostDetail;
   // mongoose test
+  console.log('Initializing mongoose with this url: ',process.env.NEXT_MONGO_URL);
   await mongoose
   .set({ debug: true, strictQuery: false })
   .connect(process.env.NEXT_MONGO_URL)
   .then((mongoose) => mongoose);
+  console.log('done')
+
 
   const posts = (await (Post.find())).map(doc => doc.toObject())[0];
   const matterResult = matter(posts.content);
