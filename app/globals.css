@@ -8,6 +8,12 @@
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 
+h1 {
+  margin:0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
 html {
   height: 100%
 }
@@ -166,3 +172,15 @@ ul.sidebar-menu li:hover {
   text-decoration: underline;
 }
 
+
+.post-content h2{
+  font-size: 2rem;
+}
+.post-content h3 {
+  font-size: 1.5rem;
+}
+
+.post-content code {
+  background-color: #282c34;
+  color: #a9b7c6;
+} 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+// import "normalize.css";
 import "./globals.css";
-import "normalize.css";
 import "@/lib/global.date.extensions";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
