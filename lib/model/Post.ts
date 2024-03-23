@@ -10,9 +10,18 @@ export const PostSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
+  create_dt: {
     type: Date,
     required: true,
+  },
+  update_dt: {
+    type: Date,
+  },
+  delete_dt: {
+    type: Date,
+  },
+  is_deleted: {
+    type: Boolean,
   },
   description: {
     type: String,

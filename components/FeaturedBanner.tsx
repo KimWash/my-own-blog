@@ -11,7 +11,7 @@ export default function FeaturedBanner({
   thumbnailUrl,
   title = "사지방에서 코딩하기 - VSCode Tunneling",
   description = "본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림",
-  date = new Date(),
+  create_dt = new Date(),
   no = 1,
   tags = [],
 }: FeaturedBannerProps) {
@@ -34,7 +34,7 @@ export default function FeaturedBanner({
             </div>
             <div className="flex flex-row justify-between items-center gap-1 pt-1">
               <p className="text-ellipsis whitespace-nowrap overflow-hidden">
-                {date.format("yyyy년 MM월 dd일")} 게시
+                {create_dt.format("yyyy년 MM월 dd일")} 게시
               </p>
               {tags.map((tag) => (
                 <Tag size="sm" key={tag} color="lightgreen" fontColor="black">

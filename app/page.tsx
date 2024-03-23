@@ -21,7 +21,7 @@ export default function Home() {
         <FeaturedBanner
           title="사지방에서 코딩하기 - VSCode Tunneling"
           description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
-          date={new Date()}
+          create_dt={new Date()}
           id={1}
           no={1}
           tags={["코딩"]}
@@ -39,7 +39,7 @@ export default function Home() {
                 id={i}
                 title="사지방에서 코딩하기 - VSCode Tunneling"
                 description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
-                date={new Date()}
+                create_dt={new Date()}
                 tags={["코딩"]}
                 thumbnailUrl={`https://picsum.photos/seed/${generateRandomString(
                   10

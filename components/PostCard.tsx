@@ -12,7 +12,7 @@ export type PostCardProps = PostBannerDto & {
 export default function PostCard({
   id,
   title,
-  date,
+  create_dt,
   description,
   tags,
   thumbnailUrl,
@@ -41,7 +41,7 @@ export default function PostCard({
             <div className="flex flex-row justify-between items-end gap-2">
               <p className="text-white">{title}</p>
               <p className="whitespace-nowrap text-white">
-                {date.format("yyyy-MM-dd")}
+                {create_dt.format("yyyy-MM-dd")}
               </p>
             </div>
             <hr className="border-white" />
