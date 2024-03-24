@@ -36,3 +36,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# infra credentials
+db_root_password.txt
+minio_root_password.txt
+minio_root_user.txt

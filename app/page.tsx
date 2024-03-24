@@ -1,6 +1,7 @@
 import FeaturedBanner from "@/components/FeaturedBanner";
 import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
+import db from "db";
 
 const generateRandomString = (length: number) => {
   const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -13,40 +14,35 @@ const generateRandomString = (length: number) => {
   return result;
 };
 
-
-export default function Home() {
+export default async function Home() {
+  const posts = await db.post.findMany({
+    include: { tags: { include: { tag: true } } },
+  });
   return (
     <main className="flex flex-col">
-      <div >
-        <FeaturedBanner
-          title="사지방에서 코딩하기 - VSCode Tunneling"
-          description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
-          create_dt={new Date()}
-          id={1}
-          no={1}
-          tags={["코딩"]}
-          thumbnailUrl="https://picsum.photos/seed/picsum/400/280"
-        />
-        <div
-          className="flex flex-row flex-wrap w-full relative"
-          style={{ flexFlow: "row wrap" }}
-        >
-          {Array(6)
-            .fill(1)
-            .map((_, i) => (
-              <PostCard
-                key={i}
-                id={i}
-                title="사지방에서 코딩하기 - VSCode Tunneling"
-                description="본업의 소중함을 알아버린 사람의 감을 잃지 않기 위한 몸부림"
-                create_dt={new Date()}
-                tags={["코딩"]}
-                thumbnailUrl={`https://picsum.photos/seed/${generateRandomString(
-                  10
-                )}/400/280`}
-                containerClassName="flex-grid"
-              />
-            ))}
+      <FeaturedBanner
+        no={posts[0].id}
+        key={posts[0].id}
+        {...posts[0]}
+        thumbnailUrl=""
+        tags={posts[0].tags.map((post_tag) => post_tag.tag)}
+      />
+      <div
+        className="flex flex-row flex-wrap w-full relative"
+        style={{ flexFlow: "row wrap" }}
+      >
+        <div>
+          {posts.map((post) => (
+            <PostCard
+              key={post.id}
+              {...post}
+              thumbnailUrl=""
+              tags={post.tags.map((post_tag) => post_tag.tag)}
+              containerClassName="flex-grid"
+
+            />
+          ))}
+    
         </div>
       </div>
     </main>

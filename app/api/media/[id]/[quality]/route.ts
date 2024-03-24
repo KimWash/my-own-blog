@@ -1,7 +1,6 @@
 import db from "@/lib/prisma";
-import { createReadStream } from "fs";
 import { Client } from "minio";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 /**
  * @param {number} id 미디어의 id입니다.

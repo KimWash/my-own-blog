@@ -34,11 +34,11 @@ export default function FeaturedBanner({
             </div>
             <div className="flex flex-row justify-between items-center gap-1 pt-1">
               <p className="text-ellipsis whitespace-nowrap overflow-hidden">
-                {create_dt.format("yyyy년 MM월 dd일")} 게시
+                {create_dt?.format("yyyy년 MM월 dd일")} 게시
               </p>
               {tags.map((tag) => (
-                <Tag size="sm" key={tag} color="lightgreen" fontColor="black">
-                  {tag}
+                <Tag size="sm" key={tag.id} color="lightgreen" fontColor="black">
+                  {tag.name}
                 </Tag>
               ))}
             </div>

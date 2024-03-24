@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql:latest
+    # command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: /run/secrects/db_root_password
+    volumes:
+      - /docker/mysql:/var/lib/mysql
+    container_name: prisma-mysql
+    ports:
+      - 3306:3306
+    secrets:
+      - db_root_password
+      
+  object_storage:
+    image: quay.io/minio/minio
+    container_name: minio_storage
+    restart: always
+    command: server /minio --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: /run/secrets/minio_root_user
+      MINIO_ROOT_PASSWORD: /run/secrets/minio_root_password
+      MINIO_DEFAULT_BUCKETS: my-own-blog
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - /docker/minio:/minio
+    secrets:
+      - minio_root_user
+      - minio_root_password
+secrets:
+  minio_root_user:
+    file: minio_root_user.txt
+  minio_root_password:
+    file: minio_root_password.txt
+  db_root_password:
+    file: db_root_password.txt

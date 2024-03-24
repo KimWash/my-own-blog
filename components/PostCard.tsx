@@ -1,4 +1,4 @@
-import { Post, PostBannerDto } from "@/lib/model/Post";
+import {  PostBannerDto } from "@/lib/model/Post";
 import Tag from "./Tag";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
@@ -41,7 +41,7 @@ export default function PostCard({
             <div className="flex flex-row justify-between items-end gap-2">
               <p className="text-white">{title}</p>
               <p className="whitespace-nowrap text-white">
-                {create_dt.format("yyyy-MM-dd")}
+                {create_dt?.format("yyyy-MM-dd")}
               </p>
             </div>
             <hr className="border-white" />
@@ -51,8 +51,8 @@ export default function PostCard({
               </p>
               <div>
                 {tags.map((tag) => (
-                  <Tag size="sm" key={tag} color="lightgreen" fontColor="black">
-                    {tag}
+                  <Tag size="sm" key={tag.id} color="lightgreen" fontColor="black">
+                    {tag.name}
                   </Tag>
                 ))}
               </div>
