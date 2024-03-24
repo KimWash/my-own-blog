@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:latest
-    # command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: /run/secrects/db_root_password
