@@ -37,34 +37,33 @@ model Media {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Post {
-  title       String     @db.VarChar(30)
-  create_dt   DateTime?  @db.DateTime(0)
+  title       String        @db.VarChar(30)
+  create_dt   DateTime?     @db.DateTime(0)
   thumbnail   Int
-  id          Int        @id @default(autoincrement())
-  description String?    @db.Text
-  content     String?    @db.Text
-  update_dt   DateTime?  @db.DateTime(0)
-  delete_dt   DateTime?  @db.DateTime(0)
-  is_deleted  Boolean?   @db.Bit(1)
+  id          Int           @id @default(autoincrement())
+  description String?       @db.Text
+  content     String?       @db.Text
+  update_dt   DateTime?     @db.DateTime(0)
+  delete_dt   DateTime?     @db.DateTime(0)
+  is_deleted  Boolean?      @db.Bit(1)
   medias      Media[]
-  post_tag    post_tag[]
+  tags        TagsOnPosts[]
 }
 
-model post_tag {
-  tag_id  Int
+model TagsOnPosts {
   post_id Int
-  id      Int  @id @unique(map: "id_UNIQUE") @default(autoincrement())
-  post    Post @relation(fields: [post_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "post_tag_ibfk_2")
-  tag     tag  @relation(fields: [tag_id], references: [id], onDelete: Cascade, map: "post_tag_ibfk_3")
+  post    Post @relation(fields: [post_id], references: [id])
+  tag_id  Int
+  tag     Tag  @relation(fields: [tag_id], references: [id])
 
-  @@index([post_id], map: "post_id")
-  @@index([tag_id], map: "tag_id")
+  @@id([post_id, tag_id])
 }
 
-model tag {
-  id         Int        @id
-  name       String?    @db.VarChar(45)
-  create_dt  DateTime?  @db.DateTime(0)
-  is_deleted Boolean?   @db.Bit(1)
-  post_tag   post_tag[]
+model Tag {
+  id         Int           @id
+  name       String?       @db.VarChar(45)
+  create_dt  DateTime?     @db.DateTime(0)
+  is_deleted Boolean?      @db.Bit(1)
+  post_id    Int?
+  post       TagsOnPosts[]
 }

@@ -1,49 +1,29 @@
-import { Post, PostDetail, PostSchema } from "@/lib/model/Post";
-import Tag from "@/components/Tag";
-import { getBaseUrl } from "@/lib/baseUrl";
-import { connectDB } from "@/lib/database";
 import "@/lib/global.date.extensions";
-import ReactMarkdown from "react-markdown";
-import gfm from "remark-gfm";
-
-import mongoose from "mongoose";
 import db from "db";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import { tag } from "@prisma/client";
+import { Client } from "minio";
+import Image from "next/image";
+
+function toBase64(arr: Buffer) {
+  // arr = new Uint8Array(arr) if it's an ArrayBuffer
+  return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""));
+}
 
 export default async function Page({ params }: { params: { id: number } }) {
-  console.log(params, getBaseUrl());
-  // const posts = (await fetch(getBaseUrl() + "/api/post/" + params.id, {
-  //   cache: "no-cache",
-  // }).then((res) => {
-  //   console.log(res)
-  //   return res.json()
-  // })) as PostDetail;
-  // mongoose test
-  // console.log(
-  //   "Initializing mongoose with this url: ",
-  //   process.env.NEXT_MONGO_URL
-  // );
-  // await mongoose
-  //   .set({ debug: true, strictQuery: false })
-  //   .connect(process.env.NEXT_MONGO_URL)
-  //   .then((mongoose) => mongoose);
-  // console.log("done");
-
-  // const posts = (await Post.find()).map((doc) => doc.toObject())[0];
-  const post = await db.post.findFirst();
-  const medias = await db.post.findFirst().medias();
-  const mediasWithFiles =  medias?.map( (media) => ({
-    ...media,
-    files:  db.file.findMany({ where: { mediaId: media.id } }),
-  }));
-  // const tags = await db.tag((await db.post.findFirst().post_tag()))
-  // console.log(tags)
+  const post = await db.post.findFirst({
+    where: { id: Number(params.id) },
+    include: {
+      tags: { include: { tag: true } },
+      medias: { include: { files: true } },
+    },
+  });
+  const medias = post?.medias;
+  const tags = post?.tags.map((postTag) => postTag.tag);
   return (
     <div className="p-8">
-      {/* {tags?.map((tag: tag) => (
+      {tags?.map((tag) => (
         <span key={tag.id}>#{tag.name} </span>
-      ))} */}
+      ))}
       <div className="flex flex-row justify-between items-end">
         <h1>{post?.title}</h1>
         <p>{post?.create_dt?.format("yyyy년 MM월 dd일")}</p>
@@ -53,8 +33,27 @@ export default async function Page({ params }: { params: { id: number } }) {
 
       <div className="mt-10 post-content">
         <MarkdownRenderer content={post?.content ?? ""} />
-        {mediasWithFiles?.map(async (media) => (
-          <p key={media.id}>{media.name} | {(await media.files).map(file => <span key={file.id}>{file.name}</span>)} </p>
+        {medias?.map((media) => (
+          <div key={media.id}>
+            <h2>{media.name} 미디어의 고화질 파일</h2>
+            <Image
+              src={`/api/media/${media.id}/HIGH`}
+              alt={media.name!}
+              width={200}
+              height={200}
+            />
+            <h2>중화질 파일(이라고 쓰고 아예 다른 사진이다)</h2>
+            <Image
+              src={`/api/media/${media.id}/MID`}
+              alt={media.name!}
+              width={200}
+              height={200}
+            />
+            <h3>{media.name} 미디어의 파일 목록</h3>
+            {media.files.map(async (file) => {
+              return <li key={file.id}>{file.name}</li>;
+            })}{" "}
+          </div>
         ))}
       </div>
     </div>
