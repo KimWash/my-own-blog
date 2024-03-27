@@ -22,7 +22,8 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: |
-            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
-            "MINIO_URL=${{secrets.MINIO_URL}}"
-            "MINIO_ACCESS_KEY=${{secrets.MINIO_ACCESS_KEY}}"
-            "MINIO_PRIVATE_KEY=${{secrets.MINIO_PRIVATE_KEY}}"
+            "DATABASE_URL=${{ secrets.DATABASE_URL }}
+            MINIO_URL=${{secrets.MINIO_URL}}
+            MINIO_ACCESS_KEY=${{secrets.MINIO_ACCESS_KEY}}
+            MINIO_PRIVATE_KEY=${{secrets.MINIO_PRIVATE_KEY}}
+            "
