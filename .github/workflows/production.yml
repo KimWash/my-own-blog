@@ -13,7 +13,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: app
           build-args: |
             "DATABASE_URL=${{ secrets.DATABASE_URL }}"
             "MINIO_URL=${{secrets.MINIO_URL}}"
