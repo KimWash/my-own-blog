@@ -1,0 +1,21 @@
+name: Docker CI
+on:
+  push:
+    branches: [master]
+jobs:
+  deploy:
+    name: Build and push to ghcr.io
+    runs-on: [ubuntu-latest]
+    strategy:
+      matrix:
+        node-version: [21.1.0]
+    steps:
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          build-args: |
+            "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+            "MINIO_URL=${{secrets.MINIO_URL}}"
+            "MINIO_ACCESS_KEY=${{secrets.MINIO_ACCESS_KEY}}"
+            "MINIO_PRIVATE_KEY=${{secrets.MINIO_PRIVATE_KEY}}"
