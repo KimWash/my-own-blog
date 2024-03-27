@@ -10,6 +10,9 @@ jobs:
       matrix:
         node-version: [21.1.0]
     steps:
+      - name: check if envs exist
+        run: echo ${{secrets.DATABASE_URL}}
+
       - name: Clone code from github
         uses: actions/checkout@v3
 
