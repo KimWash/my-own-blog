@@ -11,6 +11,7 @@ jobs:
       matrix:
         node-version: [21.1.0]
     environment: Production
+    permissions: write-all
     steps:
       - name: check if envs exist
         run: echo ${{secrets.DATABASE_URL}}
