@@ -12,7 +12,10 @@ jobs:
     steps:
       - name: Clone code from github
         uses: actions/checkout@v3
-      - run: ls -al
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
