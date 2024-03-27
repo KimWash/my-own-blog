@@ -1,4 +1,5 @@
 name: Docker CI
+
 on:
   push:
     branches: [master]
@@ -9,6 +10,7 @@ jobs:
     strategy:
       matrix:
         node-version: [21.1.0]
+    environment: Production
     steps:
       - name: check if envs exist
         run: echo ${{secrets.DATABASE_URL}}
