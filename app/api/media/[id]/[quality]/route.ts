@@ -18,7 +18,7 @@ export async function GET(
   if (!file) return NextResponse.json("", { status: 404 });
 
   var minioClient = new Client({
-    endPoint: "localhost",
+    endPoint: process.env.MINIO_URL,
     port: 9000,
     useSSL: false,
     accessKey: process.env.MINIO_ACCESS_KEY,
