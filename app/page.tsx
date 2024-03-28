@@ -16,7 +16,10 @@ const generateRandomString = (length: number) => {
 
 export default async function Home() {
   const posts = await db.post.findMany({
-    include: { tags: { include: { tag: true } } },
+    include: {
+      tags: { include: { tag: true } },
+      thumbnail: true,
+    },
   });
   return (
     <main className="flex flex-col">
@@ -24,7 +27,7 @@ export default async function Home() {
         no={posts[0].id}
         key={posts[0].id}
         {...posts[0]}
-        thumbnailUrl=""
+        thumbnailUrl={`/api/media/${posts[0].thumbnail?.id}/HIGH`}
         tags={posts[0].tags.map((post_tag) => post_tag.tag)}
       />
       <div
@@ -36,13 +39,11 @@ export default async function Home() {
             <PostCard
               key={post.id}
               {...post}
-              thumbnailUrl=""
+              thumbnailUrl={`/api/media/${post.thumbnail?.id}/HIGH`}
               tags={post.tags.map((post_tag) => post_tag.tag)}
               containerClassName="flex-grid"
-
             />
           ))}
-    
         </div>
       </div>
     </main>
