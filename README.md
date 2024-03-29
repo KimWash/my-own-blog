@@ -1,7 +1,10 @@
 # my-own-blog
 -----
 
-https://my-own-blog-xi.vercel.app/ 에서 진행 현황 지켜보기
+~https://my-own-blog-xi.vercel.app/ 에서 진행 현황 지켜보기~
+Vercel은 내렸어요.
+
+<a href="https://kimwash.notion.site/6b4507b23af9429599efc183f1269879?v=7df2add84384488c8f002dc1352d3caf&pvs=4">여기</a>에서 (거의) 매일 올리는 일지를 확인해보세요.
 
 Next.js를 이용한 마크다운 기반 블로그를 만들어 보고 있어요.
 
@@ -18,3 +21,13 @@ Next.js를 이용한 마크다운 기반 블로그를 만들어 보고 있어요
 개발 얘기가 아닌 사적인 얘기들도 담아보기 위해서 비밀글 기능 등도 생각중이고요.
 
 전역할때쯤이면.. 완성되어 있지 않을까요..?
+
+### 지금까지 적용해본 것들 (03.28)
+- Next.js + Prisma + MySQL 조합
+- CI 파이프라인 구축
+  과정
+  1. 환경변수 주입
+  2. Prisma Client 생성 및 DB에 반영
+  3. ghcr.io에 배포
+- 리액트에서 마크다운 렌더링
+- 오브젝트 스토리지와의 조합으로 미디어 스트리밍
