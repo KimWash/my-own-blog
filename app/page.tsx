@@ -1,18 +1,6 @@
 import FeaturedBanner from "@/components/FeaturedBanner";
-import Header from "@/components/Header";
 import PostCard from "@/components/PostCard";
 import db from "db";
-
-const generateRandomString = (length: number) => {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-
-  return result;
-};
 
 export default async function Home() {
   const posts = await db.post.findMany({
@@ -27,7 +15,7 @@ export default async function Home() {
         no={posts[0].id}
         key={posts[0].id}
         {...posts[0]}
-        thumbnailUrl={`/api/media/${posts[0].thumbnail?.id}/HIGH`}
+        thumbnailUrl={posts[0].thumbnail?.url ?? ''}
         tags={posts[0].tags.map((post_tag) => post_tag.tag)}
       />
       <div
@@ -39,7 +27,7 @@ export default async function Home() {
             <PostCard
               key={post.id}
               {...post}
-              thumbnailUrl={`/api/media/${post.thumbnail?.id}/HIGH`}
+              thumbnailUrl={post.thumbnail?.url ?? ''}
               tags={post.tags.map((post_tag) => post_tag.tag)}
               containerClassName="flex-grid"
             />

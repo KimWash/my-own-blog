@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
+import { ExtendedPrismaClient } from "db";
 
 declare global {
   namespace globalThis {
-    var prisma: PrismaClient
-  };
+    var prisma: ExtendedPrismaClient;
+  }
 }
