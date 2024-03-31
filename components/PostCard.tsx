@@ -63,3 +63,18 @@ export default function PostCard({
     </div>
   );
 }
+
+function CardWithoutThumbnail({
+  id,
+  title,
+  create_dt,
+  description,
+  tags,
+  thumbnailUrl,
+  containerStyle,
+  containerClassName,
+}: PostCardProps) {
+  return <div>
+    
+  </div>
+}

@@ -1,86 +1,71 @@
-"use client";
-
-import Image from "next/image";
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-  useViewportScroll,
-} from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { SizeProp } from "@fortawesome/fontawesome-svg-core";
+import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons/faArrowCircleRight";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import FullScreen from "@/components/FullScreen";
-import PanelItem from "@/components/PanelItem";
 
-export default function AboutMe() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ container: containerRef });
-  const [one, two, three] = [
-    useTransform(scrollYProgress, [0.3, 1], [0, 1]),
-    useTransform(scrollYProgress, [0.5, 1], [0, 1]),
-    useTransform(scrollYProgress, [0.7, 1], [0, 1]),
-  ];
-  const whiteToBlack = useTransform(
-    scrollYProgress,
-    [0.1, 1],
-    ["#fff", "#000"]
-  );
-  const blackToWhite = useTransform(
-    scrollYProgress,
-    [0.1, 1],
-    ["#000", "#fff"]
-  );
-
+export default function Page() {
   return (
-    <FullScreen.Container ref={containerRef}>
-      <FullScreen.Page style={{ backgroundColor: whiteToBlack }}>
-        <div className="flex flex-row items-center gap-6">
-          <Image
-            src="https://github.com/KimWash.png"
-            alt="image"
-            width={200}
-            height={200}
-            objectFit="cover"
-            className="aspect-square object-cover rounded-full "
-          />
-
-          <p className="text-4xl leading-relaxed">
-            안녕하세요,
-            <br />
-            이상할 정도로 성장에 진심인{" "}
-            <span className="font-bold">최경민</span>
-            입니다.
+    <div
+      className="flex justify-center items-center w-full h-full"
+      style={{ background: "#f7f2f2" }}
+    >
+      <div className="p-2 grid gap-2 sm:grid-cols-2 flex-1 xl:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm">
+        <GridItem span="1 1">
+          <h1>안녕하세요!</h1>
+          {`
+          I'm rob, a web developer from Italy. I'm interested in Code, Design,
+          Business, Crypto, Startups and Marketing.`}
+        </GridItem>
+        <GridItem span="1 1">
+          <h1>읽어볼만한 것</h1>
+          <p className="mt-6 mb-3">
+            {`
+            How it started vs. how it's going A short personal history as it
+            relates to design and development, and how I've found value in the
+            cross-section between both disciplines.
+            `}
           </p>
-          <motion.div
-            transition={{
-              translateY: {
-                duration: 1.2,
-                yoyo: Infinity,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatType: "mirror",
-              },
-            }}
-            style={{ color: blackToWhite }}
-            animate={{ translateY: ["5px", "-5px"] }}
-            className="absolute left-1/2 right-1/2 bottom-10"
-          >
-            <FontAwesomeIcon icon={faChevronDown} size="2xl" />
-          </motion.div>
-        </div>
-      </FullScreen.Page>
-      <FullScreen.Page style={{ background: whiteToBlack }}>
-        <motion.div style={{ opacity: scrollYProgress }} className="flex-1 flex flex-wrap flex-row p-3 gap-3">
+          <div className="flex flex-row justify-between items-center">
+            <RoundedButton radius="3xl">
+              더 읽어보기 <FontAwesomeIcon icon={faArrowCircleRight} />
+            </RoundedButton>
+            <p>2024.03.31</p>
+          </div>
+        </GridItem>
+        <GridItem span="2 1" />
+        <GridItem span="1 1" />
+        <GridItem span="1 1" />
+        <GridItem span="1 1" />
+        <GridItem span="1 1" />
+      </div>
+    </div>
+  );
+}
+export type TailwindSize = "sm" | "md" | "lg" | "xl" | `${number}xl`;
 
-          <PanelItem>
-            인천대학교 2학년 재학중
-          </PanelItem>
-        </motion.div>
-      </FullScreen.Page>
-    </FullScreen.Container>
+function RoundedButton({
+  radius = "3xl",
+  children,
+}: React.PropsWithChildren<{ radius: TailwindSize }>) {
+  return (
+    <button className={`rounded-${radius} bg-white p-2 border`}>
+      {children}
+    </button>
+  );
+}
+
+function GridItem({
+  span = "1 1",
+  children,
+}: React.PropsWithChildren<{ span?: `${number} ${number}` }>) {
+  const spans = span.split(" ");
+  return (
+    <div
+      className="bg-white rounded-3xl p-6 flex-1 "
+      style={{
+        gridColumn: `span ${spans[0]} / span ${spans[1]}`,
+      }}
+    >
+      {children}
+    </div>
   );
 }
