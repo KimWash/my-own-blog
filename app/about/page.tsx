@@ -1,6 +1,11 @@
+"use client";
+
+import RoundedButton from "@/components/RoundedButton";
 import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons/faArrowCircleRight";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import db from "db";
+import { get } from "http";
 
 export default function Page() {
   return (
@@ -25,7 +30,12 @@ export default function Page() {
             `}
           </p>
           <div className="flex flex-row justify-between items-center">
-            <RoundedButton radius="3xl">
+            <RoundedButton
+              onClick={async () => {
+                get('/api/post')
+              }}
+              radius="3xl"
+            >
               더 읽어보기 <FontAwesomeIcon icon={faArrowCircleRight} />
             </RoundedButton>
             <p>2024.03.31</p>
@@ -41,17 +51,6 @@ export default function Page() {
   );
 }
 export type TailwindSize = "sm" | "md" | "lg" | "xl" | `${number}xl`;
-
-function RoundedButton({
-  radius = "3xl",
-  children,
-}: React.PropsWithChildren<{ radius: TailwindSize }>) {
-  return (
-    <button className={`rounded-${radius} bg-white p-2 border`}>
-      {children}
-    </button>
-  );
-}
 
 function GridItem({
   span = "1 1",

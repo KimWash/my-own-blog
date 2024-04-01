@@ -7,7 +7,8 @@ import { PrismaClient } from "@prisma/client";
 // https://pris.ly/d/help/next-js-best-practices
 
 const extendedPrismaClient = () => {
-  const prisma = new PrismaClient().$extends({
+  const prisma = new PrismaClient();
+  const extendedPrisma = prisma.$extends({
     result: {
       media: {
         url: {
@@ -18,10 +19,26 @@ const extendedPrismaClient = () => {
           },
         },
       },
+      post: {
+        delete: {
+          needs: { id: true },
+          compute(data) {
+            return async () => {
+              await prisma.post.update({
+                where: { id: data.id },
+                data: {
+                  is_deleted: true,
+                  delete_dt: new Date(),
+                },
+              });
+            };
+          },
+        },
+      },
     },
   });
 
-  return prisma;
+  return extendedPrisma;
 };
 
 export type ExtendedPrismaClient = ReturnType<typeof extendedPrismaClient>;
