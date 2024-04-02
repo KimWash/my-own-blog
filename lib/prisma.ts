@@ -6,6 +6,41 @@ import { PrismaClient } from "@prisma/client";
 // Learn more:
 // https://pris.ly/d/help/next-js-best-practices
 
+export interface Delegate<T> {
+  aggregate(data: unknown): unknown;
+  count(data: unknown): unknown;
+  create(data: unknown): unknown;
+  delete(data: unknown): unknown;
+  deleteMany(data: unknown): unknown;
+  findFirst(data: unknown): unknown;
+  findMany(data: unknown): unknown;
+  findUnique(data: unknown): unknown;
+  update(data: unknown): unknown;
+  updateMany(data: unknown): unknown;
+  upsert(data: unknown): unknown;
+}
+
+function deleteExtension<T>(
+  model: Delegate<T>,
+  idFieldName: keyof T,
+  deleteFlagFieldName: keyof T,
+  deletedDateFieldName: keyof T
+) {
+  return {
+    need: { [idFieldName]: true, [deleteFlagFieldName]: true },
+    compute(data: Partial<T>) {
+      return () => {
+        model.update({
+          where: { [idFieldName]: data[idFieldName] },
+          data: {
+            [deleteFlagFieldName]: true,
+            [deletedDateFieldName]: new Date(),
+          },
+        });
+      };
+    },
+  };
+}
 const extendedPrismaClient = () => {
   const prisma = new PrismaClient();
   const extendedPrisma = prisma.$extends({
@@ -20,20 +55,7 @@ const extendedPrismaClient = () => {
         },
       },
       post: {
-        delete: {
-          needs: { id: true },
-          compute(data) {
-            return async () => {
-              await prisma.post.update({
-                where: { id: data.id },
-                data: {
-                  is_deleted: true,
-                  delete_dt: new Date(),
-                },
-              });
-            };
-          },
-        },
+        delete: deleteExtension(prisma.post, "id", "is_deleted", "delete_dt"),
       },
     },
   });
