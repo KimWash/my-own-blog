@@ -4,6 +4,9 @@ import db from "db";
 
 export default async function Home() {
   const posts = await db.post.findMany({
+    where: {
+      is_deleted: undefined,
+    },
     include: {
       tags: { include: { tag: true } },
       thumbnail: true,
@@ -15,7 +18,7 @@ export default async function Home() {
         no={posts[0].id}
         key={posts[0].id}
         {...posts[0]}
-        thumbnailUrl={posts[0].thumbnail?.url ?? ''}
+        thumbnailUrl={posts[0].thumbnail?.url ?? ""}
         tags={posts[0].tags.map((post_tag) => post_tag.tag)}
       />
       <div

@@ -1,4 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
+import {
+  DefaultArgs,
+  DynamicQueryExtensionCb,
+  InternalArgs,
+} from "@prisma/client/runtime/library";
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.
@@ -41,9 +46,22 @@ function deleteExtension<T>(
     },
   };
 }
+
+type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any
+  ? A
+  : never;
 const extendedPrismaClient = () => {
   const prisma = new PrismaClient();
   const extendedPrisma = prisma.$extends({
+    query: {
+      post: {
+        async findMany({ model, operation, args, query }) {
+          // findMany 조건에 is_deleted 추가
+          args.where = { is_deleted: false, ...args.where };
+          return query(args);
+        },
+      },
+    },
     result: {
       media: {
         url: {

@@ -4,11 +4,6 @@ import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Client } from "minio";
 import Image from "next/image";
 
-function toBase64(arr: Buffer) {
-  // arr = new Uint8Array(arr) if it's an ArrayBuffer
-  return btoa(arr.reduce((data, byte) => data + String.fromCharCode(byte), ""));
-}
-
 export default async function Page({ params }: { params: { id: number } }) {
   const post = await db.post.findFirst({
     where: { id: Number(params.id) },
