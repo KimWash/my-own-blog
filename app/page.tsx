@@ -1,17 +1,10 @@
 import FeaturedBanner from "@/components/FeaturedBanner";
 import PostCard from "@/components/PostCard";
+import useHomeViewModel from "@/components/hooks/useHomeViewModel";
 import db from "db";
 
 export default async function Home() {
-  const posts = await db.post.findMany({
-    where: {
-      is_deleted: undefined,
-    },
-    include: {
-      tags: { include: { tag: true } },
-      thumbnail: true,
-    },
-  });
+  const { posts } = await useHomeViewModel();
   return (
     <main className="flex flex-col">
       <FeaturedBanner

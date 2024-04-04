@@ -3,17 +3,10 @@ import db from "db";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { Client } from "minio";
 import Image from "next/image";
+import usePostDetailViewModel from "@/components/hooks/usePostDetailViewModel";
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const post = await db.post.findFirst({
-    where: { id: Number(params.id) },
-    include: {
-      tags: { include: { tag: true } },
-      medias: { include: { files: true } },
-    },
-  });
-  const medias = post?.medias;
-  const tags = post?.tags.map((postTag) => postTag.tag);
+  const { post, medias, tags } = await usePostDetailViewModel(params.id);
   return (
     <div className="p-8">
       {tags?.map((tag) => (
