@@ -1,9 +1,22 @@
-import db from 'db';
-import { NextResponse } from 'next/server';
+import { PostBannerDto } from "@/lib/model/Post";
+import db from "db";
+import { NextResponse } from "next/server";
 
 export async function GET() {
-  const post = await db.post.findFirst({ where: { id: 2 } });
-  console.log(post);
-  post?.delete();
-  return NextResponse.json({deleted: true})
+  const posts = await db.post.findMany({
+    include: {
+      tags: { include: { tag: true } },
+      thumbnail: true,
+    },
+  });
+  return NextResponse.json(
+    posts.map(
+      (post) =>
+        ({
+          ...post,
+          thumbnailUrl: post.thumbnail?.url!,
+          tags: post.tags.map((post_tag) => post_tag.tag),
+        } as PostBannerDto)
+    )
+  );
 }

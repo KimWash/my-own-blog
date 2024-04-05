@@ -11,8 +11,8 @@ export default async function Home() {
         no={posts[0].id}
         key={posts[0].id}
         {...posts[0]}
-        thumbnailUrl={posts[0].thumbnail?.url ?? ""}
-        tags={posts[0].tags.map((post_tag) => post_tag.tag)}
+        thumbnailUrl={posts[0].thumbnailUrl}
+        tags={posts[0].tags}
       />
       <div
         className="flex flex-row flex-wrap w-full relative"
@@ -23,8 +23,8 @@ export default async function Home() {
             <PostCard
               key={post.id}
               {...post}
-              thumbnailUrl={post.thumbnail?.url}
-              tags={post.tags.map((post_tag) => post_tag.tag)}
+              thumbnailUrl={post.thumbnailUrl}
+              tags={post.tags}
               containerClassName="flex-grid"
             />
           ))}
