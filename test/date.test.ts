@@ -1,4 +1,4 @@
-import '../lib/global.date.extensions'
+import '../lib/date/global.date.extensions'
 
 test('date formatting - Case 1', () => {
   const date = new Date(2024, 1, 2, 12, 34, 56)

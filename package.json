@@ -29,6 +29,8 @@
     "rehype-katex": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
+    "return-fetch": "^0.4.5",
+    "return-fetch-json": "^0.4.5",
     "ua-parser-js": "^1.0.37"
   },
   "jest": {

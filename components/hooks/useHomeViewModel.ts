@@ -1,6 +1,6 @@
 import db from 'db'
 import usePostListQuery from '../queries/usePostListQuery';
-import { PostBannerDto } from '@/lib/model/Post';
+import { PostListDto } from '@/lib/model/Post';
 
 // Todo: 뷰모델에 따른 DTO랑 entity model 분리
 // Todo: MinIO 클라이언트 한번만 생성해서 캐싱하기, 이미지 자체도 캐싱하기

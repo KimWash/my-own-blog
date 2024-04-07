@@ -1,10 +1,10 @@
-import {  PostBannerDto } from "@/lib/model/Post";
+import {  PostListDto } from "@/lib/model/Post";
 import Tag from "./Tag";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
 import Link from "next/link";
 
-export type PostCardProps = PostBannerDto & {
+export type PostCardProps = PostListDto & {
   containerStyle?: {};
   containerClassName?: string;
 };

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
-import { PostBannerDto } from "@/lib/model/Post";
+import { PostListDto } from "@/lib/model/Post";
 import Link from "next/link";
 import Tag from "./Tag";
 
-export type FeaturedBannerProps = PostBannerDto & { no: number };
+export type FeaturedBannerProps = PostListDto & { no: number };
 
 export default function FeaturedBanner({
   id,

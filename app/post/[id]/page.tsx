@@ -1,12 +1,10 @@
-import "@/lib/global.date.extensions";
-import db from "db";
+import "@/lib/date/global.date.extensions";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
-import { Client } from "minio";
 import Image from "next/image";
 import usePostDetailViewModel from "@/components/hooks/usePostDetailViewModel";
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const { post, medias, tags } = await usePostDetailViewModel(params.id);
+  const { medias, tags, ...post } = await usePostDetailViewModel(params.id);
   return (
     <div className="p-8">
       {tags?.map((tag) => (

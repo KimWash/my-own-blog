@@ -1,5 +1,6 @@
+import fetchExtended from "@/lib/fetchExtended";
 import { getAbsoluteUrl } from "@/lib/getAbsoluteUrl";
-import { PostBannerDto } from "@/lib/model/Post";
+import { PostListDto } from "@/lib/model/Post";
 
 const PostQueryKey = {
   all: ["posts"],
@@ -13,8 +14,6 @@ export default async function usePostListQuery(page: number) {
   //     return await (await fetch("/api/post/" + page)).json() as PostBannerDto[];
   //   },
   // });
-  
-  return (await (
-    await fetch("http://" + getAbsoluteUrl() + "/api/post?page=" + page)
-  ).json()) as PostBannerDto[];
+
+  return (await fetchExtended<PostListDto[]>("/api/post?page=1")).body;
 }

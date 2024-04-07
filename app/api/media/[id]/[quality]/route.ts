@@ -14,7 +14,6 @@ export async function GET(
     include: { files: true },
   });
   const file = media?.files.find((file) => file.quality === params.quality);
-  console.log("파일 발견: ", file);
   if (!file) return NextResponse.json("", { status: 404 });
 
   var minioClient = new Client({
