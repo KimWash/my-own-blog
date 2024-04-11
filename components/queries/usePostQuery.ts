@@ -1,3 +1,5 @@
+"use client";
+
 import fetchExtended from "@/lib/fetchExtended";
 import { PostDetailDto } from "@/lib/model/Post";
 

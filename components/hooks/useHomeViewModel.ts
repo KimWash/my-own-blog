@@ -7,5 +7,5 @@ import { PostListDto } from '@/lib/model/Post';
 
 export default async function useHomeViewModel() {
   const posts = await usePostListQuery(0);
-  return {posts: posts.map(post => ({...post, create_dt: new Date(post.create_dt!)}))};
+  return {posts: posts.data?.map(post => ({...post, create_dt: new Date(post.create_dt!)}))};
 }

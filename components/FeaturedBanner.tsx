@@ -3,6 +3,7 @@ import placeHolderImage from "@/asset/placeholder.png";
 import { PostListDto } from "@/lib/model/Post";
 import Link from "next/link";
 import Tag from "./Tag";
+import '@/lib/date/date.extensions'
 
 export type FeaturedBannerProps = PostListDto & { no: number };
 

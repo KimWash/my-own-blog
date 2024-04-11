@@ -1,4 +1,4 @@
-import "@/lib/date/global.date.extensions";
+import "@/lib/date/date.extensions";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Image from "next/image";
 import usePostDetailViewModel from "@/components/hooks/usePostDetailViewModel";

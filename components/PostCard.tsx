@@ -3,6 +3,8 @@ import Tag from "./Tag";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
 import Link from "next/link";
+import '@/lib/date/date.extensions'
+
 
 export type PostCardProps = PostListDto & {
   containerStyle?: {};

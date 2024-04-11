@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 // import "normalize.css";
 import "./globals.css";
-import "@/lib/date/global.date.extensions";
+import "@/lib/date/date.extensions";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Header from "@/components/Header";
+import Providers from "@/lib/Providers";
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 config.autoAddCss = false;
 
@@ -21,8 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col">
-        <Header />
-        {children}
+        <Providers>
+
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );

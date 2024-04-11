@@ -9,6 +9,7 @@ export async function GET() {
       thumbnail: true,
     },
   });
+  console.log('api called')
   return NextResponse.json(
     posts.map(
       (post) =>
