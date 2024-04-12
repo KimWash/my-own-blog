@@ -9,15 +9,14 @@ export async function GET() {
       thumbnail: true,
     },
   });
-  console.log('api called')
-  return NextResponse.json(
-    posts.map(
-      (post) =>
-        ({
-          ...post,
-          thumbnailUrl: post.thumbnail?.url!,
-          tags: post.tags.map((post_tag) => post_tag.tag),
-        } as PostListDto)
-    )
+  console.log("api called");
+  const result = posts.map(
+    (post) =>
+      ({
+        ...post,
+        thumbnailUrl: post.thumbnail?.url!,
+        tags: post.tags.map((post_tag) => post_tag.tag),
+      } as PostListDto)
   );
+  return NextResponse.json(result);
 }

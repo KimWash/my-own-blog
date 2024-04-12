@@ -1,30 +1,29 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import FeaturedBanner from "./FeaturedBanner";
-import PostCard from "./PostCard";
-import { fetchPosts } from "./queries/usePostListQuery";
+import FeaturedBanner from "../FeaturedBanner";
+import PostCard from "../PostCard";
+import { fetchPosts } from "../queries/usePostListQuery";
+import useHomeViewModel from "../hooks/useHomeViewModel";
 
-export default function Main() {
-  const { data } = useQuery({ queryKey: ["posts"], queryFn: fetchPosts });
-  const posts = data!;
-  console.log(posts)
-  if (!posts) return '';
+export default function HomeContainer() {
+  const {data, isLoading} = useHomeViewModel();
+  if (!data || isLoading) return 'loading...'
   return (
     <main className="flex flex-col">
       <FeaturedBanner
-        no={posts[0].id}
-        key={posts[0].id}
-        {...posts[0]}
-        thumbnailUrl={posts[0].thumbnailUrl}
-        tags={posts[0].tags}
+        no={data[0].id}
+        key={data[0].id}
+        {...data[0]}
+        thumbnailUrl={data[0].thumbnailUrl}
+        tags={data[0].tags}
       />
       <div
         className="flex flex-row flex-wrap w-full relative"
         style={{ flexFlow: "row wrap" }}
       >
         <div>
-          {posts.map((post) => (
+          {data.map((post) => (
             <PostCard
               key={post.id}
               {...post}

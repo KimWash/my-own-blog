@@ -1,28 +1,17 @@
-import FeaturedBanner from "@/components/FeaturedBanner";
-import Main from "@/components/Main";
-import PostCard from "@/components/PostCard";
+import HomeContainer from "@/components/container/HomeContainer";
 import { fetchPosts } from "@/components/queries/usePostListQuery";
-import {
-  QueryClient,
-  useQuery,
-  HydrationBoundary,
-  dehydrate,
-} from "@tanstack/react-query";
+import useDehydratedQueryClient from "@/lib/query/useDehydratedQueryClient";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function Home() {
-  // const { posts } = await useHomeViewModel();
-  const queryClient = new QueryClient();
-  console.log('render!')
-  await queryClient.prefetchQuery({
+
+  const queryClient = await useDehydratedQueryClient({
     queryKey: ["posts"],
-    queryFn: fetchPosts,
-  })
-
-  console.log(queryClient.getQueryData(['posts']))
-
+    queryFn: async () => await fetchPosts(),
+  });
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <Main />
+    <HydrationBoundary state={queryClient}>
+      <HomeContainer />
     </HydrationBoundary>
   );
 }
