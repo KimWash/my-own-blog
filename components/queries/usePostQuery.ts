@@ -1,13 +1,11 @@
-"use client";
+import { useQuery } from "@tanstack/react-query";
+import { PostService } from "../model/PostService";
 
-import fetchExtended from "@/lib/fetchExtended";
-import { PostDetailDto } from "@/lib/model/Post";
+export const PostDetailQueryKey = (id: number) => ["post", id];
 
-export default async function usePostQuery(id: number) {
-  const post = (
-    await fetchExtended<PostDetailDto>("/api/post/" + id, {
-      method: "GET",
-    })
-  ).body;
-  return post;
+export default function usePostQuery(id: number) {
+  return useQuery({
+    queryKey: PostDetailQueryKey(id),
+    queryFn: ({ queryKey: [_, id] }) => PostService.fetchPost(Number(id)),
+  });
 }

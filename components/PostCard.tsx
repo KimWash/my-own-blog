@@ -33,6 +33,8 @@ export default function PostCard({
             src={thumbnailUrl ?? placeHolderImage}
             alt="placeholder"
             width={300}
+            priority
+
             height={200}
             className="w-full aspect-video opacity-100 object-cover image-box"
           />

@@ -24,6 +24,7 @@ export default function FeaturedBanner({
           <Image
             width={100}
             height={100}
+            priority
             className="hover-animation flex-1 max-w-64 aspect-square"
             src={thumbnailUrl ?? placeHolderImage}
             alt="Thumbnail Image"

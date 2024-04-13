@@ -11,11 +11,12 @@ export default function CodePreview(props: SyntaxHighlighterProps) {
     <div className="relative">
       {props.showLineNumbers && (
         <button
-        onClick={() => {
-          navigator.clipboard.writeText(String(props.children))
-          alert("클립보드에 복사되었습니다!")
-        }}
-         className="absolute bottom-0 right-0 bg-white rounded-lg m-2 p-1 text-sm">
+          onClick={() => {
+            navigator.clipboard.writeText(String(props.children));
+            alert("클립보드에 복사되었습니다!");
+          }}
+          className="absolute bottom-0 right-0 bg-white rounded-lg m-2 p-1 text-sm"
+        >
           Copy
         </button>
       )}
