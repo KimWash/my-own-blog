@@ -2,14 +2,19 @@ import { PostListDto } from "@/lib/model/Post";
 import db from "db";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const page = Number(searchParams.get("page") ?? 1);
+  const pageSize = 10;
+
   const posts = await db.post.findMany({
     include: {
       tags: { include: { tag: true } },
       thumbnail: true,
     },
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
-  console.log("api called");
   const result = posts.map(
     (post) =>
       ({

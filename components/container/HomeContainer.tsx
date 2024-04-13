@@ -1,14 +1,15 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import FeaturedBanner from "../FeaturedBanner";
 import PostCard from "../PostCard";
-import { fetchPosts } from "../queries/usePostListQuery";
 import useHomeViewModel from "../hooks/useHomeViewModel";
+import usePage from "@/lib/usePage";
+
 
 export default function HomeContainer() {
-  const {data, isLoading} = useHomeViewModel();
-  if (!data || isLoading) return 'loading...'
+  const page = usePage();
+  const { data, isLoading } = useHomeViewModel(Number(page));
+  if (!data || isLoading) return "loading...";
   return (
     <main className="flex flex-col">
       <FeaturedBanner
