@@ -68,6 +68,15 @@ export default returnFetchJson({
   // default options
   baseUrl: "http://localhost:3000",
   interceptors: {
+    async request(requestArgs, fetch) {
+      const prevUrl = new URL(requestArgs[0]);
+      const newUrl =
+        typeof window === "undefined"
+          ? prevUrl
+          : new URL(prevUrl.pathname + prevUrl.search, window.location.origin);
+
+      return [newUrl, requestArgs[1]];
+    },
     async response(response, requestArgs, fetch) {
       if (response.status >= 400) {
         throw await response.text().then(Error);
