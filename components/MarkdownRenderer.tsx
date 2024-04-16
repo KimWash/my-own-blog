@@ -7,6 +7,7 @@ import remarkMath from "remark-math";
 import { darcula, dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import CodePreview from "./CodePreview";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import Image from "next/image";
 
 export default function MarkdownRenderer({ content }: { content: string }) {
   return (
@@ -14,6 +15,17 @@ export default function MarkdownRenderer({ content }: { content: string }) {
       remarkPlugins={[gfm, remarkMath]}
       rehypePlugins={[rehypeKatex]}
       components={{
+        img(props) {
+          return (
+            <Image
+              src={props.src ?? ""}
+              width="400"
+              height="400"
+              alt={props.alt ?? "alt"}
+              style={{width: 'auto', height: 'auto'}}
+            />
+          );
+        },
         p(props) {
           return <p>{props.children}</p>;
         },
@@ -32,7 +44,11 @@ export default function MarkdownRenderer({ content }: { content: string }) {
               {String(children).replace(/\n$/, "")}
             </CodePreview>
           ) : (
-            <SyntaxHighlighter PreTag="code" style={darcula} customStyle={{padding: 0}} >
+            <SyntaxHighlighter
+              PreTag="code"
+              style={darcula}
+              customStyle={{ padding: 0 }}
+            >
               {String(children)}
             </SyntaxHighlighter>
           );
