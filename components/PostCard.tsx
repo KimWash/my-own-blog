@@ -36,7 +36,7 @@ export default function PostCard({
             priority
 
             height={200}
-            className="w-full aspect-video opacity-100 object-cover image-box"
+            className="w-full opacity-100 object-cover image-box"
           />
           <div className="bg-black absolute w-full h-full opacity-30 top-0"></div>
         </div>

@@ -34,6 +34,9 @@ export default function SearchBox() {
             name="query"
             value={keyword}
             onChange={({ target }) => setKeyword(target.value)}
+            onKeyDown={({key,nativeEvent}) => {
+              if (key === 'Enter' && !nativeEvent.isComposing) search(keyword);
+            }}
           ></input>
           <FontAwesomeIcon
             icon={faSearch}

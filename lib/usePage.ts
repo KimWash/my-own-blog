@@ -11,5 +11,5 @@ export default function usePage() {
     router.replace(`${pathname}?${searchParams.toString()}`);
   }, []);
   // if (!page) router.replace(`${pathname}?${searchParams.toString()}`);
-  return page ?? 1;
+  return Number(page ?? 1)
 }

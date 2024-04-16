@@ -20,10 +20,8 @@ export default function HomeContainer() {
         tags={data[0].tags}
       />
       <div
-        className="flex flex-row flex-wrap w-full relative"
-        style={{ flexFlow: "row wrap" }}
+        className=" post-box"
       >
-        <div>
           {data.map((post) => (
             <PostCard
               key={post.id}
@@ -33,7 +31,6 @@ export default function HomeContainer() {
               containerClassName="flex-grid"
             />
           ))}
-        </div>
       </div>
     </main>
   );

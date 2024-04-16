@@ -18,7 +18,7 @@ body {
 }
 
 img.hover-animation:hover {
-  transform: scale(1.04);
+  transform: scale(1.04) rotate(1deg);
   transition: width, height, transform 0.3s ease;
 }
 
@@ -113,6 +113,29 @@ img.hover-animation:hover {
     font-weight: bold;
   }
 }
+.post-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 200px;
+  /* height given for illustration */
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .post-card {
+    flex: 0 1 calc(50%);
+  }
+}
+@media screen and (min-width: 768px) {
+  .post-card {
+    flex: 0 1 calc(25%); /* <-- adjusting for margin */
+  }
+}
+
+.post-card { height: 100%}
 
 .post-card:hover .image-box {
   transform: scale(1.2) rotate(2deg);

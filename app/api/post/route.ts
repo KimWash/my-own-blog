@@ -5,12 +5,27 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page") ?? 1);
+  const keyword = searchParams.get("query");
   const pageSize = 10;
 
   const posts = await db.post.findMany({
     include: {
       tags: { include: { tag: true } },
       thumbnail: true,
+    },
+    where: {
+      OR: keyword ? [
+        {
+          title: {
+            contains: keyword,
+          },
+        },
+        {
+          content: {
+            contains: keyword ,
+          },
+        },
+      ] : undefined,
     },
     skip: (page - 1) * pageSize,
     take: pageSize,

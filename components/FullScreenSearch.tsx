@@ -23,6 +23,9 @@ export default function FullScreenSearch({
           name="query"
           value={keyword}
           onChange={({ target }) => onChangeKeyword(target.value)}
+          onKeyDown={({key,nativeEvent}) => {
+            if (key === 'Enter' && !nativeEvent.isComposing) onSearch();
+          }}
         ></input>
         <FontAwesomeIcon icon={faSearch} size="lg" onClick={onSearch} />
       </div>
