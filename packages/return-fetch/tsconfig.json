@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "declaration": true,
+    "target": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+  },
+  "include": ["index.ts"]
+}
