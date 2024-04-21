@@ -1,6 +1,7 @@
 import { Client } from "minio";
 import { NextResponse } from "next/server";
-import '@core/lib/date/date.extensions'
+import "@core/lib/date/date.extensions";
+import db from "@db/prisma";
 
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;
@@ -15,9 +16,27 @@ export async function GET(request: Request) {
     accessKey: process.env.MINIO_ACCESS_KEY,
     secretKey: process.env.MINIO_PRIVATE_KEY,
   });
-  const exactFileName = new Date().format('yyyy-MM-dd') + '/' + fileName
+  const exactFileName = new Date().format("yyyy-MM-dd") + "/" + fileName;
 
-  return new NextResponse(
-    await minioClient.presignedPutObject("my-own-blog", exactFileName, 5 * 60)
-  );
+  // Todo: Media 생성
+  const file = await db.file.create({
+    data: {
+      name: exactFileName,
+      create_dt: new Date(),
+      type: fileName.match(new RegExp("/*.png|jpg|gif|heif|HEIF/g"))
+        ? "IMAGE"
+        : "VIDEO",
+      quality: "HIGH",
+      mediaId: 2,
+    },
+  });
+
+  return NextResponse.json({
+    preSignedUrl: await minioClient.presignedPutObject(
+      "my-own-blog",
+      exactFileName,
+      5 * 60
+    ),
+    file
+  });
 }
