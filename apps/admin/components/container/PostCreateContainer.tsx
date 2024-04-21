@@ -12,20 +12,7 @@ export default function PostCreateContainer({
   return (
     <>
       <button onClick={() => console.log(markdown)}></button>
-      {
-        // <MarkdownEditor
-        //     ref={editorRef}
-        //     markdown={initialMarkdown ?? ''}
-        //     onChange={setMarkdown}
-        // onDrop={(e) => {
-        //   e.preventDefault();
-        //   const file = e.dataTransfer.files?.[0];
-        //   if (file) {
-        //   }
-        // }}
-        // />
-        <MarkdownEditor  initialMarkdown={markdown} />
-      }
+      <MarkdownEditor initialMarkdown={markdown} />
     </>
   );
 }
