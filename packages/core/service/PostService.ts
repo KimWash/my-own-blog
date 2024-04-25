@@ -1,4 +1,4 @@
-import { PostDetailDto } from "@/lib/model/Post";
+import { PostDetailDto } from "@core/lib/model/Post";
 import db, { Post } from "@db/prisma";
 
 type NonFunctionKeyNames<T> = Exclude<{

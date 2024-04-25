@@ -1,16 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "../../packages/db/types"],
+    "types": ["global"],
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@core/*": [
-        "../../packages/core/*"
-      ],
-      "@db/*": [
-        "../../packages/db/*"
-      ]
+      "@/*": ["./*"],
+      "@core/*": ["../../packages/core/*"],
+      "@db/*": ["../../packages/db/*"]
     },
     "plugins": [
       {
@@ -18,13 +14,6 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

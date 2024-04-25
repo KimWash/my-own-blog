@@ -73,7 +73,12 @@ const extendedPrismaClient = () => {
   return extendedPrisma;
 };
 
+
 export type ExtendedPrismaClient = ReturnType<typeof extendedPrismaClient>;
+
+declare global {
+  var prisma: ExtendedPrismaClient;
+}
 
 const prisma : ExtendedPrismaClient = global.prisma || extendedPrismaClient();
 export default prisma;
