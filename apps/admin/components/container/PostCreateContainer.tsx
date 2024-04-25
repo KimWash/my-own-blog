@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Editor } from "@toast-ui/react-editor";
 import { PostDetailDto } from "@core/lib/model/Post";
+import { PostService, UploadPostDto } from "../services/PostService";
 
 type PostForm = Pick<
   PostDetailDto,
@@ -19,8 +20,10 @@ type PostForm = Pick<
 
 export default function PostCreateContainer({
   initialPost,
+  // onSubmit
 }: {
   initialPost?: PostDetailDto;
+  // onSubmit: (post: UploadPostDto) => Promise<void>;
 }) {
   const ref = useRef<Editor>(null);
   const emptyPost: PostForm = {
@@ -38,6 +41,7 @@ export default function PostCreateContainer({
     value: PostDetailDto[keyof PostDetailDto]
   ) => setPost((prev) => ({ ...prev, [fieldName]: value }));
 
+  
 
   // Todo: Ref가 type때문인지 뭔지 전달이 안돼서 마크다운 내용을 가져오질 못하고 있어요.
   return (
@@ -52,7 +56,7 @@ export default function PostCreateContainer({
             value={post.title}
             onChange={(e) => setPostField("title", e.target.value)}
           />
-          <button className="btn" onClick={() => console.log(ref.current)}>
+          <button className="btn" >
             작성하기
           </button>
         </div>
@@ -60,7 +64,7 @@ export default function PostCreateContainer({
       <div className="border">
         <MarkdownEditor
           initialMarkdown={initialPost?.content ?? ""}
-          ref={ref}
+          forwardedRef={ref}
         />
       </div>
     </div>
