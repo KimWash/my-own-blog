@@ -8,7 +8,8 @@ type RemoveFunctions<T> = Pick<T, NonFunctionKeyNames<T>>;
 type PostDto = RemoveFunctions<Post>
 type MediaDto = RemoveFunctions<Media>
 type FileDto = RemoveFunctions<File>
-type TagDto = RemoveFunctions<Tag>
+export type TagDto = RemoveFunctions<Tag>
+
 export type PostDetailDto =PostDto & {
   medias: (MediaDto & { files: FileDto[] })[];
   tags: TagDto[];

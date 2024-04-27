@@ -26,7 +26,7 @@ const MarkdownEditor = dynamic(
     }) {
       return (
         <Editor
-          height="auto"
+        height="calc(100% - 100px)"
           ref={forwardedRef}
           initialValue={initialMarkdown ?? ""}
           previewStyle="vertical"

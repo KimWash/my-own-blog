@@ -4,6 +4,7 @@ export interface TagProps {
   fontColor?: string;
   size?: "sm" | "md" | "lg";
   borderRadius?: number;
+  className?: string
 }
 
 const sizeMap = {
@@ -18,10 +19,11 @@ export default function Tag({
   fontColor = "white",
   size = "md",
   borderRadius = 10,
+  className
 }: TagProps) {
   return (
     <div
-      className="inline-block whitespace-nowrap"
+      className={`inline-block whitespace-nowrap ${className}`}
       style={{
         backgroundColor: color,
         borderRadius,

@@ -42,9 +42,9 @@ export default function Navbar(props: PropsWithChildren) {
       )
     );
   return (
-    <div className="drawer">
+    <div className="drawer h-full">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col h-full">
         {/* Navbar */}
         <div className="w-full navbar bg-base-300">
           <div className="flex-none lg:hidden">
@@ -81,7 +81,7 @@ export default function Navbar(props: PropsWithChildren) {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-white">
+        <ul className="menu p-4 w-80 min-h-full bg-base-200">
           {menuElements(rootMenus)}
         </ul>
       </div>
