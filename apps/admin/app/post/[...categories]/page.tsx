@@ -2,6 +2,7 @@ import Tag from "@core/components/Tag";
 import client, { Post } from "@db/prisma";
 import "@core/lib/date/date.extensions";
 import Table, { Column } from "@/components/Table";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -46,12 +47,14 @@ export default async function Page({
   return (
     <main>
       <h3>URL: /post/{params.categories.join("/")}</h3>
+      <Link href="/post/create">
+        <button className="btn">글 작성</button>
+      </Link>
       <Table
         columns={columns as Column<Post>[]}
         rows={posts as Post[]}
         keyMapper={(data) => data.id}
       />
-
     </main>
   );
 }

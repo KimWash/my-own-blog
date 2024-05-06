@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
 import menus_temp from "@/assets/menus_temp.json";
+import Link from "next/link";
+
 type MenuItem = {
   id: string;
   name: string;
@@ -37,7 +39,7 @@ export default function Navbar(props: PropsWithChildren) {
         </li>
       ) : (
         <li key={menu.id}>
-          <a href={menu.url}>{menu.name}</a>
+          <Link href={menu.url}>{menu.name}</Link>
         </li>
       )
     );
@@ -68,7 +70,9 @@ export default function Navbar(props: PropsWithChildren) {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2"><a href="/">my-own-blog 관리도구</a></div>
+          <div className="flex-1 px-2 mx-2">
+            <Link href="/">my-own-blog 관리도구</Link>
+          </div>
           <div className="flex-none hidden lg:block">
             <ul className="menu menu-horizontal">{menuElements(rootMenus)}</ul>
           </div>

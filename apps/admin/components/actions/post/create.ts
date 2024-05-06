@@ -9,13 +9,14 @@ export type UploadPostDto = Pick<
   mediaIds: number[];
 };
 export async function createPost(post: UploadPostDto) {
-  return await db.post.create({
-    data: {
-      title: post.title,
-      content: post.content,
-      is_deleted: false,
+  console.log(post)
+  // return await db.post.create({
+  //   data: {
+  //     title: post.title,
+  //     content: post.content,
+  //     is_deleted: false,
 
-      create_dt: new Date(),
-    },
-  });
+  //     create_dt: new Date(),
+  //   },
+  // });
 }
