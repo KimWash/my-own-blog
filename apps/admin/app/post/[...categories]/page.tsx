@@ -54,6 +54,7 @@ export default async function Page({
         columns={columns as Column<Post>[]}
         rows={posts as Post[]}
         keyMapper={(data) => data.id}
+        linkMapper={(data) => `/post/edit/${data.id}`}
       />
     </main>
   );

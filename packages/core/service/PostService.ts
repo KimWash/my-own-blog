@@ -10,7 +10,7 @@ type RemoveFunctions<T> = Pick<T, NonFunctionKeyNames<T>>;
 export class PostService {
   static async getPost(id: number): Promise<PostDetailDto>{
     const post = await db.post.findFirst({
-      where: { id, is_deleted: undefined },
+      where: { id: Number(id), is_deleted: undefined },
       include: {
         tags: { include: { tag: true } },
         medias: { include: { files: true } },

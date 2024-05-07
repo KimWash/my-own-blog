@@ -1,9 +1,6 @@
-import Tag from "@core/components/Tag";
-import { PostListDto } from "@core/lib/model/Post";
-import client, { Post } from "@db/prisma";
 import "@core/lib/date/date.extensions";
-import { Attributes, Key } from "react";
-
+import { Key } from "react";
+import Link from "next/link";
 
 export type Column<T> = {
   name: Extract<keyof T, string>;
@@ -16,10 +13,12 @@ export default function Table<T>({
   columns,
   rows,
   keyMapper,
+  linkMapper,
 }: {
   columns: Column<T>[];
   rows: T[];
   keyMapper: (data: T) => Key;
+  linkMapper: (data: T) => string;
 }) {
   return (
     <div className="overflow-x-auto">
@@ -35,13 +34,15 @@ export default function Table<T>({
           </tr>
         </thead>
         <tbody>
-          {rows.map((post) => (
-            <tr key={keyMapper(post)}>
+          {rows.map((row) => (
+            <tr key={keyMapper(row)}>
               {columns.map((col) => (
                 <td key={col.name} colSpan={col.width}>
+                  <Link href={linkMapper(row)}>
                   {col.render
-                    ? col.render(post[col.name])
-                    : post[col.name]?.toString()}
+                    ? col.render(row[col.name])
+                    : row[col.name]?.toString()}
+                  </Link>
                 </td>
               ))}
             </tr>
