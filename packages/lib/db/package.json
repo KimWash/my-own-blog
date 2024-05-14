@@ -1,0 +1,23 @@
+{
+  "name": "db",
+  "packageManager": "yarn@4.2.2",
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "generate": "prisma generate",
+    "clean": "rimraf -rf ./dist",
+    "compile": "tsc"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.12.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.14.0",
+    "rimraf": "^5.0.7",
+    "typescript": "^5.4.5"
+  }
+}

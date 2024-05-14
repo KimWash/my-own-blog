@@ -1,15 +1,19 @@
 {
   "name": "my-own-blog",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "private": "true",
+  "packageManager": "yarn@4.2.2",
+  "private": true,
   "scripts": {
-    "client": "workspace client",
-    "admin": "workspace admin"
+    "client": "yarn workspace client",
+    "admin": "yarn workspace admin",
+    "core": "yarn workspace core",
+    "db": "yarn workspace db",
+    "setup-db": "yarn db generate"
   },
   "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+    "packages/app/*",
+    "packages/lib/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
 }
