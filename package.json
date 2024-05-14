@@ -1,0 +1,19 @@
+{
+  "name": "my-own-blog",
+  "packageManager": "yarn@4.2.2",
+  "private": true,
+  "scripts": {
+    "client": "yarn workspace client",
+    "admin": "yarn workspace admin",
+    "core": "yarn workspace core",
+    "db": "yarn workspace db",
+    "setup-db": "yarn db generate"
+  },
+  "workspaces": [
+    "packages/app/*",
+    "packages/lib/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
