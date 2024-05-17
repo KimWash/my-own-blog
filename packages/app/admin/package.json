@@ -13,6 +13,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@my-own-blog/core": "workspace:^",
+    "@my-own-blog/db": "workspace:^",
     "@tanstack/react-query": "^5.29.2",
     "@tanstack/react-query-devtools": "^5.29.2",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",

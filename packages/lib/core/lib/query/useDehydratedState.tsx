@@ -6,7 +6,7 @@ import {
   QueryState,
 } from "@tanstack/react-query";
 
-export default async function useDehydratedState<
+export default async function getDehydratedState<
   TQueryFnData = unknown,
   TError = Error,
   TData = TQueryFnData,

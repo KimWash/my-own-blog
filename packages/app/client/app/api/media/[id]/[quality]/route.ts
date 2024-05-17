@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MediaService } from "@core/service/MediaService";
+import { MediaService } from '@my-own-blog/core/service/MediaService';
 
 export type Quality = "HIGH" | "MID" | "LOW";
 /**

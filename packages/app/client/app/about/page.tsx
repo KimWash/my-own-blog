@@ -1,10 +1,8 @@
 "use client";
 
 import RoundedButton from "@/components/RoundedButton";
-import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 import { faArrowCircleRight } from "@fortawesome/free-solid-svg-icons/faArrowCircleRight";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import db from "@db/prisma";
 import { get } from "http";
 
 export default function Page() {

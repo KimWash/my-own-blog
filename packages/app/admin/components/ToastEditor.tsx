@@ -4,7 +4,7 @@ import { EditorProps, Editor as EditorType } from "@toast-ui/react-editor";
 import TuiWithForwardedRef, {
   TuiWithForwardedRefProps,
 } from "./TuiWithForwardedRef";
-import fetchExtended from "@core/lib/fetchExtended";
+import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
 import { TuiNode, HtmlGenerator, parse } from "latex.js";
 import { File as FileData } from "@prisma/client";
 

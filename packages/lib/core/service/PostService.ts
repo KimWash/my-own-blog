@@ -1,11 +1,5 @@
-import { PostDetailDto } from "@core/lib/model/Post";
-import db, { Post } from "@db/prisma";
-
-type NonFunctionKeyNames<T> = Exclude<{
-  [key in keyof T] : T[key] extends Function? never : key;
-}[keyof T], undefined>;
- 
-type RemoveFunctions<T> = Pick<T, NonFunctionKeyNames<T>>;
+import { PostDetailDto } from "../lib/model/Post";
+import db from "@my-own-blog/db";
 
 export class PostService {
   static async getPost(id: number): Promise<PostDetailDto>{

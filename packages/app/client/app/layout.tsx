@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 // import "normalize.css";
 import "./globals.css";
-import "@core/lib/date/date.extensions.ts";
+import '@my-own-blog/core/lib/date/date.extensions.ts';
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Header from "@/components/Header";
-import Providers from "@core/lib/Providers";
+import Providers from '@my-own-blog/core/lib/Providers';
 import localFont from "next/font/local";
 
 config.autoAddCss = false;

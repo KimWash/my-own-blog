@@ -1,4 +1,4 @@
-import db from '@db/prisma'
+import db from '@my-own-blog/db'
 import { Client } from "minio";
 
 export type Quality = "HIGH" | "MID" | "LOW"

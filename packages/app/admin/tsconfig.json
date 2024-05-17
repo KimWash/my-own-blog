@@ -21,7 +21,7 @@
     "jsx": "preserve",
     "incremental": true,
     "allowImportingTsExtensions": true,
-    "rootDir": "../../../",
+    "rootDir": "./",
     "outDir": "./dist",
     "baseUrl": "./",
     "composite": true,
@@ -29,12 +29,6 @@
       "@/*": [
         "./*"
       ],
-      "@core/*": [
-        "../../lib/core/*"
-      ],
-      "@db/*": [
-        "../../lib/db/*"
-      ]
     },
     "plugins": [
       {
@@ -45,7 +39,12 @@
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "../../../**/*.ts",
-    "../../../**/*.tsx"
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.json"
+  ],
+  "references": [
+    { "path": "../../lib/core" },
+    { "path": "../../lib/db" }
   ]
 }

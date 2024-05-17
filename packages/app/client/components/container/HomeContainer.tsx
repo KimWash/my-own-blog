@@ -3,7 +3,7 @@
 import FeaturedBanner from "../FeaturedBanner";
 import PostCard from "../PostCard";
 import useHomeViewModel from "../hooks/useHomeViewModel";
-import usePage from "@core/lib/usePage";
+import usePage from '@my-own-blog/core/lib/usePage';
 
 
 export default function HomeContainer() {

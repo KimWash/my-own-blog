@@ -1,11 +1,8 @@
 import HomeContainer from "@/components/container/HomeContainer";
 import { PostService } from "@/components/model/PostService";
 import { PostQueryKey } from "@/components/queries/usePostListQuery";
-import { Hydration } from "@core/lib/query/Hydration";
-import useDehydratedState from "@core/lib/query/useDehydratedState";
-import { HydrationBoundary } from "@tanstack/react-query";
-
-
+import { Hydration } from '@my-own-blog/core/lib/query/Hydration';
+import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
 
 export default async function Home({
   searchParams,
@@ -14,7 +11,7 @@ export default async function Home({
 }) {
   const page = searchParams?.page ?? 1;
   
-  const dehydratedState = await useDehydratedState({
+  const dehydratedState = await getDehydratedState({
     queryKey: PostQueryKey.paging(Number(page)),
     queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page)),
   });

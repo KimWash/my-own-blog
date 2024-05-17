@@ -5,9 +5,10 @@
   "scripts": {
     "client": "yarn workspace client",
     "admin": "yarn workspace admin",
-    "core": "yarn workspace core",
-    "db": "yarn workspace db",
-    "setup-db": "yarn db generate"
+    "core": "yarn workspace @my-own-blog/core",
+    "db": "yarn workspace @my-own-blog/db",
+    "setup-db": "yarn db generate",
+    "build": "yarn setup-db yarn core build && yarn db build && yarn client build && yarn admin build"
   },
   "workspaces": [
     "packages/app/*",

@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Editor } from "@toast-ui/react-editor";
-import { PostDetailDto, TagDto } from "@core/lib/model/Post";
+import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
 import { UploadPostDto, createPost } from "@/components/actions/post/create";
-import Tag from "@core/components/Tag";
+import Tag from "@my-own-blog/core/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";

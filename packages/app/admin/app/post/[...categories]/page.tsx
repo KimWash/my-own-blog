@@ -1,6 +1,6 @@
-import Tag from "@core/components/Tag";
-import client, { Post } from "@db/prisma";
-import "@core/lib/date/date.extensions";
+import Tag from "@my-own-blog/core/components/Tag";
+import client, { Post } from "@my-own-blog/db";
+import "@my-own-blog/core/lib/date/date.extensions";
 import Table, { Column } from "@/components/Table";
 import Link from "next/link";
 

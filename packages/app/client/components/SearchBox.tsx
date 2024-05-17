@@ -1,6 +1,6 @@
 "use client";
 
-import usePlatform from "@core/lib/usePlatform";
+import usePlatform from '@my-own-blog/core/lib/usePlatform';
 import { faSearch, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";

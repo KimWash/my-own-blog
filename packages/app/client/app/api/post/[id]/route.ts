@@ -1,5 +1,5 @@
-import { PostDetailDto } from "@core/lib/model/Post";
-import db from "@db/prisma";
+import { PostDetailDto } from '@my-own-blog/core/lib/model/Post';
+import db from "@my-own-blog/db";
 import { NextResponse } from "next/server";
 
 export async function GET(

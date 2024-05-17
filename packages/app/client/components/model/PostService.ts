@@ -1,5 +1,5 @@
-import fetchExtended from "@core/lib/fetchExtended";
-import { PostDetailDto, PostListDto } from "@core/lib/model/Post";
+import fetchExtended from '@my-own-blog/core/lib/fetchExtended';
+import { PostDetailDto, PostListDto } from '@my-own-blog/core/lib/model/Post';
 
 export class PostService {
   static async fetchPosts(page: number, query?: string) {

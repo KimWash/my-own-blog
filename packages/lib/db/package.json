@@ -1,5 +1,5 @@
 {
-  "name": "db",
+  "name": "@my-own-blog/db",
   "packageManager": "yarn@4.2.2",
   "main": "dist/index",
   "types": "dist/index",

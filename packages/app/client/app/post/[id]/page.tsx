@@ -1,11 +1,11 @@
 import PostContainer from "@/components/container/PostContainer";
 import { PostDetailQueryKey } from "@/components/queries/usePostQuery";
-import useDehydratedState from "@core/lib/query/useDehydratedState";
+import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
 import { PostService } from "@/components/model/PostService";
 import { HydrationBoundary } from "@tanstack/react-query";
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const dehydratedState = await useDehydratedState({
+  const dehydratedState = await getDehydratedState({
     queryKey: PostDetailQueryKey(params.id),
     queryFn: ({ queryKey: [_, id] }) => PostService.fetchPost(id),
   });

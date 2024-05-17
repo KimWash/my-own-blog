@@ -1,4 +1,4 @@
-import Tag from '@core/components/Tag'
+import Tag from '@my-own-blog/core/components/Tag'
 
 export default function Home() {
   return (

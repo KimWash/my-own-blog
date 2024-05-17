@@ -1,6 +1,6 @@
 "use client";
 
-import usePage from "@core/lib/usePage";
+import usePage from '@my-own-blog/core/lib/usePage';
 import PostCard from "../PostCard";
 import useSearchViewModel from "../hooks/useSearchViewModel";
 

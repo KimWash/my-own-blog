@@ -1,5 +1,5 @@
 import PostEditContainer from "@/components/container/PostEditContainer";
-import { PostService } from "@core/service/PostService";
+import { PostService } from "@my-own-blog/core/service/PostService";
 
 export default async function Page({ params }: { params: { id: number } }) {
   // Todo: 객체에서 함수를 제거해야 클라이언트 컴포넌트로 전달이 가능함.

@@ -1,9 +1,8 @@
 "use client";
 
-import MarkdownRenderer from "@core/components/MarkdownRenderer";
-import TuiRenderer from "@core/components/TuiRenderer";
+import TuiRenderer from '@my-own-blog/core/components/TuiRenderer';
 import usePostDetailViewModel from "../hooks/usePostDetailViewModel";
-import "@core/lib/date/date.extensions";
+import '@my-own-blog/core/lib/date/date.extensions';
 
 export default function PostContainer({ id }: { id: number }) {
   const { data, isLoading } = usePostDetailViewModel(id);

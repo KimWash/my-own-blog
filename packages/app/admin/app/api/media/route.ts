@@ -1,7 +1,7 @@
 import { Client } from "minio";
 import { NextResponse } from "next/server";
-import "@core/lib/date/date.extensions";
-import db from "@db/prisma";
+import "@my-own-blog/core/lib/date/date.extensions";
+import db from "@my-own-blog/db";
 
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;

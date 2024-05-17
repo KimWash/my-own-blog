@@ -1,9 +1,9 @@
-import { PostListDto } from "@core/lib/model/Post";
-import Tag from "@core/components/Tag";
+import { PostListDto } from '@my-own-blog/core/lib/model/Post';
+import Tag from '@my-own-blog/core/components/Tag';
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
 import Link from "next/link";
-import "@core/lib/date/date.extensions";
+import '@my-own-blog/core/lib/date/date.extensions';
 
 export type PostCardProps = PostListDto & {
   containerStyle?: {};

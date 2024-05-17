@@ -1,6 +1,6 @@
-import { PostListDto } from "@core/lib/model/Post";
+import { PostListDto } from "@my-own-blog/core/lib/model/Post";
 import { NextResponse } from "next/server";
-import db from "@db/prisma";
+import db from "@my-own-blog/db";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

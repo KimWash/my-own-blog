@@ -1,6 +1,6 @@
 'use server';
 
-import db, { Post } from "@db/prisma";
+import db, { Post } from "@my-own-blog/db";
 
 export type UploadPostDto = Pick<
   Post,

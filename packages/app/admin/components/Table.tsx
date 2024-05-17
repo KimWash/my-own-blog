@@ -1,4 +1,4 @@
-import "@core/lib/date/date.extensions";
+import "@my-own-blog/core/lib/date/date.extensions";
 import { Key } from "react";
 import Link from "next/link";
 

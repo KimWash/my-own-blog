@@ -1,9 +1,9 @@
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
-import { PostListDto } from "@core/lib/model/Post";
+import { PostListDto } from '@my-own-blog/core/lib/model/Post';
 import Link from "next/link";
-import Tag from "@core/components/Tag";
-import '@core/lib/date/date.extensions'
+import Tag from '@my-own-blog/core/components/Tag';
+import '@my-own-blog/core/lib/date/date.extensions'
 
 export type FeaturedBannerProps = PostListDto & { no: number };
 
