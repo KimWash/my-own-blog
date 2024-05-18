@@ -202,3 +202,6 @@ ul.sidebar-menu li:hover {
   background-color: #282c34;
   color: #a9b7c6;
 } 
+.post-content pre code {
+  display:block
+}
