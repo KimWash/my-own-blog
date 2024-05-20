@@ -2,12 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
-h1 {
-  margin:0;
-  font-size: 2.5rem;
-  font-weight: bold;
+@layer base {
+  h1 {
+    @apply text-4xl;
+    margin:0;
+    font-weight: bold;
+  }
+  h2 {
+    @apply text-3xl;
+    @apply font-bold
+  }
+  h3 {
+    @apply text-2xl;
+    @apply font-bold
+  }
+  /* ... */
 }
+
 
 html {
   height: 100%

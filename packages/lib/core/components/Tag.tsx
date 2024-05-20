@@ -23,8 +23,9 @@ export default function Tag({
 }: TagProps) {
   return (
     <div
-      className={`inline-block whitespace-nowrap ${className}`}
+      className={` whitespace-nowrap ${className}`}
       style={{
+        display: 'inline-flex',
         backgroundColor: color,
         borderRadius,
         color: fontColor,
