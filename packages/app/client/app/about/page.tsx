@@ -7,8 +7,11 @@ import newLineIcon from "@/asset/newline.svg";
 import Reply from "@/components/Reply";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function Page() {
+ const [flipped, setFlipped] = useState(false);
+
   return (
     <div
       className="flex justify-center w-full py-24"
@@ -16,9 +19,9 @@ export default function Page() {
     >
       <div className="p-2 grid gap-2 sm:grid-cols-2 flex-1 xl:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm overflow-scroll">
         <GridItem span="1 1">
-          <div className="relative w-max">
+          <div className="relative w-max" style={{ width: 180, height: 180 }}>
             <div
-              className="absolute top-0 right-0 rounded-md bg-green-300 w-6 text-center cursor-pointer"
+              className="absolute top-0 right-0 z-10 rounded-md bg-green-300 w-6 text-center cursor-pointer"
               title="ㅎㅇㅎㅎㅇ"
               onClick={() => {
                 alert("프로필 이미지 변경");
@@ -26,7 +29,26 @@ export default function Page() {
             >
               <FontAwesomeIcon icon={faRepeat} />
             </div>
-            <Image src={profileImage} alt="profile" className="mb-3" />
+            <Image
+              src={profileImage}
+              alt="profile"
+              className="mb-3 absolute top-0 left-0"
+              style={{
+                transform: "rotateY(0deg)",
+                backfaceVisibility: "hidden",
+              }}
+            />
+            <Image
+              src="https://github.com/KimWash.png"
+              width={180}
+              height={180}
+              alt="profile"
+              className="mb-3 absolute top-0 left-0 "
+              style={{
+                transform: "rotateY(180deg)",
+                backfaceVisibility: "hidden",
+              }}
+            />
           </div>
           <h1>안녕하세요!</h1>
           <p>
