@@ -17,18 +17,30 @@ export async function GET(request: Request) {
     secretKey: process.env.MINIO_PRIVATE_KEY,
   });
   const exactFileName = new Date().format("yyyy-MM-dd") + "/" + fileName;
-
+  const fileType = fileName.match(new RegExp("/*.png|jpg|jpeg|gif|heif|HEIF/g"))
+    ? "IMAGE"
+    : "VIDEO";
   // Todo: Media 생성
-  const file = await db.file.create({
+  const media = await db.media.create({
     data: {
-      name: exactFileName,
+      type: fileType,
       create_dt: new Date(),
-      type: fileName.match(new RegExp("/*.png|jpg|gif|heif|HEIF/g"))
-        ? "IMAGE"
-        : "VIDEO",
-      quality: "HIGH",
-      mediaId: 2,
+      name: exactFileName,
+      postId: null,
+      files: {
+        create: {
+          name: exactFileName,
+          create_dt: new Date(),
+          type: fileName.match(new RegExp("/*.png|jpg|jpeg|gif|heif|HEIF/g"))
+            ? "IMAGE"
+            : "VIDEO",
+          quality: "HIGH",
+        },
+      },
     },
+    include: {
+      files: true
+    }
   });
 
   return NextResponse.json({
@@ -37,6 +49,6 @@ export async function GET(request: Request) {
       exactFileName,
       5 * 60
     ),
-    file
+    file: media.files[0],
   });
 }

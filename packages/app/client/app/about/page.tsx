@@ -8,10 +8,11 @@ import Reply from "@/components/Reply";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import Stack from "@/components/Stack";
 
 export default function Page() {
- const [flipped, setFlipped] = useState(false);
-
+  const [flipped, setFlipped] = useState(false);
   return (
     <div
       className="flex justify-center w-full py-24"
@@ -19,36 +20,47 @@ export default function Page() {
     >
       <div className="p-2 grid gap-2 sm:grid-cols-2 flex-1 xl:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm overflow-scroll">
         <GridItem span="1 1">
-          <div className="relative w-max" style={{ width: 180, height: 180 }}>
+          <div
+            className="relative w-max mb-2"
+            style={{ width: 180, height: 180 }}
+          >
             <div
-              className="absolute top-0 right-0 z-10 rounded-md bg-green-300 w-6 text-center cursor-pointer"
+              className="absolute top-2 right-2 z-10 rounded-md bg-green-300 w-6 text-center cursor-pointer"
               title="ㅎㅇㅎㅎㅇ"
               onClick={() => {
-                alert("프로필 이미지 변경");
+                setFlipped((prev) => !prev);
               }}
             >
               <FontAwesomeIcon icon={faRepeat} />
             </div>
-            <Image
-              src={profileImage}
-              alt="profile"
+            <motion.div
               className="mb-3 absolute top-0 left-0"
+              animate={{
+                rotateY: flipped ? 180 : 0,
+              }}
               style={{
-                transform: "rotateY(0deg)",
                 backfaceVisibility: "hidden",
               }}
-            />
-            <Image
-              src="https://github.com/KimWash.png"
-              width={180}
-              height={180}
-              alt="profile"
+            >
+              <Image src={profileImage} alt="profile" className="rounded-md" />
+            </motion.div>
+            <motion.div
+              animate={{
+                rotateY: flipped ? 0 : 180,
+              }}
               className="mb-3 absolute top-0 left-0 "
               style={{
-                transform: "rotateY(180deg)",
                 backfaceVisibility: "hidden",
               }}
-            />
+            >
+              <Image
+                alt="profile"
+                src="https://github.com/KimWash.png"
+                width={180}
+                height={180}
+                className="rounded-md"
+              />
+            </motion.div>
           </div>
           <h1>안녕하세요!</h1>
           <p>
@@ -147,33 +159,40 @@ export default function Page() {
         </GridItem>
         <GridItem span="1 1">
           <h2>기술스택</h2>
-          <p>
-            <Tag color="#f14668">Level 1</Tag> 코드를 읽고 수정할 수 있어요
-          </p>
-          <p>
-            <Tag color="#ffe08a">Level 2</Tag> 어느정도 프로젝트를 수행할 수
-            있어요
-          </p>
-          <p>
-            {" "}
-            <Tag color="#48c78e">Level 3</Tag> 많이 사용해봐서 자신있어요
-          </p>
+          <div className="leading-10 mb-3">
+            <div>
+              <Tag color="#f14668">Level 1</Tag> 코드를 읽고 수정할 수 있어요
+            </div>
+            <div>
+              <Tag color="#ffe08a" fontColor="black">Level 2</Tag> 어느정도 프로젝트를 수행할 수
+              있어요
+            </div>
+            <div>
+              <Tag color="#48c78e">Level 3</Tag> 많이 사용해봐서 자신있어요
+            </div>
+          </div>
           <h3>Frontend</h3>
-          <Tag color="#48c78e">JS</Tag>
-          <Tag color="#48c78e">React</Tag>
-          <Tag color="#f14668">Vue.js</Tag>
-          <Tag color="#48c78e">HTML/CSS</Tag>
-          <Tag color="#ffe08a">TS</Tag>
-          <Tag color="#ffe08a">JQuery</Tag>
-          <Tag color="#f14668">Buefy</Tag>
-          <Tag color="#ffe08a">Tailwind</Tag>
+          <div className="flex flex-wrap gap-1 mb-3">
+            <Stack level={3}>JS</Stack>
+            <Stack level={3}>React</Stack>
+            <Stack level={1}>Vue.js</Stack>
+            <Stack level={3}>HTML/CSS</Stack>
+            <Stack level={3}>TS</Stack>
+            <Stack level={2}>JQuery</Stack>
+            <Stack level={1}>Buefy</Stack>
+            <Stack level={2}>Tailwind</Stack>
+          </div>
           <h3>Backend</h3>
-          <Tag color="#f14668">Express.js</Tag>
-          <Tag color="#f14668">Spring Boot</Tag>
+          <div className="flex flex-wrap gap-1 mb-3">
+            <Stack level={1}>Express.js</Stack>
+            <Stack level={1}>Spring Boot</Stack>
+          </div>
           <h3>App</h3>
-          <Tag color="#ffe08a">React Native</Tag>
-          <Tag color="#ffe08a">Koltin Android</Tag>
-          <Tag color="#ffe08a">Flutter</Tag>
+          <div className="flex flex-wrap gap-1 mb-2">
+            <Stack level={2}>React Native</Stack>
+            <Stack level={2}>Koltin Android</Stack>
+            <Stack level={2}>Flutter</Stack>
+          </div>
         </GridItem>
         <GridItem span="1 1">
           <h2>프로젝트</h2>
@@ -186,12 +205,16 @@ export type TailwindSize = "sm" | "md" | "lg" | "xl" | `${number}xl`;
 
 function GridItem({
   span = "1 1",
+  className,
   children,
-}: React.PropsWithChildren<{ span?: `${number} ${number}` }>) {
+}: React.PropsWithChildren<{
+  span?: `${number} ${number}`;
+  className?: string;
+}>) {
   const spans = span.split(" ");
   return (
     <div
-      className="bg-white rounded-3xl p-6 flex-1 "
+      className={`bg-white rounded-3xl p-6 flex-1 ${className}`}
       style={{
         gridColumn: `span ${spans[0]} / span ${spans[1]}`,
       }}

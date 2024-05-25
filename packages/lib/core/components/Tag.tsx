@@ -31,6 +31,7 @@ export default function Tag({
         color: fontColor,
         padding: sizeMap[size],
         fontSize: sizeMap[size] + 8,
+      lineHeight: 'normal'
       }}
     >
       {children}

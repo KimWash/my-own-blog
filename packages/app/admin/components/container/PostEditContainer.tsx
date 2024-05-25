@@ -73,10 +73,12 @@ export default function PostEditContainer({
         <ToastEditor
           initialValue={initialPost?.content ?? ""}
           addImage={(file) => {
-            setPostField<number[]>("mediaIds", (prev) => [
-              ...prev,
-              file.mediaId!,
-            ]);
+            setPostField<number[]>("mediaIds", (prev) => {
+              return [
+                ...(prev ?? []),
+                file.mediaId!,
+              ]
+            });
           }}
           forwardedRef={ref}
         />
