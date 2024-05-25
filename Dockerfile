@@ -15,7 +15,7 @@ WORKDIR /app
 # Yarn Berry 설치
 RUN yarn set version berry
 
-RUN yarn workspaces
+RUN yarn workspaces list
 
 COPY .yarn .yarn
 COPY .yarnrc.yml .yarnrc.yml
