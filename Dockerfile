@@ -22,12 +22,14 @@ COPY .yarnrc.yml .yarnrc.yml
 COPY package.json .
 COPY yarn.lock .
 
-RUN yarn install
+
+COPY . .
+
 RUN cat package.json
 RUN ls 
 RUN ls packages/lib/db
 
-COPY . .
+RUN yarn install
 
 EXPOSE 3000
 EXPOSE 3001
