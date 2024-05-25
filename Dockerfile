@@ -15,7 +15,7 @@ WORKDIR /app
 # Yarn Berry 설치
 RUN yarn set version berry
 
-RUN yarn workspaces list
+RUN yarn -v
 
 COPY .yarn .yarn
 COPY .yarnrc.yml .yarnrc.yml
@@ -23,6 +23,10 @@ COPY package.json .
 COPY yarn.lock .
 
 RUN yarn install
+RUN yarn workspaces
+RUN cat package.json
+RUN ls 
+RUN ls packages/lib/db
 
 COPY . .
 
