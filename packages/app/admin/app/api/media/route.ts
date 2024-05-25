@@ -6,6 +6,7 @@ import db from "@my-own-blog/db";
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams;
   const fileName = params.get("filename");
+  const postId = params.get("postId");
   if (!fileName) return new NextResponse("no filename", { status: 400 });
   // Todo: 인증 로직 추가 후 인증 된 경우에만 업로드 가능하게
 
@@ -26,7 +27,7 @@ export async function GET(request: Request) {
       type: fileType,
       create_dt: new Date(),
       name: exactFileName,
-      postId: null,
+      postId: postId && !isNaN(parseInt(postId)) ? parseInt(postId) : null,
       files: {
         create: {
           name: exactFileName,

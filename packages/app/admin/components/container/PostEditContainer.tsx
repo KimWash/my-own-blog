@@ -120,13 +120,13 @@ export default function PostEditContainer({
                 onKeyDown={({ nativeEvent, key }) => {
                   if (key == "Enter" && !nativeEvent.isComposing) {
                     setPostField<TagDto[]>("tags", (prev) => [
-                      ...prev,
+                      ...(prev ?? []),
                       {
-                        id: Math.max(...prev.map((tag) => tag.id)) + 1,
+                        id: Math.max(...(prev ?? []).map((tag) => tag.id)) + 1,
                         name: newTag,
                         create_dt: new Date(),
                         is_deleted: false,
-                        post_id: 2,
+                        post_id: post.id ?? null,
                       },
                     ]);
                     setNewTag("");
