@@ -17,10 +17,17 @@ RUN yarn set version berry
 
 RUN yarn -v
 
+COPY .yarn .yarn
+COPY .yarnrc.yml .yarnrc.yml
+COPY package.json .
+COPY yarn.lock .
+
+
 COPY . .
 
 RUN cat package.json
-RUN ls -r
+RUN ls 
+RUN ls packages/lib/db
 
 RUN yarn install
 
