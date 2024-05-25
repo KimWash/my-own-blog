@@ -22,6 +22,7 @@ jobs:
           registry: ghcr.io
           username: KimWash
           password: ${{secrets.GITHUB_TOKEN}}
+  
 
       - name: Build and push
         uses: docker/build-push-action@v2
