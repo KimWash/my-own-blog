@@ -10,19 +10,23 @@ ENV MINIO_URL=$MINIO_URL
 ENV MINIO_ACCESS_KEY=$MINIO_ACCESS_KEY
 ENV MINIO_PRIVATE_KEY=$MINIO_PRIVATE_KEY
 
-
 WORKDIR /app
 
-COPY package*.json ./
+# Yarn Berry 설치
+RUN yarn set version berry
 
-RUN npm install -g only-allow
+COPY .yarn .yarn
+COPY .yarnrc.yml .yarnrc.yml
+COPY package.json .
+COPY yarn.lock .
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
 EXPOSE 3000
+EXPOSE 3001
 
-RUN npm run build
+RUN yarn build
 
-CMD npm run start 
+CMD yarn start
