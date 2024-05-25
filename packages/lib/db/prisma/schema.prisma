@@ -63,7 +63,7 @@ model TagsOnPosts {
 }
 
 model Tag {
-  id         Int           @id
+  id         Int           @id @default(autoincrement())
   name       String?       @db.VarChar(45)
   create_dt  DateTime?     @db.DateTime(0)
   is_deleted Boolean?      @db.Bit(1)

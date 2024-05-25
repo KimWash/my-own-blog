@@ -185,6 +185,7 @@ export default function PostEditContainer({
               content: post.content!,
               mediaIds: post.mediaIds!,
               thumbnail_media: post.thumbnail_media!,
+              tags: post.tags!
             })
           }
         >

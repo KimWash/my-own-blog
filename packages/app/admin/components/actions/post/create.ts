@@ -1,5 +1,6 @@
 "use server";
 
+import { TagDto } from "@my-own-blog/core/lib/model/Post";
 import db, { Post } from "@my-own-blog/db";
 
 export type UploadPostDto = Pick<
@@ -7,6 +8,7 @@ export type UploadPostDto = Pick<
   "title" | "content" | "thumbnail_media"
 > & {
   mediaIds: number[];
+  tags: TagDto[];
 };
 export async function createPost(post: UploadPostDto) {
   console.log(post);
@@ -19,15 +21,18 @@ export async function createPost(post: UploadPostDto) {
       create_dt: new Date(),
     },
   });
+  await db.tag.createMany({
+    data: post.tags.map((tag) => ({ ...tag, id: undefined, post_id: createdPost.id })),
+  });
   await db.media.updateMany({
     where: {
-      id:{
-        in:  post.mediaIds
-      }
+      id: {
+        in: post.mediaIds,
+      },
     },
     data: {
-      postId: createdPost.id
-    }
-  })
+      postId: createdPost.id,
+    },
+  });
   return JSON.stringify(createdPost);
 }
