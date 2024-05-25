@@ -1,0 +1,5 @@
+/* 사용자 정의 CSS 추가 */
+.token.operator,
+.token.punctuation {
+  background: none !important;
+}

@@ -1,16 +1,10 @@
 "use server";
 
+import { PostForm } from "@/components/container/PostEditContainer";
 import { TagDto } from "@my-own-blog/core/lib/model/Post";
 import db, { Post } from "@my-own-blog/db";
 
-export type UploadPostDto = Pick<
-  Post,
-  "title" | "content" | "thumbnail_media" | "description"
-> & {
-  mediaIds: number[];
-  tags: TagDto[];
-};
-export async function createPost(post: UploadPostDto) {
+export async function createPost(id: number, post: PostForm) {
   console.log(post);
   // Todo:미디어/태그와 포스트 연결하기
   const createdPost = await db.post.create({

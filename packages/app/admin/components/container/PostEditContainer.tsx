@@ -1,15 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import { useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
-import { UploadPostDto, createPost } from "@/components/actions/post/create";
 import Tag from "@my-own-blog/core/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleXmark,
-  faClose,
   faExpand,
   faImage,
   faTrashCan,
@@ -18,15 +15,17 @@ import Image from "next/image";
 import ToastEditor from "../ToastEditor";
 
 type TagForm = Pick<TagDto, "name" | "id">;
-type PostForm = Pick<
+export type PostForm = Pick<
   PostDetailDto,
   "content" | "title" | "description" | "update_dt" | "thumbnail_media"
 > & { tags: (TagForm | TagDto)[]; mediaIds: number[] };
 
 export default function PostEditContainer({
   initialPost,
+  onSubmit,
 }: {
   initialPost?: PostDetailDto;
+  onSubmit: (id: number, post: PostForm) => void;
 }) {
   const ref = useRef<Editor>();
   const emptyPost: PostForm = {
@@ -177,7 +176,9 @@ export default function PostEditContainer({
                         color="white"
                       />
                       <FontAwesomeIcon
-                        onClick={() => setPostField<number>('thumbnail_media', mediaId)}
+                        onClick={() =>
+                          setPostField<number>("thumbnail_media", mediaId)
+                        }
                         icon={faImage}
                         color="white"
                       />
@@ -206,13 +207,14 @@ export default function PostEditContainer({
           onClick={() => {
             if (!post.title) alert("제목을 입력해주세요.");
             else
-              createPost({
+              onSubmit(post.id ?? -1, {
                 title: post.title!,
                 content: ref.current?.getInstance().getMarkdown(),
                 description: post.description!,
                 mediaIds: post.mediaIds!,
                 thumbnail_media: post.thumbnail_media!,
                 tags: post.tags!,
+                update_dt: null,
               });
           }}
         >

@@ -17,6 +17,7 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 // 3 below for editor-plugin-color-syntax
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "./custom-prism.css"
 
 import dynamic from "next/dynamic";
 import { HtmlGenerator, TuiNode, parse } from "latex.js";
@@ -27,8 +28,7 @@ const Viewer = dynamic(() =>
 export default function TuiRenderer({ content }: { content: string }) {
   return (
     <Viewer
-      theme="dark"
-      plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
+      plugins={[[codeSyntaxHighlight, { highlighter: Prism, }]]}
       customHTMLRenderer={{
         latex(node: TuiNode) {
           const generator = new HtmlGenerator({ hyphenate: false });

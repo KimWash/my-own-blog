@@ -1,3 +1,4 @@
+import { updatePost } from "@/components/actions/post/update";
 import PostEditContainer from "@/components/container/PostEditContainer";
 import { PostService } from "@my-own-blog/core/service/PostService";
 
@@ -8,5 +9,10 @@ export default async function Page({ params }: { params: { id: number } }) {
   const initialPost = JSON.parse(
     JSON.stringify(await PostService.getPost(params.id))
   );
-  return <PostEditContainer initialPost={initialPost} />;
+  return (
+    <PostEditContainer
+      initialPost={initialPost}
+      onSubmit={updatePost}
+    />
+  );
 }

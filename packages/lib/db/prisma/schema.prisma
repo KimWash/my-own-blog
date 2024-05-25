@@ -39,7 +39,7 @@ model Media {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Post {
-  title           String        @db.VarChar(30)
+  title           String        @db.VarChar(100)
   create_dt       DateTime?     @db.DateTime(0)
   thumbnail       Media?        @relation("Thumbnail", fields: [thumbnail_media], references: [id], map: "thumbnail")
   thumbnail_media Int?          
