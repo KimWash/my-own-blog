@@ -7,7 +7,12 @@ import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
 import { UploadPostDto, createPost } from "@/components/actions/post/create";
 import Tag from "@my-own-blog/core/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleXmark,
+  faClose,
+  faExpand,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import ToastEditor from "../ToastEditor";
 
@@ -52,7 +57,7 @@ export default function PostEditContainer({
     }));
   }
   const [newTag, setNewTag] = useState("");
-
+  const [focusedMediaId, setFocusedMediaId] = useState<number | null>(null);
 
   // Todo: Ref가 type때문인지 뭔지 전달이 안돼서 마크다운 내용을 가져오질 못하고 있어요.
   return (
@@ -74,10 +79,7 @@ export default function PostEditContainer({
           initialValue={initialPost?.content ?? ""}
           addImage={(file) => {
             setPostField<number[]>("mediaIds", (prev) => {
-              return [
-                ...(prev ?? []),
-                file.mediaId!,
-              ]
+              return [...(prev ?? []), file.mediaId!];
             });
           }}
           forwardedRef={ref}
@@ -146,8 +148,18 @@ export default function PostEditContainer({
                 className="relative"
                 onClick={() => {
                   // Todo: 클릭 시 오버레이 생기고 이미지 최대화/썸네일 지정 가능하게
+                  setFocusedMediaId(mediaId);
                 }}
               >
+                {focusedMediaId == mediaId && (
+                  <>
+                    <div className=" absolute top-0 left-0 right-0 bottom-0 opacity-50 bg-gray-800 "></div>
+                    <div className="absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center gap-4">
+                      <FontAwesomeIcon icon={faTrashCan} color="white" />
+                      <FontAwesomeIcon icon={faExpand} color="white" />
+                  </div>
+                  </>
+                )}
                 {(post.thumbnail_media ?? 0) === mediaId && (
                   <Tag className="absolute top-1 left-1 text-xs" color="black">
                     썸네일
