@@ -5,7 +5,7 @@ import db, { Post } from "@my-own-blog/db";
 
 export type UploadPostDto = Pick<
   Post,
-  "title" | "content" | "thumbnail_media"
+  "title" | "content" | "thumbnail_media" | "description"
 > & {
   mediaIds: number[];
   tags: TagDto[];
@@ -19,11 +19,29 @@ export async function createPost(post: UploadPostDto) {
       content: post.content,
       is_deleted: false,
       create_dt: new Date(),
+      thumbnail_media: post.thumbnail_media,
     },
   });
-  await db.tag.createMany({
-    data: post.tags.map((tag) => ({ ...tag, id: undefined, post_id: createdPost.id })),
-  });
+  if (post.tags) {
+    await db.tag.createMany({
+      data: post.tags.map((tag) => ({
+        ...tag,
+        id: undefined,
+        post_id: createdPost.id,
+      })),
+    });
+    const tags = await db.tag.findMany({
+      where: {
+        post_id: createdPost.id
+      }
+    });
+    await db.tagsOnPosts.createMany({
+      data: tags.map((tag) => ({
+        tag_id: tag.id,
+        post_id: createdPost.id,
+      })),
+    });
+  }
   await db.media.updateMany({
     where: {
       id: {

@@ -25,8 +25,8 @@ export default function PostCard({
       className={`flex flex-col justify-end w-full overflow-hidden post-card ${containerClassName}`}
       style={containerStyle}
     >
-      <Link href={`/post/${id}`}>
-        <div className="relative">
+      <Link href={`/post/${id}`} className="h-full">
+        <div className="relative h-full">
           <Image
             draggable={false}
             src={thumbnailUrl ?? placeHolderImage}
@@ -34,7 +34,7 @@ export default function PostCard({
             width={300}
             priority
             height={200}
-            className="w-full opacity-100 object-cover image-box"
+            className="w-full h-full opacity-100 object-cover image-box"
           />
           <div className="bg-black absolute w-full h-full opacity-30 top-0"></div>
         </div>

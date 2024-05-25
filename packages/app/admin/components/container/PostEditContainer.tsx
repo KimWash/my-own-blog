@@ -11,6 +11,7 @@ import {
   faCircleXmark,
   faClose,
   faExpand,
+  faImage,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
@@ -78,9 +79,13 @@ export default function PostEditContainer({
         <ToastEditor
           initialValue={initialPost?.content ?? ""}
           addImage={(file) => {
-            setPostField<number[]>("mediaIds", (prev) => {
-              return [...(prev ?? []), file.mediaId!];
-            });
+            setPost((prev) => ({
+              ...prev,
+              mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
+              thumbnail_media: !prev.mediaIds
+                ? file.mediaId!
+                : prev.thumbnail_media,
+            }));
           }}
           forwardedRef={ref}
         />
@@ -151,15 +156,34 @@ export default function PostEditContainer({
                   setFocusedMediaId(mediaId);
                 }}
               >
-                {focusedMediaId == mediaId && (
+                {focusedMediaId == mediaId ? (
                   <>
                     <div className=" absolute top-0 left-0 right-0 bottom-0 opacity-50 bg-gray-800 "></div>
-                    <div className="absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center gap-4">
-                      <FontAwesomeIcon icon={faTrashCan} color="white" />
-                      <FontAwesomeIcon icon={faExpand} color="white" />
-                  </div>
+                    <div
+                      onClick={() => {
+                        console.log("clicked");
+                        setFocusedMediaId(-1);
+                      }}
+                      className="absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center gap-4"
+                    >
+                      <FontAwesomeIcon
+                        onClick={() => alert("삭제")}
+                        icon={faTrashCan}
+                        color="white"
+                      />
+                      <FontAwesomeIcon
+                        onClick={() => alert("확장")}
+                        icon={faExpand}
+                        color="white"
+                      />
+                      <FontAwesomeIcon
+                        onClick={() => setPostField<number>('thumbnail_media', mediaId)}
+                        icon={faImage}
+                        color="white"
+                      />
+                    </div>
                   </>
-                )}
+                ) : null}
                 {(post.thumbnail_media ?? 0) === mediaId && (
                   <Tag className="absolute top-1 left-1 text-xs" color="black">
                     썸네일
@@ -179,15 +203,18 @@ export default function PostEditContainer({
         </div>
         <button
           className="btn"
-          onClick={() =>
-            createPost({
-              title: post.title!,
-              content: post.content!,
-              mediaIds: post.mediaIds!,
-              thumbnail_media: post.thumbnail_media!,
-              tags: post.tags!
-            })
-          }
+          onClick={() => {
+            if (!post.title) alert("제목을 입력해주세요.");
+            else
+              createPost({
+                title: post.title!,
+                content: ref.current?.getInstance().getMarkdown(),
+                description: post.description!,
+                mediaIds: post.mediaIds!,
+                thumbnail_media: post.thumbnail_media!,
+                tags: post.tags!,
+              });
+          }}
         >
           작성하기
         </button>

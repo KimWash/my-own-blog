@@ -14,6 +14,7 @@ export async function GET(
 
     const responseHeader = new Headers(request.headers);
     responseHeader.set("Content-Type", "image/png");
+    responseHeader.set("Cache-Control", "no-cache");
     const data = new ReadableStream({
       start(controller) {
         fs.on("data", (chunk: Buffer) =>
