@@ -23,7 +23,6 @@ COPY package.json .
 COPY yarn.lock .
 
 RUN yarn install
-RUN yarn workspaces list
 RUN cat package.json
 RUN ls 
 RUN ls packages/lib/db
