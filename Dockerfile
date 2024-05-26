@@ -12,7 +12,6 @@ ENV MINIO_PRIVATE_KEY=$MINIO_PRIVATE_KEY
 
 WORKDIR /app
 
-# Yarn Berry 설치
 RUN yarn set version berry
 
 RUN yarn -v
@@ -22,18 +21,16 @@ COPY .yarnrc.yml .yarnrc.yml
 COPY package.json .
 COPY yarn.lock .
 
+COPY packages ./packages
+
+RUN yarn workspaces list
+RUN yarn install
 
 COPY . .
-
-RUN cat package.json
-RUN ls 
-RUN ls packages/lib/db
-
-RUN yarn install
 
 EXPOSE 3000
 EXPOSE 3001
 
 RUN yarn build
 
-CMD yarn start
+CMD ["yarn", "start"]

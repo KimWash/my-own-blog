@@ -1,11 +1,10 @@
 {
   "name": "@my-own-blog/db",
   "packageManager": "yarn@4.2.2",
-  "main": "dist/index",
-  "types": "dist/index",
-  "files": [
-    "dist"
-  ],
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "yarn clean && yarn compile",
     "generate": "prisma generate",
