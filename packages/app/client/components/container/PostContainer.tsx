@@ -1,8 +1,11 @@
 "use client";
 
-import TuiRenderer from '@my-own-blog/core/components/TuiRenderer';
 import usePostDetailViewModel from "../hooks/usePostDetailViewModel";
-import '@my-own-blog/core/lib/date/date.extensions';
+import "@my-own-blog/core/lib/date/date.extensions";
+import dynamic from "next/dynamic";
+const TuiRenderer = dynamic(
+  () => import("@my-own-blog/core/components/TuiRenderer")
+);
 
 export default function PostContainer({ id }: { id: number }) {
   const { data, isLoading } = usePostDetailViewModel(id);
