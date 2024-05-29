@@ -18,7 +18,7 @@ export default function Page() {
       className="flex justify-center w-full py-24"
       style={{ background: "#f7f2f2" }}
     >
-      <div className="p-2 grid gap-2 sm:grid-cols-2 flex-1 xl:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm overflow-scroll">
+      <div className="p-2 grid gap-2 sm:grid-cols-2 flex-1 xl:max-w-screen-xl md:max-w-screen-md sm:max-w-screen-sm">
         <GridItem span="1 1">
           <div
             className="relative w-max mb-2"

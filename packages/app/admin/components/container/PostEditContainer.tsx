@@ -12,7 +12,9 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
-import ToastEditor from "../ToastEditor";
+import dynamic from "next/dynamic";
+
+const ToastEditor = dynamic(() => import('../ToastEditor'))
 
 type TagForm = Pick<TagDto, "name" | "id">;
 export type PostForm = Pick<
