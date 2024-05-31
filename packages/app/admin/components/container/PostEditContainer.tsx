@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const ToastEditor = dynamic(() => import('../ToastEditor'))
+const ToastEditor = dynamic(() => import('../ToastEditor'), {ssr:false})
 
 type TagForm = Pick<TagDto, "name" | "id">;
 export type PostForm = Pick<
