@@ -13,20 +13,28 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import menus_temp from "@/assets/menus_temp.json";
 
-const ToastEditor = dynamic(() => import('../ToastEditor'), {ssr:false})
+const ToastEditor = dynamic(() => import("../ToastEditor"), { ssr: false });
 
 type TagForm = Pick<TagDto, "name" | "id">;
 export type PostForm = Pick<
   PostDetailDto,
-  "content" | "title" | "description" | "update_dt" | "thumbnail_media"
+  | "content"
+  | "title"
+  | "description"
+  | "update_dt"
+  | "thumbnail_media"
+  | "category_id"
 > & { tags: (TagForm | TagDto)[]; mediaIds: number[] };
 
 export default function PostEditContainer({
   initialPost,
+  initialCategory,
   onSubmit,
 }: {
   initialPost?: PostDetailDto;
+  initialCategory: string;
   onSubmit: (id: number, post: PostForm) => void;
 }) {
   const ref = useRef<Editor>();
@@ -38,6 +46,7 @@ export default function PostEditContainer({
     thumbnail_media: null,
     mediaIds: [],
     tags: [],
+    category_id: initialCategory,
   };
 
   const [post, setPost] = useState(
@@ -60,8 +69,45 @@ export default function PostEditContainer({
   }
   const [newTag, setNewTag] = useState("");
   const [focusedMediaId, setFocusedMediaId] = useState<number | null>(null);
+  const rootMenus = menus_temp;
+  const menuElements = (menus: typeof rootMenus) =>
+    menus.map((menu) =>
+      menu.children !== undefined ? (
+        <li key={menu.id} onClick={() => setPostField("category_id", menu.id)}>
+          <details open>
+            <summary
+              style={
+                post.category_id === menu.id
+                  ? {
+                      backgroundColor:
+                        "var(--fallback-bc,oklch(var(--bc)/0.1))",
+                    }
+                  : undefined
+              }
+            >
+              {menu.name} | {menu.id}
+            </summary>
+            <ul>{menuElements(menu.children)}</ul>
+          </details>
+        </li>
+      ) : (
+        <li
+          className="rounded-md p-2 hover:bg-base-300 cursor-pointer"
+          onClick={() => setPostField("category_id", menu.id)}
+          style={
+            post.category_id === menu.id
+              ? {
+                  backgroundColor: "var(--fallback-bc,oklch(var(--bc)/0.1))",
+                }
+              : undefined
+          }
+          key={menu.id}
+        >
+          {menu.name} {menu.id}
+        </li>
+      )
+    );
 
-  // Todo: Ref가 type때문인지 뭔지 전달이 안돼서 마크다운 내용을 가져오질 못하고 있어요.
   return (
     <div className="p-3 flex flex-row h-full">
       <div className=" w-3/4 lg:w-5/6 border border-black rounded-lg p-3 ">
@@ -93,6 +139,10 @@ export default function PostEditContainer({
       </div>
       <div className="border ml-3 p-3 rounded-lg border-black flex flex-col justify-between">
         <div>
+          <p>카테고리</p>
+          {post.category_id}
+          <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+          <ul className="menu p-4 bg-base-200">{menuElements(rootMenus)}</ul>
           <p>글 설명</p>
           <textarea
             value={post.description ?? ""}
@@ -216,6 +266,7 @@ export default function PostEditContainer({
                 mediaIds: post.mediaIds!,
                 thumbnail_media: post.thumbnail_media!,
                 tags: post.tags!,
+                category_id: post.category_id!,
                 update_dt: null,
               });
           }}
