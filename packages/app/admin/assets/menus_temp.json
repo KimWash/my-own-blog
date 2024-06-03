@@ -5,7 +5,7 @@
     "type": "app",
     "children": [
       {
-        "id": "fluter",
+        "id": "flutter",
         "name": "Flutter",
         "type": "flutter"
       },

@@ -7,7 +7,7 @@
     "admin": "yarn workspace admin",
     "core": "yarn workspace @my-own-blog/core",
     "db": "yarn workspace @my-own-blog/db",
-    "setup-db": "yarn db generate",
+    "setup-db": "yarn db generate && yarn db push",
     "build": "yarn setup-db yarn core build && yarn db build && yarn client build && yarn admin build",
     "dev": "yarn client dev & yarn admin dev",
     "start": "yarn client start & yarn admin dev"

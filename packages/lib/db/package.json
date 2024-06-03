@@ -8,6 +8,9 @@
   "scripts": {
     "build": "yarn clean && yarn compile",
     "generate": "prisma generate",
+    "push": "prisma db push",
+    "pull": "prisma db pull",
+    "migrate": "prisma migrate dev",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc"
   },
