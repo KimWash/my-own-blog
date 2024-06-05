@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
 import Tag from "@my-own-blog/core/components/Tag";
@@ -14,6 +14,52 @@ import {
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import menus_temp from "@/assets/menus_temp.json";
+import classNames from "classnames";
+import {
+  DragDropContext,
+  Draggable,
+  DraggingStyle,
+  DropResult,
+  Droppable,
+  NotDraggingStyle,
+  ResponderProvided,
+} from "react-beautiful-dnd";
+
+interface MenuItem {
+  id: string;
+  name: string;
+  type: string;
+  children?: MenuItem[];
+}
+
+const LeafMenu = ({
+  isSelected,
+  onClick,
+  currPos,
+  onChangePos,
+  children,
+}: React.PropsWithChildren<{
+  isSelected: boolean;
+  currPos: { x: number; y: number };
+  onChangePos: (pos: { x: number; y: number }) => void;
+  onClick: () => void;
+}>) => {
+  const { x, y } = currPos;
+  return (
+    <li
+      style={{
+        transform: `translateX(${x}px) translateY(${y}px)`,
+      }}
+      className={classNames({
+        "rounded-md p-2 hover:bg-base-300 cursor-pointer": true,
+        "bg-base-300": isSelected,
+      })}
+      onClick={onClick}
+    >
+      {children}
+    </li>
+  );
+};
 
 const ToastEditor = dynamic(() => import("../ToastEditor"), { ssr: false });
 
@@ -70,43 +116,112 @@ export default function PostEditContainer({
   const [newTag, setNewTag] = useState("");
   const [focusedMediaId, setFocusedMediaId] = useState<number | null>(null);
   const rootMenus = menus_temp;
-  const menuElements = (menus: typeof rootMenus) =>
-    menus.map((menu) =>
-      menu.children !== undefined ? (
-        <li key={menu.id} onClick={() => setPostField("category_id", menu.id)}>
-          <details open>
-            <summary
-              style={
-                post.category_id === menu.id
-                  ? {
-                      backgroundColor:
-                        "var(--fallback-bc,oklch(var(--bc)/0.1))",
-                    }
-                  : undefined
-              }
-            >
-              {menu.name} | {menu.id}
-            </summary>
-            <ul>{menuElements(menu.children)}</ul>
-          </details>
-        </li>
-      ) : (
-        <li
-          className="rounded-md p-2 hover:bg-base-300 cursor-pointer"
-          onClick={() => setPostField("category_id", menu.id)}
-          style={
-            post.category_id === menu.id
-              ? {
-                  backgroundColor: "var(--fallback-bc,oklch(var(--bc)/0.1))",
-                }
-              : undefined
-          }
-          key={menu.id}
-        >
-          {menu.name} {menu.id}
-        </li>
-      )
-    );
+  const [menus, setMenus] = useState(rootMenus);
+  const [{ x, y }, setPos] = useState({ x: 0, y: 0 });
+
+  const menuElements = (menus: typeof rootMenus) => {
+    return menus.map((menu, i) => (
+      <Draggable draggableId={`menu-${i}`} index={i} key={menu.id}>
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            style={getItemStyle(
+              snapshot.isDragging,
+              provided.draggableProps.style
+            )}
+          >
+            {menu.children !== undefined ? (
+              <li>
+                <details open>
+                  <summary
+                    onClick={() => setPostField("category_id", menu.id)}
+                    className={classNames({
+                      "bg-base-300": post.category_id === menu.id,
+                    })}
+                  >
+                    {menu.name}
+                  </summary>
+                  {/* <ul>{menuElements(menu.children)}</ul> */}
+                </details>
+              </li>
+            ) : (
+              <LeafMenu
+                isSelected={post.category_id === menu.id}
+                onClick={() => setPostField("category_id", menu.id)}
+                currPos={{ x, y }}
+                onChangePos={setPos}
+              >
+                {menu.name}
+              </LeafMenu>
+            )}
+          </div>
+        )}
+      </Draggable>
+    ));
+  };
+  // using useCallback is optional
+  const onBeforeCapture = useCallback(() => {
+    /*...*/
+  }, []);
+  const onBeforeDragStart = useCallback(() => {
+    /*...*/
+  }, []);
+  const onDragStart = useCallback(() => {
+    /*...*/
+  }, []);
+  const onDragUpdate = useCallback(() => {
+    /*...*/
+  }, []);
+
+  const reorder = (list: MenuItem[], startIndex: number, endIndex: number) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    console.log(result)
+    return result;
+  };
+  const onDragEnd = useCallback(
+    (result: DropResult, provided: ResponderProvided) => {
+      console.log('dragend')
+      // 리스트의 바깥에 놓음
+      if (!result.destination) return;
+
+      console.log('org', menus)
+      const items = reorder(
+        menus,
+        result.source.index,
+        result.destination.index
+      );
+      console.log('moved', items)
+      setMenus(items);
+    },
+    []
+  );
+
+  const grid = 8;
+
+  const getItemStyle = (
+    isDragging: boolean,
+    draggableStyle: DraggingStyle | NotDraggingStyle | undefined
+  ) => ({
+    // some basic styles to make the items look a bit nicer
+    padding: grid * 2,
+    margin: `0 0 ${grid}px 0`,
+
+    // change background colour if dragging
+    background: isDragging ? "lightgreen" : "grey",
+
+    // styles we need to apply on draggables
+    ...draggableStyle,
+  });
+
+  const getListStyle = (isDraggingOver: boolean) => ({
+    background: isDraggingOver ? "lightblue" : "lightgrey",
+    padding: grid,
+    width: 250,
+  });
 
   return (
     <div className="p-3 flex flex-row h-full">
@@ -140,9 +255,27 @@ export default function PostEditContainer({
       <div className="border ml-3 p-3 rounded-lg border-black flex flex-col justify-between">
         <div>
           <p>카테고리</p>
-          {post.category_id}
           <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-          <ul className="menu p-4 bg-base-200">{menuElements(rootMenus)}</ul>
+          <DragDropContext
+            onBeforeCapture={onBeforeCapture}
+            onBeforeDragStart={onBeforeDragStart}
+            onDragStart={onDragStart}
+            onDragUpdate={onDragUpdate}
+            onDragEnd={onDragEnd}
+          >
+            <Droppable droppableId="d-1">
+              {(provided, snapshot) => (
+                <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={getListStyle(snapshot.isDraggingOver)}
+                >
+                  {menuElements(menus)}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
           <p>글 설명</p>
           <textarea
             value={post.description ?? ""}

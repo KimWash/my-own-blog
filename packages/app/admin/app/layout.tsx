@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { DragDropContext } from "react-beautiful-dnd";
+import { useCallback } from "react";
+import { resetServerContext } from 'react-beautiful-dnd';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,11 +19,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Navbar>{children}</Navbar>
-      </body>
+      
+        <body className={inter.className}>
+          <Navbar>{children}</Navbar>
+        </body>
     </html>
   );
 }

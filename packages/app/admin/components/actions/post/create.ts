@@ -14,6 +14,7 @@ export async function createPost(id: number, post: PostForm) {
       is_deleted: false,
       create_dt: new Date(),
       thumbnail_media: post.thumbnail_media,
+      category_id: post.category_id
     },
   });
   if (post.tags) {
