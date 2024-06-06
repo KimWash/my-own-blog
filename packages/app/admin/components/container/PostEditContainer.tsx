@@ -121,7 +121,7 @@ export default function PostEditContainer({
 
   const menuElements = (menus: typeof rootMenus) => {
     return menus.map((menu, i) => (
-      <Draggable draggableId={`menu-${i}`} index={i} key={menu.id}>
+      <Draggable draggableId={`menu-${menu.id}`} index={i} key={menu.id}>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
@@ -176,28 +176,31 @@ export default function PostEditContainer({
   }, []);
 
   const reorder = (list: MenuItem[], startIndex: number, endIndex: number) => {
-    const result = Array.from(list);
+    const result = [...list];
+    // 요소 제거
     const [removed] = result.splice(startIndex, 1);
+    
     result.splice(endIndex, 0, removed);
-    console.log(result)
     return result;
   };
   const onDragEnd = useCallback(
     (result: DropResult, provided: ResponderProvided) => {
-      console.log('dragend')
+      console.log("dragend");
       // 리스트의 바깥에 놓음
       if (!result.destination) return;
 
-      console.log('org', menus)
-      const items = reorder(
+      console.log("org", menus, result.source.index, result.destination.index);
+      const movedMenus = reorder(
         menus,
         result.source.index,
         result.destination.index
       );
-      console.log('moved', items)
-      setMenus(items);
+      setMenus(() => {
+        console.log(movedMenus);
+        return movedMenus;
+      });
     },
-    []
+    [menus]
   );
 
   const grid = 8;
