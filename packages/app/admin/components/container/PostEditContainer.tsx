@@ -35,21 +35,13 @@ interface MenuItem {
 const LeafMenu = ({
   isSelected,
   onClick,
-  currPos,
-  onChangePos,
   children,
 }: React.PropsWithChildren<{
   isSelected: boolean;
-  currPos: { x: number; y: number };
-  onChangePos: (pos: { x: number; y: number }) => void;
   onClick: () => void;
 }>) => {
-  const { x, y } = currPos;
   return (
-    <li
-      style={{
-        transform: `translateX(${x}px) translateY(${y}px)`,
-      }}
+    <div
       className={classNames({
         "rounded-md p-2 hover:bg-base-300 cursor-pointer": true,
         "bg-base-300": isSelected,
@@ -57,7 +49,7 @@ const LeafMenu = ({
       onClick={onClick}
     >
       {children}
-    </li>
+    </div>
   );
 };
 
@@ -117,24 +109,23 @@ export default function PostEditContainer({
   const [focusedMediaId, setFocusedMediaId] = useState<number | null>(null);
   const rootMenus = menus_temp;
   const [menus, setMenus] = useState(rootMenus);
-  const [{ x, y }, setPos] = useState({ x: 0, y: 0 });
 
   const menuElements = (menus: typeof rootMenus) => {
-    return menus.map((menu, i) => (
-      <Draggable draggableId={`menu-${menu.id}`} index={i} key={menu.id}>
-        {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            style={getItemStyle(
-              snapshot.isDragging,
-              provided.draggableProps.style
-            )}
-          >
-            {menu.children !== undefined ? (
-              <li>
-                <details open>
+    return menus.map((menu, i) => {
+      return menu.children !== undefined ? (
+        <div key={menu.id}>
+          <Draggable draggableId={`menu-${menu.id}`} index={i} key={menu.id}>
+            {(provided, snapshot) => (
+              <>
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  style={getItemStyle(
+                    snapshot.isDragging,
+                    provided.draggableProps.style
+                  )}
+                >
                   <summary
                     onClick={() => setPostField("category_id", menu.id)}
                     className={classNames({
@@ -143,53 +134,42 @@ export default function PostEditContainer({
                   >
                     {menu.name}
                   </summary>
-                  {/* <ul>{menuElements(menu.children)}</ul> */}
-                </details>
-              </li>
-            ) : (
-              <LeafMenu
-                isSelected={post.category_id === menu.id}
-                onClick={() => setPostField("category_id", menu.id)}
-                currPos={{ x, y }}
-                onChangePos={setPos}
-              >
-                {menu.name}
-              </LeafMenu>
+                  <ul>{menuElements(menu.children)}</ul>
+                </div>
+              </>
             )}
-          </div>
-        )}
-      </Draggable>
-    ));
+          </Draggable>
+        </div>
+      ) : (
+        <LeafMenu
+          key={menu.id}
+          isSelected={post.category_id === menu.id}
+          onClick={() => setPostField("category_id", menu.id)}
+        >
+          {menu.name}
+        </LeafMenu>
+      );
+    });
   };
-  // using useCallback is optional
-  const onBeforeCapture = useCallback(() => {
-    /*...*/
-  }, []);
-  const onBeforeDragStart = useCallback(() => {
-    /*...*/
-  }, []);
-  const onDragStart = useCallback(() => {
-    /*...*/
-  }, []);
-  const onDragUpdate = useCallback(() => {
-    /*...*/
-  }, []);
+  
+  const onBeforeCapture = useCallback(() => {}, []);
+  const onBeforeDragStart = useCallback(() => {}, []);
+  const onDragStart = useCallback(() => {}, []);
+  const onDragUpdate = useCallback(() => {}, []);
 
   const reorder = (list: MenuItem[], startIndex: number, endIndex: number) => {
     const result = [...list];
     // 요소 제거
     const [removed] = result.splice(startIndex, 1);
-    
+
     result.splice(endIndex, 0, removed);
     return result;
   };
   const onDragEnd = useCallback(
     (result: DropResult, provided: ResponderProvided) => {
-      console.log("dragend");
       // 리스트의 바깥에 놓음
       if (!result.destination) return;
 
-      console.log("org", menus, result.source.index, result.destination.index);
       const movedMenus = reorder(
         menus,
         result.source.index,

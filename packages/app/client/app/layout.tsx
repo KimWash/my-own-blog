@@ -16,7 +16,11 @@ export const metadata: Metadata = {
 };
 
 const myFont = localFont({ src: "../asset/spoqa.woff2" });
-
+import { Nanum_Myeongjo } from 'next/font/google' // 해당 폰트의 함수를 사용합니다.
+const font = Nanum_Myeongjo({
+  subsets: ['latin'],
+  weight: "400"
+})
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={"flex flex-col " + myFont.className}>
+      <body className={"flex flex-col " + font.className}>
         <Providers>
           <Header />
           {children}
