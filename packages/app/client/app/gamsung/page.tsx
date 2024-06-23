@@ -1,5 +1,4 @@
-import HomeContainer from "@/components/container/HomeContainer";
-import SubHomeContainer from "@/components/container/SubHomeContainer";
+import SubHomeContainer from "@/components/dev/container/SubHomeContainer";
 import { PostService } from "@/components/model/PostService";
 import { PostQueryKey } from "@/components/queries/usePostListQuery";
 import { Hydration } from '@my-own-blog/core/lib/query/Hydration';

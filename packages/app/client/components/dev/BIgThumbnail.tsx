@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { PostCardProps } from "./PostCard";
+import { PostCardProps } from "../PostCard";
 import placeHolderImage from "@/asset/placeholder.png";
-import classNames from "classNames";
+import classNames from "classnames";
 import "@my-own-blog/core/lib/date/date.extensions"
 
 export default function BigThumbnail({

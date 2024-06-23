@@ -1,9 +1,9 @@
 "use client";
 
 import BigThumbnail from "../BIgThumbnail";
-import FeaturedBanner from "../FeaturedBanner";
-import PostCard from "../PostCard";
-import useHomeViewModel from "../hooks/useHomeViewModel";
+import FeaturedBanner from "../../FeaturedBanner";
+import PostCard from "../../PostCard";
+import useHomeViewModel from "../../hooks/useHomeViewModel";
 import usePage from "@my-own-blog/core/lib/usePage";
 import Image from "next/image";
 import SmallThumbnail from "../SmallThumbnail";
@@ -20,7 +20,6 @@ export default function HomeContainer() {
   return (
     <main
       className={`flex flex-col flex-1 p-10 ${font.className}`}
-      style={{ background: "#FFF2E7" }}
     >
       <div className="text-black text-xl font-bold mb-4">
         당신이 읽어봤으면 하는 것들,

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import "@my-own-blog/core/lib/date/date.extensions";
-import classNames from "classNames";
+import classNames from "classnames";
 
 export default function SmallThumbnail({
   title,
