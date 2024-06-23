@@ -1,6 +1,6 @@
 "use client";
 
-import { TailwindSize } from "@/app/about/page";
+import { TailwindSize } from "@/app/dev/about/page";
 
 export default function RoundedButton({
   radius = "3xl",

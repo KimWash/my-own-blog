@@ -18,7 +18,7 @@ export default function FeaturedBanner({
 }: FeaturedBannerProps) {
   return (
     <div className="p-5">
-      <Link href={`/post/${id}`}>
+      <Link href={`/dev/post/${id}`}>
         <h1 className="font-bold text-3xl pb-2">Featured #{no}</h1>
         <div className="flex flex-row">
           <Image
