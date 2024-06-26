@@ -31,13 +31,15 @@ export default function SidebarMenu() {
         unmountOnExit
       >
         <div
-          ref={sidebarRef}
           className="fixed left-0 top-0 right-0 bottom-0 z-20 bg-gray-400 bg-opacity-50 flex justify-end"
           onClick={({ target, currentTarget }) => {
             if (target === currentTarget) onClose();
           }}
         >
-          <div className="w-80 h-full bg-white p-4 sidebar-content">
+          <div
+            ref={sidebarRef}
+            className="w-80 h-full bg-white p-4 sidebar-content"
+          >
             <div className="flex justify-between items-center">
               <p className="text-xl font-extrabold">Wh@t !s development?</p>
               <FontAwesomeIcon
