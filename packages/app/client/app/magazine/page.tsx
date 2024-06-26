@@ -1,4 +1,4 @@
-import SubHomeContainer from "@/components/dev/container/SubHomeContainer";
+import HomeContainer from "@/components/magazine/container/HomeContainer";
 import { PostService } from "@/components/model/PostService";
 import { PostQueryKey } from "@/components/queries/usePostListQuery";
 import { Hydration } from '@my-own-blog/core/lib/query/Hydration';
@@ -17,7 +17,7 @@ export default async function Home({
   });
   return (
     <Hydration queries={[dehydratedState]}>
-      <SubHomeContainer />
+      <HomeContainer />
     </Hydration>
   );
 }

@@ -1,11 +1,8 @@
 "use client";
 
-import BigThumbnail from "../BIgThumbnail";
-import FeaturedBanner from "../../FeaturedBanner";
-import PostCard from "../../PostCard";
+import BigThumbnail from "../BigThumbnail";
 import useHomeViewModel from "../../hooks/useHomeViewModel";
 import usePage from "@my-own-blog/core/lib/usePage";
-import Image from "next/image";
 import SmallThumbnail from "../SmallThumbnail";
 import { Nanum_Myeongjo } from "next/font/google"; // 해당 폰트의 함수를 사용합니다.
 import { PostListDto } from "@my-own-blog/core/lib/model/Post";
@@ -33,8 +30,9 @@ export default function HomeContainer() {
           return acc;
         }, [] as PostListDto[][])
         .map((posts) => (
-          <div className="flex md:flex-row flex-col gap-4">
+          <div key={posts[0].id} className="flex md:flex-row flex-col gap-4">
             <BigThumbnail
+            id={posts[0].id}
               title={posts[0].title}
               description={posts[0].description!}
               create_dt={posts[0].create_dt!}
