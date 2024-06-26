@@ -11,6 +11,7 @@ export async function createPost(id: number, post: PostForm) {
     data: {
       title: post.title,
       content: post.content,
+      description: post.description,
       is_deleted: false,
       create_dt: new Date(),
       thumbnail_media: post.thumbnail_media,
