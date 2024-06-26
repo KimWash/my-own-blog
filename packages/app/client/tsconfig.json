@@ -40,7 +40,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.json"
   ],
   "references": [
     { "path": "../../lib/core" },

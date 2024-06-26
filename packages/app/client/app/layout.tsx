@@ -4,7 +4,7 @@ import "./globals.css";
 import "@my-own-blog/core/lib/date/date.extensions.ts";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import Header from "@/components/Header";
+import Header from "@/components/dev/Header";
 import Providers from "@my-own-blog/core/lib/Providers";
 import localFont from "next/font/local";
 import { headers } from "next/headers";

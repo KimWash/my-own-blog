@@ -3,11 +3,19 @@
 import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
-import menus from "@/asset/menus_temp.json";
 import Link from "next/link";
 import { CSSTransition } from "react-transition-group";
+import type { MenuItem } from "@my-own-blog/core/types/Menu";
 
-export default function SidebarMenu() {
+export default function SidebarMenu({
+  backgroundColor,
+  menus,
+  title,
+}: {
+  backgroundColor: string;
+  menus: MenuItem[];
+  title: React.ReactNode
+}) {
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const onOpen = () => setSidebarOpened(true);
   const onClose = () => setSidebarOpened(false);
@@ -39,9 +47,10 @@ export default function SidebarMenu() {
           <div
             ref={sidebarRef}
             className="w-80 h-full bg-white p-4 sidebar-content"
+            style={{background: backgroundColor}}
           >
             <div className="flex justify-between items-center">
-              <p className="text-xl font-extrabold">Wh@t !s development?</p>
+            {title}
               <FontAwesomeIcon
                 icon={faClose}
                 size="2xl"

@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/dev/Header";
 
 export const metadata = {
   title: "Next.js",
