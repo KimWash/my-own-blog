@@ -12,7 +12,6 @@ export default function RootLayout({
 }) {
   return (
     <div className="flex flex-col flex-1 bg-orange-50" >
-      <Header />
       {children}
     </div>
   );

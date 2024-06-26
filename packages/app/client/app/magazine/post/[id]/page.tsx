@@ -1,4 +1,4 @@
-import PostContainer from "@/components/container/PostContainer";
+import PostContainer from "@/components/magazine/container/PostContainer";
 import { PostDetailQueryKey } from "@/components/queries/usePostQuery";
 import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
 import { PostService } from "@/components/model/PostService";
