@@ -21,7 +21,7 @@
     "jsx": "preserve",
     "incremental": true,
     "allowImportingTsExtensions": true,
-    "rootDir": "./",
+    "rootDir": "../../../",
     "outDir": "./dist",
     "baseUrl": "./",
     "composite": true,
