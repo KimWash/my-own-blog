@@ -12,6 +12,7 @@ export async function GET(request: Request) {
     include: {
       tags: { include: { tag: true } },
       thumbnail: true,
+      category: true
     },
     where: {
       OR: keyword ? [
