@@ -1,4 +1,3 @@
-"use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +7,11 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { MenuItem } from "@my-own-blog/core/types/Menu";
 import menus from "@/asset/menus_temp.json";
+import MenuService from "@my-own-blog/core/service/MenuService";
 
 const SearchBox = dynamic(() => import("../SearchBox"), { ssr: false });
 
-export default function Header() {
-  const router = useRouter();
+export default async function Header() {
 
   /**
    * Todo: handleSubmit이 모바일인 경우 submit을 검색 버튼 클릭으로 간주하고
@@ -20,6 +19,8 @@ export default function Header() {
    * 따라서 어차피 server component가 아닌 client component로 관리할 것이라면
    * 그냥 form submit 이벤트와 구분하자~
    */
+
+  const menus = await MenuService.getMenus();
 
   return (
     <div
@@ -33,7 +34,7 @@ export default function Header() {
         <SearchBox />
         <SidebarMenu
           title={<p className="text-xl font-extrabold">Wh@t !s development?</p>}
-          menus={menus as MenuItem[]}
+          menus={menus.filter(menu => menu.type === 'dev')}
           backgroundColor="white"
         />
         {/* <SidebarDemo/> */}

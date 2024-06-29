@@ -21,9 +21,9 @@ export default function SmallThumbnail({
 }) {
   return (
     <div className={classNames(["flex flex-col flex-1 h-full ", className])}>
-      <div className="md:h-[54%] aspect-[3/4] md:aspect-[unset] ">
+      <div className="md:h-[54%] aspect-[3/4]  ">
         <Link className="h-full flex flex-col justify-start gap-4 cursor-pointer group" href={`/magazine/post/${id}`}>
-          <div className="relative h-full">
+          <div className="relative h-full aspect-square">
             <Image
               src={thumbnailUrl ?? placeHolderImage}
               alt="alt"

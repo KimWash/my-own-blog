@@ -1,11 +1,16 @@
 "use client";
 
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faChevronDown,
+  faClose,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { CSSTransition } from "react-transition-group";
 import type { MenuItem } from "@my-own-blog/core/types/Menu";
+import { motion } from "framer-motion";
 
 export default function SidebarMenu({
   backgroundColor,
@@ -14,13 +19,17 @@ export default function SidebarMenu({
 }: {
   backgroundColor: string;
   menus: MenuItem[];
-  title: React.ReactNode
+  title: React.ReactNode;
 }) {
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const onOpen = () => setSidebarOpened(true);
   const onClose = () => setSidebarOpened(false);
   const sidebarRef = useRef(null);
-
+  const [expandedMenu, setExpandedMenu] = useState<string>();
+  const variants = {
+    expanded: { scaleY: '100%', display:'block' },
+    collapsed: {scaleY: 0, transitionEnd: {delay: 200, display:'none'}},
+  };
   return (
     <>
       <FontAwesomeIcon
@@ -47,10 +56,10 @@ export default function SidebarMenu({
           <div
             ref={sidebarRef}
             className="w-80 h-full bg-white p-4 sidebar-content"
-            style={{background: backgroundColor}}
+            style={{ background: backgroundColor }}
           >
             <div className="flex justify-between items-center">
-            {title}
+              {title}
               <FontAwesomeIcon
                 icon={faClose}
                 size="2xl"
@@ -61,7 +70,7 @@ export default function SidebarMenu({
             <ul className="sidebar-menu">
               <li>
                 <Link
-                  href="/"
+                  href="/dev"
                   onClick={() => {
                     setSidebarOpened(false);
                   }}
@@ -71,7 +80,7 @@ export default function SidebarMenu({
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/dev/about"
                   onClick={() => {
                     setSidebarOpened(false);
                   }}
@@ -79,18 +88,61 @@ export default function SidebarMenu({
                   About Me
                 </Link>
               </li>
-              {menus.map((menu) => (
-                <li key={menu.id}>
-                  <Link
-                    href={menu.id}
-                    onClick={() => {
-                      setSidebarOpened(false);
-                    }}
-                  >
-                    {menu.name}
-                  </Link>
-                </li>
-              ))}
+              {menus.map((menu) =>
+                menu.children.length != 0 ? (
+                  <div key={menu.id}>
+                    <li
+                      key={menu.id}
+                      className="flex flex-row justify-between group cursor-pointer"
+                      onClick={() =>
+                        setExpandedMenu((prev) => (prev === menu.id ? undefined : menu.id))
+                      }
+                    >
+                      {menu.name}
+
+                      <FontAwesomeIcon
+                        icon={faChevronDown}
+                        className="invisible group-hover:visible"
+                      />
+                    </li>
+                    <motion.div
+                      variants={variants}
+                      initial="collapsed"
+                      className="origin-top"
+                      animate={
+                        expandedMenu === menu.id ? "expanded" : "collapsed"
+                      }
+                    >
+                      <ul>
+                        {menu.children.map((child) => (
+                          <li key={menu.id}>
+                            <Link
+                              href={child.url}
+                              onClick={() => {
+                                setSidebarOpened(false);
+                              }}
+                              className="hover:underline pl-4"
+                            >
+                              {child.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  </div>
+                ) : (
+                  <li key={menu.id}>
+                    <Link
+                      href={menu.url}
+                      onClick={() => {
+                        setSidebarOpened(false);
+                      }}
+                    >
+                      {menu.name}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </div>
         </div>

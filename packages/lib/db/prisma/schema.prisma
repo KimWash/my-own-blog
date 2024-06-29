@@ -16,7 +16,7 @@ model File {
   delete_dt  DateTime? @db.DateTime(0)
   is_deleted Boolean?  @db.Bit(1)
   quality    String?   @db.VarChar(10)
-  name       String?   @db.VarChar(45)
+  name       String?   @db.VarChar(100)
   mediaId    Int?
   media      Media?    @relation(fields: [mediaId], references: [id])
 
@@ -57,7 +57,8 @@ model Post {
 
 model Category {
   id   String @id @db.VarChar(100)
-  name String @db.VarChar(100)
+  name String @db.VarChar(100) 
+  type String @db.VarChar(100) @default("dev")
 
   Post      Post[]
   parent    Category?  @relation("Children", fields: [parent_id], references: [id])

@@ -23,7 +23,10 @@ import {
   Droppable,
   NotDraggingStyle,
   ResponderProvided,
+  resetServerContext,
 } from "react-beautiful-dnd";
+import { useQuery } from "@tanstack/react-query";
+import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
 
 interface MenuItem {
   id: string;
@@ -63,16 +66,17 @@ export type PostForm = Pick<
   | "description"
   | "update_dt"
   | "thumbnail_media"
-  | "category_id"
-> & { tags: (TagForm | TagDto)[]; mediaIds: number[] };
+> & {category_id: string; tags: (TagForm | TagDto)[]; mediaIds: number[] };
 
 export default function PostEditContainer({
   initialPost,
   initialCategory,
+  categories,
   onSubmit,
 }: {
   initialPost?: PostDetailDto;
   initialCategory: string;
+  categories: MenuItem[];
   onSubmit: (id: number, post: PostForm) => void;
 }) {
   const ref = useRef<Editor>();
@@ -91,6 +95,7 @@ export default function PostEditContainer({
     {
       ...initialPost,
       mediaIds: initialPost?.medias.map((media) => media.id),
+      category_id: initialPost?.category.id,
     } ?? emptyPost
   );
   function setPostField<T extends PostForm[keyof PostForm]>(
@@ -105,12 +110,12 @@ export default function PostEditContainer({
           : valueOrUpdater,
     }));
   }
+
   const [newTag, setNewTag] = useState("");
   const [focusedMediaId, setFocusedMediaId] = useState<number | null>(null);
-  const rootMenus = menus_temp;
-  const [menus, setMenus] = useState(rootMenus);
+  const [menus, setMenus] = useState(categories);
 
-  const menuElements = (menus: typeof rootMenus) => {
+  const menuElements = (menus: MenuItem[]) => {
     return menus.map((menu, i) => {
       return menu.children !== undefined ? (
         <div key={menu.id}>
@@ -134,27 +139,58 @@ export default function PostEditContainer({
                   >
                     {menu.name}
                   </summary>
-                  <ul>{menuElements(menu.children)}</ul>
+                  {menu.children && (
+                    <ul>
+                      {/* <Droppable droppableId="d-2">
+                        {(provided, snapshot) => (
+                          <div
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                          > */}
+                      {menuElements(menu.children!)}
+                      {/* </div>
+                        )}
+                      </Droppable> */}
+                    </ul>
+                  )}
                 </div>
               </>
             )}
           </Draggable>
         </div>
       ) : (
-        <LeafMenu
-          key={menu.id}
-          isSelected={post.category_id === menu.id}
-          onClick={() => setPostField("category_id", menu.id)}
-        >
-          {menu.name}
-        </LeafMenu>
+        <Draggable draggableId={`menu-${menu.id}`} index={i} key={menu.id}>
+          {(provided, snapshot) => (
+            <>
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getItemStyle(
+                  snapshot.isDragging,
+                  provided.draggableProps.style
+                )}
+              >
+                <LeafMenu
+                  key={menu.id}
+                  isSelected={post.category_id === menu.id}
+                  onClick={() => setPostField("category_id", menu.id)}
+                >
+                  {menu.name}
+                </LeafMenu>
+              </div>
+            </>
+          )}
+        </Draggable>
       );
     });
   };
-  
+
   const onBeforeCapture = useCallback(() => {}, []);
   const onBeforeDragStart = useCallback(() => {}, []);
-  const onDragStart = useCallback(() => {}, []);
+  const onDragStart = useCallback(() => {
+    console.log("ff");
+  }, []);
   const onDragUpdate = useCallback(() => {}, []);
 
   const reorder = (list: MenuItem[], startIndex: number, endIndex: number) => {
@@ -169,16 +205,19 @@ export default function PostEditContainer({
     (result: DropResult, provided: ResponderProvided) => {
       // 리스트의 바깥에 놓음
       if (!result.destination) return;
-
-      const movedMenus = reorder(
-        menus,
-        result.source.index,
-        result.destination.index
-      );
-      setMenus(() => {
-        console.log(movedMenus);
-        return movedMenus;
-      });
+      console.log(result.type);
+      if (result.type === "Inner") {
+      } else if (result.type === "DEFAULT") {
+        const movedMenus = reorder(
+          menus,
+          result.source.index,
+          result.destination.index
+        );
+        setMenus(() => {
+          console.log(movedMenus);
+          return movedMenus;
+        });
+      }
     },
     [menus]
   );

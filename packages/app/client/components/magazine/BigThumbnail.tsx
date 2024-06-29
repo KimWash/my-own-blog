@@ -33,7 +33,7 @@ export default function BigThumbnail({
           alt="alt"
           width={588}
           height={357}
-          className="aspect-square"
+          className="aspect-square w-full"
         />
         <div className=" text-black text-[32px] font-bold group-hover:underline">
           {title}

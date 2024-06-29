@@ -41,7 +41,7 @@ export default function PostContainer({ id }: { id: number }) {
         <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 z-20"></div>
         <div className="absolute  px-10 py-[200px] flex-col justify-start items-start gap-2.5 flex z-30">
           <div className="text-white text-2xl font-extrabold font-['NanumMyeongjo']">
-            {post.category_id}
+            {post.category.name}
           </div>
           <div className=" text-white text-[64px] font-bold font-['NanumMyeongjo']">
             {post.title}
