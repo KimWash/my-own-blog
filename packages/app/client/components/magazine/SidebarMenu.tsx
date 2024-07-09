@@ -62,12 +62,12 @@ export default function SidebarMenu({
               {menus.map((menu) => (
                 <li key={menu.id} className="mb-8">
                   <Link
-                    href={menu.id}
+                    href={menu.url}
                     onClick={() => {
                       setSidebarOpened(false);
                     }}
                   >
-                    <div className="text-black text-4xl font-normal font-['NanumMyeongjo'] hover:underline ">
+                    <div className="text-black text-4xl font-normal hover:underline ">
                       {menu.name}
                     </div>
                   </Link>

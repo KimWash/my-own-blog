@@ -11,9 +11,11 @@ export async function GET(
     include: {
       tags: { include: { tag: true } },
       medias: { include: { files: true } },
+      category: true
     },
   });
   const medias = post?.medias;
   const tags = post?.tags.map((postTag) => postTag.tag);
+  console.log(post?.category_id)
   return NextResponse.json({ ...post, medias, tags });
 }

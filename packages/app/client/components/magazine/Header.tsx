@@ -1,25 +1,27 @@
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SidebarMenu from "./SidebarMenu";
-import menus from "@/asset/menus_temp.json";
-import { MenuItem } from "@my-own-blog/core/types/Menu";
-import Link from "next/link";
-import MenuService from "@my-own-blog/core/service/MenuService"
+'use client';
 
-export default async function Header() {
-  const menus = await MenuService.getMenus();
+import SidebarMenu from "./SidebarMenu";
+import Link from "next/link";
+import useMenu from "../hooks/useMenu";
+
+export default function Header() {
+  const menuQuery = useMenu();
   return (
-    <div className="w-full px-10 py-8 justify-between items-center inline-flex">
+    <div className="w-full px-10 py-8 justify-between items-center inline-flex bg-orange-50">
       <Link href="/magazine">
-      <div className="text-black text-4xl font-bold font-['NanumMyeongjo']">
+      <div className="text-black text-4xl font-bold">
         draft
       </div>
       </Link>
-      <SidebarMenu
-      title={<div className="w-full"></div>}
-        menus={menus.filter(menu => menu.type === 'magazine')}
-        backgroundColor="#FFF7ED"
-      />
+      {
+        !menuQuery.isLoading && menuQuery.data && 
+        <SidebarMenu
+        title={<div className="w-full"></div>}
+          menus={menuQuery.data.filter(menu => menu.type === 'magazine')}
+          backgroundColor="#FFF7ED"
+        />
+      }
+      
     </div>
   );
 }

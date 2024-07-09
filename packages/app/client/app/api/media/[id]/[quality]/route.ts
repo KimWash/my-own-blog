@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MediaService } from '@my-own-blog/core/service/MediaService';
+import { MediaService } from "@my-own-blog/core/service/MediaService";
 
 export type Quality = "HIGH" | "MID" | "LOW";
 /**
@@ -10,16 +10,20 @@ export async function GET(
   { params }: { params: { id: number; quality: Quality } }
 ) {
   try {
+    const t1 = new Date().getMilliseconds();
     const fs = await MediaService.getMedia(params.id, params.quality);
-
+    const t2 = new Date().getMilliseconds();
     const responseHeader = new Headers(request.headers);
-    responseHeader.set("Content-Type", "image/png");
+    responseHeader.set("Content-Type", "image/webp");
     const data = new ReadableStream({
       start(controller) {
-        fs.on("data", (chunk: Buffer) =>
-          controller.enqueue(new Uint8Array(chunk))
-        );
-        fs.on("end", () => controller.close());
+        fs.on("data", (chunk: Buffer) => {
+          controller.enqueue(new Uint8Array(chunk));
+        });
+        fs.on("end", () => {
+          console.log(t2-t1, new Date().getMilliseconds() - t1);
+          controller.close();
+        });
         fs.on("error", (error: NodeJS.ErrnoException) =>
           controller.error(error)
         );

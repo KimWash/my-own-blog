@@ -20,6 +20,7 @@ export default function BigThumbnail({
   className?: string;
   create_dt: Date;
 }) {
+  const blurDataURL = 'data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg==';
   return (
     <div
       className={classNames([
@@ -34,6 +35,8 @@ export default function BigThumbnail({
           width={588}
           height={357}
           className="aspect-square w-full"
+          placeholder="blur"
+          blurDataURL={blurDataURL}
         />
         <div className=" text-black text-[32px] font-bold group-hover:underline">
           {title}

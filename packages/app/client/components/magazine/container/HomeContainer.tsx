@@ -4,12 +4,8 @@ import BigThumbnail from "../BigThumbnail";
 import useHomeViewModel from "../../hooks/useHomeViewModel";
 import usePage from "@my-own-blog/core/lib/usePage";
 import SmallThumbnail from "../SmallThumbnail";
-import { Nanum_Myeongjo } from "next/font/google"; // 해당 폰트의 함수를 사용합니다.
 import { PostListDto } from "@my-own-blog/core/lib/model/Post";
-const font = Nanum_Myeongjo({
-  subsets: ["latin"],
-  weight: "400",
-});
+
 
 const groupPosts = (posts: PostListDto[]) => {
   return posts.reduce((acc, curr, idx) => {
@@ -102,7 +98,7 @@ export default function HomeContainer() {
   const groupedPosts = groupPosts(data);
 
   return (
-    <main className={`flex flex-col flex-1 p-10 ${font.className}`}>
+    <main className={`flex flex-col flex-1 p-10 bg-orange-50`}>
       <div className="text-black text-xl font-bold mb-4">
         당신이 읽어봤으면 하는 것들,
         <br />

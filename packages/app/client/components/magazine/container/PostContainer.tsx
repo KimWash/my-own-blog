@@ -20,6 +20,7 @@ export default function PostContainer({ id }: { id: number }) {
 
   if (!data || isLoading) return "loading...";
   const { medias, tags, ...post } = data;
+  console.log(post)
   return (
     <div className=" bg-orange-50 flex-col justify-start items-center inline-flex">
       <motion.div
@@ -40,16 +41,16 @@ export default function PostContainer({ id }: { id: number }) {
         />
         <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 z-20"></div>
         <div className="absolute  px-10 py-[200px] flex-col justify-start items-start gap-2.5 flex z-30">
-          <div className="text-white text-2xl font-extrabold font-['NanumMyeongjo']">
+          <div className="text-white text-2xl font-extrabold ">
             {post.category.name}
           </div>
-          <div className=" text-white text-[64px] font-bold font-['NanumMyeongjo']">
+          <div className=" text-white text-[64px] font-bold ">
             {post.title}
           </div>
-          <div className="  text-white text-4xl font-normal font-['NanumMyeongjo']">
+          <div className="  text-white text-4xl font-normal ">
             {post.description}
           </div>
-          <div className=" text-white text-2xl font-normal font-['NanumMyeongjo']">
+          <div className=" text-white text-2xl font-normal ">
             {post.create_dt?.format("yyyy-MM-dd")}
           </div>
         </div>
@@ -60,7 +61,7 @@ export default function PostContainer({ id }: { id: number }) {
         </div>
       </div>
       <div className="self-stretch p-[60px] flex-col justify-center items-center gap-2.5 flex">
-        <div className="self-stretch text-black text-[40px] font-extrabold font-['NanumMyeongjo']">
+        <div className="self-stretch text-black text-[40px] font-extrabold ">
           댓글
         </div>
         준비중인 기능입니다.
