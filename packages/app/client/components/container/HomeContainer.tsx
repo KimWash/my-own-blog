@@ -8,8 +8,9 @@ import usePage from '@my-own-blog/core/lib/usePage';
 
 export default function HomeContainer() {
   const page = usePage();
-  const { data, isLoading } = useHomeViewModel(Number(page));
+  const { data, isLoading } = useHomeViewModel(Number(page), 'dev');
   if (!data || isLoading) return "loading...";
+  if (data.length == 0) return '글이 없네요..?'
   return (
     <main className="flex flex-col">
       <FeaturedBanner

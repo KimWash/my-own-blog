@@ -1,5 +1,5 @@
-import usePostListQuery from "../queries/usePostListQuery";
+import usePostListQuery, { BlogType } from "../queries/usePostListQuery";
 
-export default function useHomeViewModel(page: number) {
-  return usePostListQuery(page);
+export default function useHomeViewModel(page: number, type: BlogType) {
+  return usePostListQuery(page, type);
 }

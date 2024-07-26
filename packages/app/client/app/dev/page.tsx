@@ -13,7 +13,7 @@ export default async function Home({
   
   const dehydratedState = await getDehydratedState({
     queryKey: PostQueryKey.paging(Number(page)),
-    queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page)),
+    queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page), 'dev'),
   });
   return (
     <Hydration queries={[dehydratedState]}>

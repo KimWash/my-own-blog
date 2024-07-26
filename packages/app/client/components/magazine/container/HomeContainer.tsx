@@ -92,7 +92,7 @@ const renderGroup = (posts: PostListDto[], index: number) => {
 
 export default function HomeContainer() {
   const page = usePage();
-  const { data, isLoading } = useHomeViewModel(Number(page));
+  const { data, isLoading } = useHomeViewModel(Number(page), 'magazine');
   if (!data || isLoading) return "loading...";
 
   const groupedPosts = groupPosts(data);

@@ -11,10 +11,11 @@ export const PostQueryKey = {
   paging: (page: number) => [...PostQueryKey.all, page],
   search: (param: PostSearchParam) => [...PostQueryKey.all, param.page, param.query]
 };
+export type BlogType = 'dev' | 'magazine'
 
-export default function usePostListQuery(page: number) {
+export default function usePostListQuery(page: number, type: BlogType) {
   return useQuery({
     queryKey: PostQueryKey.paging(page),
-    queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page)),
+    queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page), type),
   });
 }

@@ -6,8 +6,8 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const page = Number(searchParams.get("page") ?? 1);
   const keyword = searchParams.get("query");
+  const type = searchParams.get('type');
   const pageSize = 10;
-
   const posts = await db.post.findMany({
     include: {
       tags: { include: { tag: true } },
@@ -27,6 +27,9 @@ export async function GET(request: Request) {
           },
         },
       ] : undefined,
+      category: {
+        type: type ?? undefined
+      }
     },
     skip: (page - 1) * pageSize,
     take: pageSize,
