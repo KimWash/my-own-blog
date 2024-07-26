@@ -11,16 +11,19 @@ import Image from "next/image";
 const TuiRenderer = dynamic(
   () => import("@my-own-blog/core/components/TuiRenderer")
 );
+import "@toast-ui/editor/dist/toastui-editor.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBackward, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function PostContainer({ id }: { id: number }) {
   const { data, isLoading } = usePostDetailViewModel(id);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, (lateset) => lateset * 10);
+  const backButtonOpacity = useTransform(opacity, (opacity) => 1 - opacity);
   console.log(scrollYProgress, opacity);
 
   if (!data || isLoading) return "loading...";
   const { medias, tags, ...post } = data;
-  console.log(post)
   return (
     <div className=" bg-orange-50 flex-col justify-start items-center inline-flex">
       <motion.div
@@ -28,6 +31,12 @@ export default function PostContainer({ id }: { id: number }) {
         style={{ opacity: opacity }}
       >
         <Header />
+      </motion.div>
+      <motion.div
+        className="fixed left-10 top-10"
+        style={{ opacity: backButtonOpacity }}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} size='2xl' />
       </motion.div>
       <div className="w-full h-screen relative ">
         <Image
@@ -44,9 +53,7 @@ export default function PostContainer({ id }: { id: number }) {
           <div className="text-white text-2xl font-extrabold ">
             {post.category.name}
           </div>
-          <div className=" text-white text-[64px] font-bold ">
-            {post.title}
-          </div>
+          <div className=" text-white text-[64px] font-bold ">{post.title}</div>
           <div className="  text-white text-4xl font-normal ">
             {post.description}
           </div>

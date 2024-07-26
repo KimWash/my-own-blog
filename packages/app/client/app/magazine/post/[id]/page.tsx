@@ -9,10 +9,9 @@ export default async function Page({ params }: { params: { id: number } }) {
     queryKey: PostDetailQueryKey(params.id),
     queryFn: ({ queryKey: [_, id] }) => PostService.fetchPost(id),
   });
-  console.log(dehydratedState)
   return (
     <Hydration queries={[dehydratedState]}>
-      <PostContainer id={params.id} />;
+      <PostContainer id={params.id} />
     </Hydration>
   );
 }

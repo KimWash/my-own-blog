@@ -213,3 +213,6 @@ ul.sidebar-menu li:hover {
 .post-content pre code {
   display:block
 }
+.toastui-editor-contents {
+  font-family: inherit !important;  
+}
