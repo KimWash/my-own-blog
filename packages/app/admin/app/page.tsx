@@ -1,10 +1,9 @@
-import Tag from '@my-own-blog/core/components/Tag'
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main>
-      대충 메인 페이지
-      <button className="btn">Button</button>
-    </main>
-  );
+export default async function Home() {
+  const session = await auth();
+
+  if (session) redirect("/dashboard");
+  else redirect("/signin");
 }

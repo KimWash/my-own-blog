@@ -22,9 +22,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-  const pathname = headers().get('x-pathname');
-  if (!session && pathname !== '/signin') redirect('/signin')
+
 
   return (
     <html lang="en">
