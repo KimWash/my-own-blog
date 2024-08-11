@@ -16,7 +16,7 @@ model File {
   delete_dt  DateTime? @db.DateTime(0)
   is_deleted Boolean?  @db.Bit(1)
   quality    String?   @db.VarChar(10)
-  name       String?   @db.VarChar(100)
+  name       String?   @db.VarChar(200)
   mediaId    Int?
   media      Media?    @relation(fields: [mediaId], references: [id])
 
@@ -28,7 +28,7 @@ model Media {
   id        Int       @id @default(autoincrement())
   type      String?   @db.VarChar(10)
   create_dt DateTime? @db.DateTime(0)
-  name      String?   @db.VarChar(45)
+  name      String?   @db.VarChar(200)
   files     File[]
   postId    Int?
   post      Post?     @relation(fields: [postId], references: [id])

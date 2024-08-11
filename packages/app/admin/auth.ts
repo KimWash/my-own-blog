@@ -5,7 +5,7 @@ const nextAuthResult = NextAuth(authConfig);
 
 export const auth: NextAuthResult["auth"] = nextAuthResult.auth;
 export const {
-  handlers: { GET, POST },
+  handlers,
   signIn,
   signOut,
 }: NextAuthResult = nextAuthResult;

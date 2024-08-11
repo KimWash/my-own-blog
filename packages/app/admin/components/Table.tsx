@@ -38,7 +38,7 @@ export default function Table<T>({
             <tr key={keyMapper(row)}>
               {columns.map((col) => (
                 <td key={col.name} colSpan={col.width}>
-                  <Link href={linkMapper(row)}>
+                  <Link href={'/dashboard' + linkMapper(row)}>
                   {col.render
                     ? col.render(row[col.name])
                     : row[col.name]?.toString()}

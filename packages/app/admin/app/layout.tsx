@@ -2,13 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { DragDropContext } from "react-beautiful-dnd";
-import { useCallback } from "react";
-import { resetServerContext } from 'react-beautiful-dnd';
-import { auth } from "@/auth";
-import { redirect, usePathname } from "next/navigation";
-import { headers } from "next/headers";
-
 
 const inter = Inter({ subsets: ["latin"] });
 

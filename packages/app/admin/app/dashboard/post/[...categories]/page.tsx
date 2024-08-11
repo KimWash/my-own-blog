@@ -68,7 +68,7 @@ export default async function Page({
       <h1 className="text-2xl font-bold">
         {`${currentCategory.parent?.name} > ${currentCategory.name}`}
       </h1>
-      <Link href="/post/create">
+      <Link href="/dashboard/post/create">
         <button className="btn">글 작성</button>
       </Link>
       <Table
