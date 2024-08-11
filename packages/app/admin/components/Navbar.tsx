@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import menus_temp from "@/assets/menus_temp.json";
 import Link from "next/link";
+import MenuService from "@my-own-blog/core/service/MenuService";
 
 type MenuItem = {
   id: string;
@@ -10,8 +10,9 @@ type MenuItem = {
   children: MenuItem[];
 };
 
-export default function Navbar(props: PropsWithChildren) {
-  const post_menus = menus_temp;
+export default async function Navbar(props: PropsWithChildren) {
+  const groupedCategories = await MenuService.getMenus();
+  const post_menus = groupedCategories;
   const rootMenus = [
     {
       id: "post",
@@ -23,7 +24,7 @@ export default function Navbar(props: PropsWithChildren) {
   ] as MenuItem[];
   const menuElements = (menus: typeof rootMenus) =>
     menus.map((menu) =>
-      menu.children !== undefined ? (
+      menu.children.length > 0 ? (
         <li key={menu.id}>
           <details>
             <summary>{menu.name}</summary>

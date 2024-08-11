@@ -36,3 +36,5 @@ jobs:
             "MINIO_URL=${{secrets.MINIO_URL}}"
             "MINIO_ACCESS_KEY=${{secrets.MINIO_ACCESS_KEY}}"
             "MINIO_PRIVATE_KEY=${{secrets.MINIO_PRIVATE_KEY}}"
+            "ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}}"
+            "ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}"
