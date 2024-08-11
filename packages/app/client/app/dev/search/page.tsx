@@ -1,11 +1,11 @@
 import PostContainer from "@/components/container/PostContainer";
 import { PostDetailQueryKey } from "@/components/queries/usePostQuery";
-import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
+import getDehydratedState from "@my-own-blog/core/lib/query/useDehydratedState";
 import { PostService } from "@/components/model/PostService";
 import { HydrationBoundary } from "@tanstack/react-query";
 import SearchContainer from "@/components/container/SearchContainer";
-import { PostQueryKey } from "@/components/queries/usePostListQuery";
-import { Hydration } from '@my-own-blog/core/lib/query/Hydration';
+import { BlogType, PostQueryKey } from "@/components/queries/usePostListQuery";
+import { Hydration } from "@my-own-blog/core/lib/query/Hydration";
 
 export default async function Page({
   searchParams,
@@ -17,7 +17,7 @@ export default async function Page({
   const dehydratedQuery = await getDehydratedState({
     queryKey: PostQueryKey.search({ page, query }),
     queryFn: ({ queryKey: [_, page, query] }) =>
-      PostService.fetchPosts(Number(page), query?.toString()),
+      PostService.fetchPosts(Number(page), query as BlogType),
   });
   // Todo: 이거 좀 최적화 해야할듯.. 타입 추론 어떻게 안되나..?
   if (dehydratedQuery.state.data?.length == 0)
