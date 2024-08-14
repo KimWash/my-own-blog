@@ -22,7 +22,7 @@ export default function SmallThumbnail({
   return (
     <div className={classNames(["flex flex-col flex-1 h-full ", className])}>
       <div className="md:h-[54%] aspect-[3/4]  ">
-        <Link className="h-full flex flex-col justify-start gap-4 cursor-pointer group" href={`/magazine/post/${id}`}>
+        <Link className="h-full flex flex-col justify-start cursor-pointer group" href={`/magazine/post/${id}`}>
           <div className="relative h-full aspect-square">
             <Image
               src={thumbnailUrl ?? placeHolderImage}
@@ -31,10 +31,10 @@ export default function SmallThumbnail({
               className="aspect-video object-cover"
             />
           </div>
-          <div className=" text-black text-xl font-bold group-hover:underline">
+          <div className=" text-black text-xl font-bold group-hover:underline mb-1 mt-2">
             {title}
           </div>
-          <div className=" text-black text-[15px] font-normal">
+          <div className=" text-black text-[15px] font-normal mb-3">
             {description}
           </div>
           <div className=" text-black text-[15px] font-normal">

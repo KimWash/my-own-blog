@@ -216,3 +216,21 @@ ul.sidebar-menu li:hover {
 .toastui-editor-contents {
   font-family: inherit !important;  
 }
+.toastui-editor-contents p {
+  font-size: 1.25rem
+}
+.toastui-editor-contents h1 {
+  font-size: xxx-large !important;
+  margin-bottom: 1.25rem !important;
+}
+.toastui-editor-contents h2 {
+  font-size: xx-large !important;
+  margin-bottom: 1.25rem !important;
+}
+.toastui-editor-contents h3 {
+  font-size: x-large !important;
+  margin-bottom: 1.25rem !important;
+}
+.toastui-editor-contents img {
+  max-width: 380px  !important;
+}

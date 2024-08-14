@@ -38,11 +38,11 @@ export default function BigThumbnail({
           placeholder="blur"
           blurDataURL={blurDataURL}
         />
-        <div className=" text-black text-[32px] font-bold group-hover:underline">
+        <div className=" text-black text-[32px] font-bold group-hover:underline mt-3">
           {title}
         </div>
-        <div className=" text-black text-xl font-normal">{description}</div>
-        <div className=" text-black text-xl font-normal">
+        <div className=" text-black text-xl font-normal mt-2">{description}</div>
+        <div className=" text-black text-xl font-normal mt-6">
           {create_dt.format("yyyy-MM-dd")}
         </div>
       </Link>
