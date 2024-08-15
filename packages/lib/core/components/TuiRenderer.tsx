@@ -20,7 +20,12 @@ import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import "./custom-prism.css";
 
 import { HtmlGenerator, TuiNode, parse } from "latex.js";
-import { Viewer } from "@toast-ui/react-editor";
+import dynamic from "next/dynamic";
+
+const Viewer = dynamic(
+  () => import("@toast-ui/react-editor").then((_) => _.Viewer),
+  { ssr: false }
+);
 
 export default function TuiRenderer({ content }: { content: string }) {
   return (

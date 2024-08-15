@@ -16,6 +16,5 @@ export async function GET(
   });
   const medias = post?.medias;
   const tags = post?.tags.map((postTag) => postTag.tag);
-  console.log('post category:',post?.category)
   return NextResponse.json({ ...post, medias, tags });
 }

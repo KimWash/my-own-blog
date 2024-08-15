@@ -9,7 +9,8 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 const TuiRenderer = dynamic(
-  () => import("@my-own-blog/core/components/TuiRenderer")
+  () => import("@my-own-blog/core/components/TuiRenderer"),
+  { ssr: false }
 );
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,10 +21,14 @@ export default function PostContainer({ id }: { id: number }) {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, (lateset) => lateset * 10);
   const backButtonOpacity = useTransform(opacity, (opacity) => 1 - opacity);
-  console.log(scrollYProgress, opacity);
 
   if (!data || isLoading) return "loading...";
   const { medias, tags, ...post } = data;
+  console.log(
+    medias,
+    post.thumbnail_media,
+    medias.find((media) => media.id === post.thumbnail_media)
+  );
   return (
     <div className=" bg-orange-50 flex-col justify-start items-center inline-flex">
       <motion.div
@@ -36,16 +41,17 @@ export default function PostContainer({ id }: { id: number }) {
         className="fixed left-10 top-10"
         style={{ opacity: backButtonOpacity }}
       >
-        <FontAwesomeIcon icon={faChevronLeft} size='2xl' />
+        <FontAwesomeIcon icon={faChevronLeft} size="2xl" />
       </motion.div>
       <div className="w-full h-screen relative ">
         <Image
+          // 진짜 멍청한 실수때문에 500 떴었네.. 가로 너비 창 사이즈 따라가게 하려고 썼던 window객체가 독이되어..
           src={`/api/media/${
             medias.find((media) => media.id === post.thumbnail_media)?.id
           }/HIGH`}
+          width={"1920"}
+          height={"100"}
           alt="bg"
-          width={window.innerWidth}
-          height={window.innerHeight}
           className="absolute top-0 left-0 right-0 bottom-0 h-full w-full object-cover z-10"
         />
         <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 z-20"></div>

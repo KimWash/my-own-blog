@@ -5,13 +5,13 @@ import { PostService } from "@/components/model/PostService";
 import { Hydration } from "@my-own-blog/core/lib/query/Hydration";
 import { Metadata, ResolvingMetadata } from "next";
 
-type Props = {
+export type PageProps = {
   params: { id: number }
   searchParams: { [key: string]: string | string[] | undefined }
 }
  
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: PageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   // read route params

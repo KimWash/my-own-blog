@@ -4,7 +4,7 @@ import usePostDetailViewModel from "../hooks/usePostDetailViewModel";
 import "@my-own-blog/core/lib/date/date.extensions";
 import dynamic from "next/dynamic";
 const TuiRenderer = dynamic(
-  () => import("@my-own-blog/core/components/TuiRenderer")
+  () => import("@my-own-blog/core/components/TuiRenderer"), {ssr:false}
 );
 
 export default function PostContainer({ id }: { id: number }) {
