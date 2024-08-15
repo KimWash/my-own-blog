@@ -21,7 +21,7 @@ export async function generateMetadata(
   return {
     title: post.title,
     openGraph: {
-      images: [`https://blog-v2.kimwash.xyz/media/${post.medias.find(media => media.id === post.thumbnail_media)?.id}/HIGH`],
+      images: [`https://blog-v2.kimwash.xyz/api/media/${post.medias.find(media => media.id === post.thumbnail_media)?.id}/HIGH`],
       description: post.description!,
       releaseDate: post.create_dt?.toString()
     },
