@@ -104,7 +104,7 @@ export default function HomeContainer() {
         <br />
         고봉밥처럼 눌러 담아봤어요.
       </div>
-      <div className="sm:max-w-screen-sm md:max-w-screen-md self-center lg:max-w-screen-lg">
+      <div >
       {groupedPosts.map((posts, index) => renderGroup(posts, index))}
       </div>
     </main>

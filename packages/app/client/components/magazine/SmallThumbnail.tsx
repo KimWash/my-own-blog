@@ -21,7 +21,7 @@ export default function SmallThumbnail({
 }) {
   return (
     <div className={classNames(["flex flex-col flex-1 h-full ", className])}>
-      <div className="md:h-[54%] aspect-[3/4]  ">
+      <div className=" ">
         <Link className="h-full flex flex-col justify-start cursor-pointer group" href={`/magazine/post/${id}`}>
           <div className="relative h-full aspect-square">
             <Image

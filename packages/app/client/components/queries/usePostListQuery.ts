@@ -3,7 +3,9 @@ import { PostService } from "../model/PostService";
 
 export interface PostSearchParam {
   page: number;
+  type: BlogType;
   query?: string;
+  category?: string;
 }
 
 export const PostQueryKey = {

@@ -6,6 +6,6 @@ export default function useSearchViewModel(param: PostSearchParam) {
   return useQuery({
     queryKey: PostQueryKey.search(param),
     queryFn: ({ queryKey: [_, page, query] }) =>
-      PostService.fetchPosts(Number(page), query as BlogType),
+      PostService.fetchPosts(Number(page), 'dev', {query: query?.toString()}),
   });
 }
