@@ -12,7 +12,10 @@
  *
  * @public
  */
-export type FetchArgs = [string | URL, RequestInit | undefined];
+export type FetchArgs = [
+  string | URL,
+  (RequestInit | undefined) & { next: { revalidate: number } }
+];
 
 /**
  * Type of `returnFetch` function.
@@ -63,7 +66,7 @@ export type ReturnFetchDefaultOptions = {
      */
     request?: (
       requestArgs: FetchArgs,
-      fetch: NonNullable<ReturnFetchDefaultOptions["fetch"]>,
+      fetch: NonNullable<ReturnFetchDefaultOptions["fetch"]>
     ) => Promise<FetchArgs>;
     /**
      * Response interceptor. It will be called after response.
@@ -77,14 +80,14 @@ export type ReturnFetchDefaultOptions = {
     response?: (
       response: Response,
       requestArgs: FetchArgs,
-      fetch: NonNullable<ReturnFetchDefaultOptions["fetch"]>,
+      fetch: NonNullable<ReturnFetchDefaultOptions["fetch"]>
     ) => Promise<Response>;
   };
 };
 
 const applyDefaultOptions = (
   [input, requestInit]: FetchArgs,
-  defaultOptions?: ReturnFetchDefaultOptions,
+  defaultOptions?: ReturnFetchDefaultOptions
 ): FetchArgs => {
   const headers = new Headers(defaultOptions?.headers);
   new Headers(requestInit?.headers).forEach((value, key) => {
@@ -100,6 +103,7 @@ const applyDefaultOptions = (
     inputToReturn,
     {
       ...requestInit,
+
       headers,
     },
   ];
@@ -109,7 +113,7 @@ const applyDefaultOptions = (
 // If you have a better way, please let me know.
 const mergeRequestObjectWithRequestInit = (
   request: Request,
-  requestInit?: RequestInit,
+  requestInit?: RequestInit
 ): Promise<RequestInit> => {
   const mergedRequest = new Request(request, requestInit);
   return new Response(mergedRequest.body).arrayBuffer().then((body) => ({
@@ -142,7 +146,7 @@ const normalizeArgs = async (
     requestInit = args[1];
   }
 
-  return [input, requestInit];
+  return [input, { ...requestInit, next: { revalidate: 60 * 10 } }];
 };
 
 const returnFetch =
@@ -150,7 +154,7 @@ const returnFetch =
   async (...args: Parameters<typeof fetch>): Promise<Response> => {
     const defaultOptionAppliedArgs = applyDefaultOptions(
       await normalizeArgs(...args),
-      defaultOptions,
+      defaultOptions
     );
 
     // apply request interceptor
@@ -160,7 +164,7 @@ const returnFetch =
       requestInterceptorAppliedArgs =
         await defaultOptions?.interceptors?.request?.(
           defaultOptionAppliedArgs,
-          fetchProvided,
+          fetchProvided
         );
     } else {
       requestInterceptorAppliedArgs = defaultOptionAppliedArgs;
@@ -174,7 +178,7 @@ const returnFetch =
       defaultOptions?.interceptors?.response?.(
         response,
         requestInterceptorAppliedArgs,
-        fetchProvided,
+        fetchProvided
       ) || response
     );
   };

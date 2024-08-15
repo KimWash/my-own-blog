@@ -25,7 +25,7 @@ export default function PostCard({
       className={`flex flex-col justify-end w-full overflow-hidden post-card ${containerClassName}`}
       style={containerStyle}
     >
-      <Link href={`/post/${id}`} className="h-full">
+      <Link href={`/dev/post/${id}`} className="h-full">
         <div className="relative h-full">
           <Image
             draggable={false}
