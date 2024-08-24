@@ -7,11 +7,14 @@ import PostListContainer from "@/components/magazine/container/PostListContainer
 
 export default async function Page({
   searchParams,
+  params
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
+  params: {category: string}; 
 }) {
   const page = Number(searchParams?.page ?? 1);
-  const category = searchParams?.category?.toString();
+
+  const category = params.category
   const dehydratedQuery = await getDehydratedState({
     queryKey: PostQueryKey.search({ page, type: 'magazine', category }),
     queryFn: ({ queryKey: [_, page, category] }) =>

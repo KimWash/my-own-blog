@@ -14,7 +14,7 @@ export default function PostListContainer({ category  }: { category?: string }) 
   if (!data || isLoading) return "loading...";
   return (
     <main className="flex flex-col p-10 bg-orange-50 flex-1">
-      {data.map((post) => (
+      {data.pages.flat().map((post) => (
         <div
           key={post.id}
           className="flex flex-row mb-3 gap-4 flex-wrap md:flex-nowrap"

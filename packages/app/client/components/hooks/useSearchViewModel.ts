@@ -1,11 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { BlogType, PostQueryKey, PostSearchParam } from "../queries/usePostListQuery";
-import { PostService } from "../model/PostService";
+import { BlogType } from "../queries/usePostListQuery";
+import useSearchQuery, { PostSearchParam } from "../queries/useSearchQuery";
 
 export default function useSearchViewModel(param: PostSearchParam) {
-  return useQuery({
-    queryKey: PostQueryKey.search(param),
-    queryFn: ({ queryKey: [_, page, query] }) =>
-      PostService.fetchPosts(Number(page), 'dev', {query: query?.toString()}),
-  });
+  console.log(param)
+  return useSearchQuery(param)
 }
