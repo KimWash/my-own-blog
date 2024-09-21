@@ -62,7 +62,7 @@ export default function SidebarMenu({
               {menus.map((menu) => (
                 <li key={menu.id} className="mb-8">
                   <Link
-                    href={menu.url}
+                    href={'/'+menu.url}
                     onClick={() => {
                       setSidebarOpened(false);
                     }}

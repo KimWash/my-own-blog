@@ -7,7 +7,7 @@ import { PostSearchParam } from "./useSearchQuery";
 export const PostQueryKey = {
   all: ["posts"],
   paging: (page: number) => [...PostQueryKey.all, page],
-  search: (param: PostSearchParam) => [...PostQueryKey.all, param.type, param.category, param.query, ]
+  search: (param: PostSearchParam) => [...PostQueryKey.paging(param.page), param.type, param.category, param.query, ]
 };
 export type BlogType = 'dev' | 'magazine'
 

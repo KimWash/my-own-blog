@@ -19,7 +19,7 @@ function useTypedInfiniteQuery<
     TQueryFnData,
     DefaultError,
     InfiniteData<TQueryFnData, number>,
-    (string|undefined)[],
+    (string|number|undefined)[],
     number
   >,
   queryClient?: QueryClient
@@ -32,7 +32,7 @@ function useTypedInfiniteQuery<
     TQueryFnData,
     DefaultError,
     InfiniteData<TQueryFnData, number>,
-    (string|undefined)[],
+    (string|number|undefined)[],
     number
   >,
   queryClient?: QueryClient
@@ -47,12 +47,12 @@ function useTypedInfiniteQuery<
     DefaultError,
     InfiniteData<TQueryFnData, number>,
     TQueryFnData,
-    (string|undefined)[],
+    (string|number|undefined)[],
     number
   >,
   queryClient?: QueryClient
 ): UseInfiniteQueryResult<InfiniteData<TQueryFnData, number>, DefaultError> {
-  return useInfiniteQuery<TQueryFnData, DefaultError, InfiniteData<TQueryFnData, number>, (string|undefined)[], number>(
+  return useInfiniteQuery<TQueryFnData, DefaultError, InfiniteData<TQueryFnData, number>, (string|number|undefined)[], number>(
     options,
     queryClient
   );

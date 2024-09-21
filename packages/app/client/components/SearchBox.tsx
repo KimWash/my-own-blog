@@ -12,7 +12,7 @@ export default function SearchBox() {
   const { isMobile } = usePlatform();
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
-  const search = (query: string) => router.push("/search?query=" + query);
+  const search = (query: string) => router.push("/dev/search?query=" + query);
 
   return (
     <div>

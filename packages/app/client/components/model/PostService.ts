@@ -11,7 +11,7 @@ export class PostService {
     // 검색조건
     if (params?.query) queryBuilder.append("query", params.query);
     if (params?.category) queryBuilder.append('category', params.category);
-
+    
     return (
       await fetchExtended<PostListDto[]>("/api/post?" + queryBuilder.toString())
     ).body;

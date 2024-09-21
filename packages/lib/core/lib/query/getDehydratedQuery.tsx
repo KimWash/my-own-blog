@@ -21,6 +21,7 @@ export default async function getDehydratedQuery<
     (query) =>
       query.queryHash === (args.queryHash ?? JSON.stringify(args.queryKey))
   );
+  console.log(queries, args.queryKey, dehydratedQuery)
 
   return {
     ...dehydratedQuery,

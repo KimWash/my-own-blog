@@ -15,7 +15,7 @@ export default class MenuService {
             id: m.id,
             name: m.name,
             type: m.type,
-            url: `${m.type}/${m.id}`,
+            url: `${m.type}/category/${m.id}`,
             children: [],
           } as MenuItem)
       );
@@ -32,7 +32,7 @@ export default class MenuService {
                     id: curr.id,
                     name: curr.name,
                     type: curr.type,
-                    url: `${curr.type}/${curr.parent?.id}/${curr.id}`,
+                    url: `${curr.type}/category/${curr.parent?.id}/${curr.id}`,
                     children: [],
                   },
                 ],

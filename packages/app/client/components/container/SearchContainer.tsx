@@ -11,7 +11,7 @@ export default function SearchContainer({ query }: { query?: string }) {
   return (
     <main className="flex flex-col">
       <div className=" post-box">
-        {data.pages.flat().map((post) => (
+        {data.map((post) => (
           <PostCard
             key={post.id}
             {...post}

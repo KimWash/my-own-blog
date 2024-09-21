@@ -14,16 +14,15 @@ export interface PostSearchParam {
   category?: string;
 }
 export default function useSearchQuery(param: PostSearchParam) {
-  return useTypedInfiniteQuery<PostListDto[]>({
-    getNextPageParam: (lastPage, allPages, lastPageParam) => lastPageParam + 1,
-    initialPageParam: param.page,
+  return useQuery<PostListDto[]>({
+    // getNextPageParam: (lastPage, allPages, lastPageParam) => lastPageParam + 1,
+    // initialPageParam: param.page,
     queryKey: PostQueryKey.search(param),
-    queryFn: async ({ pageParam, queryKey: [_, type, query, category] }) => {
-      const posts = await PostService.fetchPosts(pageParam, "dev", {
-        query,
-        category,
+    queryFn: async ({ queryKey: [_, page, type, category, query] }) => {
+      return await PostService.fetchPosts(Number(page), type as BlogType, {
+        query: query?.toString(),
+        category: category?.toString(),
       });
-      return posts; // 여기서 posts는 PostListDto[] 타입으로 추론됨
     },
   });
   // return useInfiniteQuery<PostListDto[], Error, InfiniteData<PostListDto[]>, ReturnType<typeof PostQueryKey.search>, number>({

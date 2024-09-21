@@ -14,11 +14,13 @@ export default async function Page({
 }) {
   const page = Number(searchParams?.page ?? 1);
   const query = searchParams?.query?.toString();
+  console.log(page, query)
   const dehydratedQuery = await getDehydratedState({
     queryKey: PostQueryKey.search({ page, type: 'dev', query }),
-    queryFn: ({ queryKey: [_, page, query] }) =>
-      PostService.fetchPosts(Number(page), query as BlogType),
+    queryFn: ({ queryKey: [_, page,type, __,query] }) =>
+      PostService.fetchPosts(Number(page), type as BlogType, {query: query?.toString() }),
   });
+  console.log(dehydratedQuery)
   // Todo: 이거 좀 최적화 해야할듯.. 타입 추론 어떻게 안되나..?
   if (dehydratedQuery.state.data?.length == 0)
     // 디자인 만들기
