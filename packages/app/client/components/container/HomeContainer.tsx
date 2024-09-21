@@ -1,5 +1,6 @@
 "use client";
 
+import { useContext } from "react";
 import FeaturedBanner from "../FeaturedBanner";
 import PostCard from "../PostCard";
 import useHomeViewModel from "../hooks/useHomeViewModel";
@@ -8,6 +9,7 @@ import usePage from '@my-own-blog/core/lib/usePage';
 
 export default function HomeContainer() {
   const page = usePage();
+
   const { data, isLoading } = useHomeViewModel(Number(page), 'dev');
   if (!data || isLoading) return "loading...";
   if (data.length == 0) return '글이 없네요..?'

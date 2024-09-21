@@ -1,4 +1,4 @@
-import Header from "@/components/magazine/Header";
+import Providers from "@my-own-blog/core/lib/Providers";
 import { Nanum_Myeongjo } from "next/font/google";
 
 export const metadata = {
@@ -9,14 +9,15 @@ const font = Nanum_Myeongjo({
   subsets: ["latin"],
   weight: "400",
 });
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col flex-1 bg-orange-5" style={font.style} >
-      {children}
+    <div className="flex flex-col flex-1 bg-orange-5" style={font.style}>
+      <Providers>{children}</Providers>
     </div>
   );
 }

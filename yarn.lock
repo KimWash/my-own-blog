@@ -544,13 +544,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.52.0":
-  version: 5.52.0
-  resolution: "@tanstack/query-core@npm:5.52.0"
-  checksum: 10c0/6f2309294d23721e4508241a4e109d6134bd125b732271217181ae99cc7994ec02ff964397e08bc5e9af5302e3838a3f3259d6e49fdf6fc8aaf324bc4fde4939
-  languageName: node
-  linkType: hard
-
 "@tanstack/query-devtools@npm:5.32.1":
   version: 5.32.1
   resolution: "@tanstack/query-devtools@npm:5.32.1"
@@ -578,17 +571,6 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
   checksum: 10c0/d6372ad8d956b1ee578afad3a062a1c8011c4cd72a659d99f626a94e1d3f5d73116c77709fdb8e332fe3f846770f76bf97f7415e32bca644bdb48a27da9c50f5
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query@npm:^5.52.1":
-  version: 5.52.1
-  resolution: "@tanstack/react-query@npm:5.52.1"
-  dependencies:
-    "@tanstack/query-core": "npm:5.52.0"
-  peerDependencies:
-    react: ^18 || ^19
-  checksum: 10c0/a07697446311e908173bcce25ccbf019d7ffde19a7607b6791195414f1b337754f48d3d40b8100283e0fea556295240ecf9fe7bb39b3c1f3040d1ac38da03485
   languageName: node
   linkType: hard
 
@@ -1662,8 +1644,6 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"
     "@tanstack/eslint-plugin-query": "npm:^5.52.0"
-    "@tanstack/react-query": "npm:^5.52.1"
-    "@tanstack/react-query-devtools": "npm:^5.29.2"
     "@toast-ui/editor-plugin-code-syntax-highlight": "npm:^3.1.0"
     "@toast-ui/editor-plugin-color-syntax": "npm:^3.1.0"
     "@toast-ui/react-editor": "npm:^3.1.1"

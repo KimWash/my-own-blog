@@ -3,9 +3,6 @@
 import usePostDetailViewModel from "../../hooks/usePostDetailViewModel";
 import "@my-own-blog/core/lib/date/date.extensions";
 import dynamic from "next/dynamic";
-import Header from "../Header";
-import { CSSTransition } from "react-transition-group";
-import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 const TuiRenderer = dynamic(
@@ -13,36 +10,40 @@ const TuiRenderer = dynamic(
   { ssr: false }
 );
 import "@toast-ui/editor/dist/toastui-editor.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackward, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function PostContainer({ id }: { id: number }) {
+export default function PostContainer({
+  id,
+  isApp = false,
+  header,
+}: {
+  id: number;
+  isApp?: boolean;
+  header: React.ReactNode;
+}) {
+  console.log(JSON.stringify(useQueryClient()));
   const { data, isLoading } = usePostDetailViewModel(id);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, (lateset) => lateset * 10);
   const backButtonOpacity = useTransform(opacity, (opacity) => 1 - opacity);
+  useEffect(() => {
+    console.log(isApp);
+  }, [isApp]);
 
   if (!data || isLoading) return "loading...";
   const { medias, tags, ...post } = data;
-  console.log(
-    medias,
-    post.thumbnail_media,
-    medias.find((media) => media.id === post.thumbnail_media)
-  );
+
   return (
     <div className=" bg-orange-50 flex-col justify-start items-center inline-flex">
-      <motion.div
-        className="fixed w-full bg-orange-50 z-50"
-        style={{ opacity: opacity }}
-      >
-        <Header />
-      </motion.div>
-      <motion.div
-        className="fixed left-10 top-10"
-        style={{ opacity: backButtonOpacity }}
-      >
-        <FontAwesomeIcon icon={faChevronLeft} size="2xl" />
-      </motion.div>
+      {!isApp && (
+        <motion.div
+          className="fixed w-full bg-orange-50 z-50"
+          style={{ opacity: opacity }}
+        >
+          {header}
+        </motion.div>
+      )}
       <div className="w-full h-screen relative ">
         <Image
           // 진짜 멍청한 실수때문에 500 떴었네.. 가로 너비 창 사이즈 따라가게 하려고 썼던 window객체가 독이되어..

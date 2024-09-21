@@ -5,6 +5,8 @@ import useHomeViewModel from "../../hooks/useHomeViewModel";
 import usePage from "@my-own-blog/core/lib/usePage";
 import SmallThumbnail from "../SmallThumbnail";
 import { PostListDto } from "@my-own-blog/core/lib/model/Post";
+import { getQueryClient } from "@my-own-blog/core/lib/Providers";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const groupPosts = (posts: PostListDto[]) => {

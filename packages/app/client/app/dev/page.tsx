@@ -2,7 +2,7 @@ import HomeContainer from "@/components/container/HomeContainer";
 import { PostService } from "@/components/model/PostService";
 import { PostQueryKey } from "@/components/queries/usePostListQuery";
 import { Hydration } from '@my-own-blog/core/lib/query/Hydration';
-import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
+import getDehydratedState from '@my-own-blog/core/lib/query/getDehydratedQuery';
 
 export default async function Home({
   searchParams,
@@ -15,9 +15,11 @@ export default async function Home({
     queryKey: PostQueryKey.paging(Number(page)),
     queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page), 'dev'),
   });
+  console.log(dehydratedState)
   return (
     <Hydration queries={[dehydratedState]}>
       <HomeContainer />
     </Hydration>
   );
 }
+ 

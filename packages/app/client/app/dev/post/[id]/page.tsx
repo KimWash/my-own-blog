@@ -1,6 +1,6 @@
 import PostContainer from "@/components/container/PostContainer";
 import { PostDetailQueryKey } from "@/components/queries/usePostQuery";
-import getDehydratedState from '@my-own-blog/core/lib/query/useDehydratedState';
+import getDehydratedState from '@my-own-blog/core/lib/query/getDehydratedQuery';
 import { PostService } from "@/components/model/PostService";
 import { HydrationBoundary } from "@tanstack/react-query";
 import { Metadata, ResolvingMetadata } from "next";

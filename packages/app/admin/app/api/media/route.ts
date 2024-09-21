@@ -21,7 +21,7 @@ export async function GET(request: Request) {
   const fileType = fileName.match(new RegExp("/*.png|jpg|jpeg|gif|heif|HEIF/g"))
     ? "IMAGE"
     : "VIDEO";
-  // Todo: Media 생성
+  // Todo: Media 생성 
   const media = await db.media.create({
     data: {
       type: fileType,
