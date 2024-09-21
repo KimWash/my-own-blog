@@ -60,16 +60,18 @@ export default function PostContainer({
           <div className="text-white text-2xl font-extrabold ">
             {post.category.name}
           </div>
-          <div className=" text-white text-[64px] font-bold ">{post.title}</div>
-          <div className="  text-white text-4xl font-normal ">
+          <div className=" text-white text-4xl md:text-[64px] font-bold ">
+            {post.title}
+            </div>
+          <div className="  text-white text-2xl md:text-4xl font-normal ">
             {post.description}
           </div>
-          <div className=" text-white text-2xl font-normal ">
+          <div className=" text-white text-xl md:text-2xl font-normal ">
             {post.create_dt?.format("yyyy-MM-dd")}
           </div>
         </div>
       </div>
-      <div className="self-stretch p-[60px] flex-col justify-center items-center gap-2.5 flex">
+      <div className="self-stretch  flex-col justify-center items-center gap-2.5 flex">
         <div className="mt-10 post-content">
           <TuiRenderer content={post?.content ?? ""} />
         </div>

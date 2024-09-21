@@ -33,7 +33,6 @@ export interface HydrationProps extends HydrationBoundaryProps {
 }
 
 export function Hydration(props: HydrationProps) {
-  // const c = useQueryClient();
   return (
     <HydrationBoundary
       {...props}
@@ -42,7 +41,6 @@ export function Hydration(props: HydrationProps) {
         queries: props.queries,
         mutations: props.mutations,
       }}
-      // queryClient={c}
     >
     </HydrationBoundary>
   );

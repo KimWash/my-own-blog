@@ -198,6 +198,10 @@ ul.sidebar-menu li:hover {
   text-decoration: underline;
 }
 
+.post-content {
+  max-width: 768px;
+  width: 80%;
+}
 
 .post-content h2{
   font-size: 2rem;
@@ -217,20 +221,29 @@ ul.sidebar-menu li:hover {
   font-family: inherit !important;  
 }
 .toastui-editor-contents p {
-  font-size: 1.25rem
+  font-size: 1rem
+}
+@media screen and (min-width: 768px) {
+   
+  .toastui-editor-contents p {
+    font-size: 1.25rem
+  }
 }
 .toastui-editor-contents h1 {
   font-size: xxx-large !important;
   margin-bottom: 1.25rem !important;
+  line-height: 2rem !important;
 }
 .toastui-editor-contents h2 {
   font-size: xx-large !important;
   margin-bottom: 1.25rem !important;
+  line-height: 2rem !important;
 }
 .toastui-editor-contents h3 {
   font-size: x-large !important;
   margin-bottom: 1.25rem !important;
+  line-height: 2rem !important;
 }
 .toastui-editor-contents img {
-  max-width: 380px  !important;
+  max-width: 100%  !important;
 }
