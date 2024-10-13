@@ -14,8 +14,8 @@ export class MediaService {
 
     var minioClient = new Client({
       endPoint: process.env.MINIO_URL,
-      port: 9000,
-      useSSL: false,
+      port: 443,
+      useSSL: true,
       accessKey: process.env.MINIO_ACCESS_KEY,
       secretKey: process.env.MINIO_PRIVATE_KEY,
     });
@@ -23,4 +23,12 @@ export class MediaService {
     return await minioClient.getObject("my-own-blog", file.name ?? "");
   
   }
+
+  static async getMedias(quality: Quality) {
+    const medias = await db.media.findMany({
+      include: { files: true },
+    });
+    return medias;
+  }
+
 }

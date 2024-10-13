@@ -12,8 +12,8 @@ export async function GET(request: Request) {
 
   const minioClient = new Client({
     endPoint: process.env.MINIO_URL,
-    port: 9000,
-    useSSL: false,
+    port: 443,
+    useSSL: true,
     accessKey: process.env.MINIO_ACCESS_KEY,
     secretKey: process.env.MINIO_PRIVATE_KEY,
   });
