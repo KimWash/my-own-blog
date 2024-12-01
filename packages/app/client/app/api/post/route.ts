@@ -36,6 +36,11 @@ export async function GET(request: Request) {
     },
     skip: (page - 1) * pageSize,
     take: pageSize,
+    orderBy: [
+      {
+        regDt: "desc"
+      }
+    ]
   });
   const result = posts.map(
     (post) =>
