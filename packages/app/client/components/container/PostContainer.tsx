@@ -3,6 +3,7 @@
 import usePostDetailViewModel from "../hooks/usePostDetailViewModel";
 import "@my-own-blog/core/lib/date/date.extensions";
 import dynamic from "next/dynamic";
+import Giscus from "../Giscus";
 const TuiRenderer = dynamic(
   () => import("@my-own-blog/core/components/TuiRenderer"), {ssr:false}
 );
@@ -27,6 +28,7 @@ export default function PostContainer({ id }: { id: number }) {
       <div className="mt-10 post-content">
         <TuiRenderer content={post?.content ?? ""} />
       </div>
+      <Giscus/>
     </div>
   );
 }

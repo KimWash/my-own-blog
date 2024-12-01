@@ -7,11 +7,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 const TuiRenderer = dynamic(
   () => import("@my-own-blog/core/components/TuiRenderer"),
-  { ssr: false }
 );
 import "@toast-ui/editor/dist/toastui-editor.css";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import Giscus from "@/components/Giscus";
 
 export default function PostContainer({
   id,
@@ -80,7 +80,11 @@ export default function PostContainer({
         <div className="self-stretch text-black text-[40px] font-extrabold ">
           댓글
         </div>
-        준비중인 기능입니다.
+        <div className="self-stretch">
+
+        <Giscus/>
+        </div>
+
       </div>
     </div>
   );
