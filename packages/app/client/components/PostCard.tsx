@@ -40,7 +40,7 @@ export default function PostCard({
         </div>
         <div className="relative">
           <div className="absolute bottom-0 w-full p-4">
-            <div className="flex flex-row justify-between items-end gap-2">
+            <div className="flex flex-row justify-between items-end gap-2 flex-wrap">
               <p className="text-white">{title}</p>
               <p className="whitespace-nowrap text-white">
                 {create_dt?.format("yyyy-MM-dd")}

@@ -8,7 +8,7 @@ import Paragraph from "@editorjs/paragraph";
 import Header from "@editorjs/header";
 import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
 
-export const EDITOR_TOOLS = {
+export const EDITOR_TOOLS = (onAddImage) => ({
   code: Code,
   paragraph: { class: Paragraph, inlineToolbar: true },
   header: Header,
@@ -33,6 +33,7 @@ export const EDITOR_TOOLS = {
               method: "PUT",
               body: file,
             });
+            onAddImage(presignResult.file)
             return {
               success: 1,
               file: {
@@ -59,4 +60,4 @@ export const EDITOR_TOOLS = {
       }
     }
   }
-};
+});

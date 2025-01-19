@@ -12,6 +12,9 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Giscus from "@/components/Giscus";
+import EditorJSViewer from "@/components/EditorJSViewer";
+import { isJSONObject } from "@my-own-blog/core/lib/isJSONObject";
+import { OutputData } from "@editorjs/editorjs";
 
 export default function PostContainer({
   id,
@@ -72,8 +75,17 @@ export default function PostContainer({
         </div>
       </div>
       <div className="self-stretch  flex-col justify-center items-center gap-2.5 flex">
-        <div className="mt-10 post-content">
-          <TuiRenderer content={post?.content ?? ""} />
+   <div className="mt-10 ">
+          {post.content && isJSONObject(post?.content) ? (
+            <EditorJSViewer
+              data={JSON.parse(post.content!) as OutputData}
+              holder="post"
+            />
+          ) : (
+            <div className="post-content">
+              <TuiRenderer content={post?.content ?? ""} />
+            </div>
+          )}
         </div>
       </div>
       <div className="self-stretch p-[60px] flex-col justify-center items-center gap-2.5 flex">

@@ -3,13 +3,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_TOOLS } from "@/lib/editor/config";
+import { File } from "@my-own-blog/db";
 type EditorProps = {
   data?: OutputData;
   onChange(val: OutputData): void;
   holder: string;
+  addImage: (file: File) => void;
 };
 
-function Editor({ data, onChange, holder }: EditorProps) {
+function Editor({ data, onChange, holder, addImage }: EditorProps) {
   //add a reference to editor
   const ref = useRef<EditorJS>();
   //initialize editorjs
@@ -19,7 +21,7 @@ function Editor({ data, onChange, holder }: EditorProps) {
       const editor = new EditorJS({
         holder: holder,
         placeholder: "Start writting here..",
-        tools: EDITOR_TOOLS,
+        tools: EDITOR_TOOLS(addImage),
         data,
         async onChange(api, event) {
           const content = await api.saver.save();

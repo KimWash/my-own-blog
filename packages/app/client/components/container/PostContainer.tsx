@@ -9,7 +9,7 @@ const TuiRenderer = dynamic(
   { ssr: false }
 );
 import { isJSONObject } from "@my-own-blog/core/lib/isJSONObject";
-const EditorJSViewer = dynamic(() => import("../EditorJSViewer"), );
+const EditorJSViewer = dynamic(() => import("../EditorJSViewer"));
 import { OutputData } from "@editorjs/editorjs";
 
 export default function PostContainer({ id }: { id: number }) {
@@ -22,21 +22,23 @@ export default function PostContainer({ id }: { id: number }) {
       {tags?.map((tag) => (
         <span key={tag.id}>#{tag.name} </span>
       ))}
-      <div className="flex flex-row justify-between items-end">
+      <div className="flex flex-row justify-between items-end flex-wrap">
         <h1>{post?.title}</h1>
         <p>{post?.create_dt?.format("yyyy년 MM월 dd일")}</p>
       </div>
       <hr className="border-1 border-gray-400" />
       <p>{post?.description}</p>
 
-      <div className="mt-10 post-content">
+      <div className="mt-10 ">
         {post.content && isJSONObject(post?.content) ? (
           <EditorJSViewer
             data={JSON.parse(post.content!) as OutputData}
             holder="post"
           />
         ) : (
-          <TuiRenderer content={post?.content ?? ""} />
+          <div className="post-content">
+            <TuiRenderer content={post?.content ?? ""} />
+          </div>
         )}
       </div>
       <Giscus />

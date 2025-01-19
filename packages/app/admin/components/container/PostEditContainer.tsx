@@ -274,8 +274,23 @@ export default function PostEditContainer({
             />
           </div>
         </div>
-        {!initialPost || !initialPost?.content || isJSONObject(initialPost?.content) ? (
-          <Editor data={content} onChange={setContent} holder={"editor"} />
+        {!initialPost ||
+        !initialPost?.content ||
+        isJSONObject(initialPost?.content) ? (
+          <Editor
+            data={content}
+            onChange={setContent}
+            holder={"editor"}
+            addImage={(file) => {
+              setPost((prev) => ({
+                ...prev,
+                mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
+                thumbnail_media: !prev.mediaIds
+                  ? file.mediaId!
+                  : prev.thumbnail_media,
+              }));
+            }}
+          />
         ) : (
           <ToastEditor
             initialValue={initialPost?.content ?? ""}
