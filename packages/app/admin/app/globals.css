@@ -12,3 +12,34 @@ body {
     text-wrap: balance;
   }
 }
+
+.ce-block__content {
+  p,
+  ce-paragraph {
+      @apply tracking-wider text-[12px] text-gray-500;
+  }
+
+  h1 {
+      @apply text-[32px] leading-5 font-extrabold;
+  }
+
+  h2 {
+      @apply text-[24px] leading-5 font-bold;
+  }
+
+  h3 {
+      @apply text-[18px] leading-5 font-bold;
+  }
+
+  h4 {
+      @apply text-[16px] leading-5 font-semibold;
+  }
+
+  h5 {
+      @apply text-[14px] leading-5 font-semibold;
+  }
+
+  h6 {
+      @apply text-[14px] leading-5 font-semibold;
+  }
+}

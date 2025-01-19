@@ -1,7 +1,5 @@
 import PostCreateContainer from "@/components/container/PostCreateContainer";
 import MenuService from "@my-own-blog/core/service/MenuService";
-import { MenuItem } from "@my-own-blog/core/types/Menu";
-import db from "@my-own-blog/db";
 
 export default async function Page({
   params,

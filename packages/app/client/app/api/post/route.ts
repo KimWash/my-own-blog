@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     take: pageSize,
     orderBy: [
       {
-        regDt: "desc"
+        create_dt: "desc"
       }
     ]
   });

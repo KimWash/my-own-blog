@@ -5,8 +5,12 @@ import "@my-own-blog/core/lib/date/date.extensions";
 import dynamic from "next/dynamic";
 import Giscus from "../Giscus";
 const TuiRenderer = dynamic(
-  () => import("@my-own-blog/core/components/TuiRenderer"), {ssr:false}
+  () => import("@my-own-blog/core/components/TuiRenderer"),
+  { ssr: false }
 );
+import { isJSONObject } from "@my-own-blog/core/lib/isJSONObject";
+const EditorJSViewer = dynamic(() => import("../EditorJSViewer"), );
+import { OutputData } from "@editorjs/editorjs";
 
 export default function PostContainer({ id }: { id: number }) {
   const { data, isLoading } = usePostDetailViewModel(id);
@@ -26,9 +30,16 @@ export default function PostContainer({ id }: { id: number }) {
       <p>{post?.description}</p>
 
       <div className="mt-10 post-content">
-        <TuiRenderer content={post?.content ?? ""} />
+        {post.content && isJSONObject(post?.content) ? (
+          <EditorJSViewer
+            data={JSON.parse(post.content!) as OutputData}
+            holder="post"
+          />
+        ) : (
+          <TuiRenderer content={post?.content ?? ""} />
+        )}
       </div>
-      <Giscus/>
+      <Giscus />
     </div>
   );
 }

@@ -41,7 +41,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.json"
+    "**/*.json",
+    "lib/editor/config.js"
 , "../../lib/core/service/MenuService.ts"  ],
   "references": [
     { "path": "../../lib/core" },

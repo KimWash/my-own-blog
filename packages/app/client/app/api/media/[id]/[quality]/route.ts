@@ -36,5 +36,6 @@ export async function GET(
   } catch (e) {
     if ((e as Error).message == "File not found")
       return NextResponse.json("", { status: 404 });
+    else return NextResponse.json((e as Error).message, {status: 500})
   }
 }

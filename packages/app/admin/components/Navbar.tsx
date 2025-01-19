@@ -39,7 +39,7 @@ export default async function Navbar(props: PropsWithChildren) {
           </details>
         </li>
       ) : (
-        <li key={menu.id}>
+        <li key={menu.id} className="z-10">
           <Link href={'/dashboard' + menu.url}>{menu.name}</Link>
         </li>
       )

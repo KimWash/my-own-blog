@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { Editor } from "@toast-ui/react-editor";
 import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
 import Tag from "@my-own-blog/core/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import menus_temp from "@/assets/menus_temp.json";
 import classNames from "classnames";
 import {
   DragDropContext,
@@ -25,8 +23,21 @@ import {
   ResponderProvided,
   resetServerContext,
 } from "react-beautiful-dnd";
-import { useQuery } from "@tanstack/react-query";
-import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
+
+import { Editor as EditorType } from "@toast-ui/react-editor";
+const Editor = dynamic(() => import("../Editor"), { ssr: false });
+
+import { OutputData } from "@editorjs/editorjs";
+import { isJSONObject } from "@my-own-blog/core/lib/isJSONObject";
+
+function safeJsonParse<T>(jsonString?: string | null) {
+  if (!jsonString) return undefined;
+  try {
+    return JSON.parse(jsonString) as T;
+  } catch (e) {
+    return undefined;
+  }
+}
 
 interface MenuItem {
   id: string;
@@ -61,12 +72,8 @@ const ToastEditor = dynamic(() => import("../ToastEditor"), { ssr: false });
 type TagForm = Pick<TagDto, "name" | "id">;
 export type PostForm = Pick<
   PostDetailDto,
-  | "content"
-  | "title"
-  | "description"
-  | "update_dt"
-  | "thumbnail_media"
-> & {category_id: string; tags: (TagForm | TagDto)[]; mediaIds: number[] };
+  "content" | "title" | "description" | "update_dt" | "thumbnail_media" | "id"
+> & { category_id: string; tags: (TagForm | TagDto)[]; mediaIds: number[] };
 
 export default function PostEditContainer({
   initialPost,
@@ -79,8 +86,9 @@ export default function PostEditContainer({
   categories: MenuItem[];
   onSubmit: (id: number, post: PostForm) => void;
 }) {
-  const ref = useRef<Editor>();
+  const ref = useRef<EditorType>();
   const emptyPost: PostForm = {
+    id: 0,
     title: "",
     content: "",
     update_dt: new Date(),
@@ -91,12 +99,18 @@ export default function PostEditContainer({
     category_id: initialCategory,
   };
 
+  const [content, setContent] = useState<OutputData | undefined>(
+    safeJsonParse<OutputData>(initialPost?.content)
+  );
+
   const [post, setPost] = useState(
-    {
-      ...initialPost,
-      mediaIds: initialPost?.medias.map((media) => media.id),
-      category_id: initialPost?.category.id,
-    } ?? emptyPost
+    initialPost
+      ? {
+          ...initialPost,
+          mediaIds: initialPost?.medias.map((media) => media.id),
+          category_id: initialPost?.category.id,
+        }
+      : emptyPost
   );
   function setPostField<T extends PostForm[keyof PostForm]>(
     fieldName: keyof PostForm,
@@ -260,19 +274,23 @@ export default function PostEditContainer({
             />
           </div>
         </div>
-        <ToastEditor
-          initialValue={initialPost?.content ?? ""}
-          addImage={(file) => {
-            setPost((prev) => ({
-              ...prev,
-              mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
-              thumbnail_media: !prev.mediaIds
-                ? file.mediaId!
-                : prev.thumbnail_media,
-            }));
-          }}
-          forwardedRef={ref}
-        />
+        {!initialPost || !initialPost?.content || isJSONObject(initialPost?.content) ? (
+          <Editor data={content} onChange={setContent} holder={"editor"} />
+        ) : (
+          <ToastEditor
+            initialValue={initialPost?.content ?? ""}
+            addImage={(file) => {
+              setPost((prev) => ({
+                ...prev,
+                mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
+                thumbnail_media: !prev.mediaIds
+                  ? file.mediaId!
+                  : prev.thumbnail_media,
+              }));
+            }}
+            forwardedRef={ref}
+          />
+        )}
       </div>
       <div className="border ml-3 p-3 rounded-lg border-black flex flex-col justify-between">
         <div>
@@ -415,8 +433,9 @@ export default function PostEditContainer({
             if (!post.title) alert("제목을 입력해주세요.");
             else
               onSubmit(post.id ?? -1, {
+                id: post.id,
                 title: post.title!,
-                content: ref.current?.getInstance().getMarkdown(),
+                content: JSON.stringify(content),
                 description: post.description!,
                 mediaIds: post.mediaIds!,
                 thumbnail_media: post.thumbnail_media!,
