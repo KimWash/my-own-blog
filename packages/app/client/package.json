@@ -46,6 +46,7 @@
     "remark-math": "^6.0.0",
     "return-fetch": "0.4.5",
     "rimraf": "^3.0.2",
+    "sharp": "^0.33.5",
     "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
