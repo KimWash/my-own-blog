@@ -44,6 +44,7 @@ async function getObjectAsBuffer(
  * @param {number} id 미디어의 id입니다.
  */
 export async function GET(request: Request) {
+  if (process.env.NODE_ENV == 'production') return NextResponse.json("Migration not allowed on production.", { status: 403 });
   try {
     const medias = await MediaService.getMedias("HIGH");
     for (const media of medias) {
