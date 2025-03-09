@@ -7,6 +7,7 @@ import TuiWithForwardedRef, {
 import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
 import { TuiNode, HtmlGenerator, parse } from "latex.js";
 import { File as FileData } from "@prisma/client";
+import { loadImage } from "@/lib/editor/config";
 
 const Editor = dynamic<TuiWithForwardedRefProps>(
   () => import("./TuiWithForwardedRef"),
@@ -26,7 +27,6 @@ interface ToastUiEditorProps extends EditorProps {
   addImage: (file: FileData) => void;
 }
 const ToastEditor: React.FC<ToastUiEditorProps> = (props) => {
-
   return (
     <EditorWithForwardRef
       {...props}
@@ -69,10 +69,16 @@ const ToastEditor: React.FC<ToastUiEditorProps> = (props) => {
         ) {
           // Todo: Implement Upload
           try {
+            const exif = await loadImage(blob);
+
             const { body: presignResult } = await fetchExtended<{
               preSignedUrl: string;
               file: FileData;
-            }>(`/api/media?filename=${blob.name}`);
+            }>(`/api/media?filename=${blob.name}`, {
+              method: "POST",
+              body: { exif },
+              next: { revalidate: 0 },
+            });
 
             await fetch(presignResult.preSignedUrl, {
               method: "PUT",

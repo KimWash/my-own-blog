@@ -14,7 +14,7 @@ export async function GET(
     const fs = await MediaService.getMedia(params.id, params.quality);
     const t2 = new Date().getMilliseconds();
     const responseHeader = new Headers(request.headers);
-    responseHeader.set("Content-Type", "image/webp");
+    // responseHeader.set("Content-Type", "image/webp");
     const data = new ReadableStream({
       start(controller) {
         fs.on("data", (chunk: Buffer) => {

@@ -7,6 +7,29 @@ import Table from "@editorjs/table";
 import Paragraph from "@editorjs/paragraph";
 import Header from "@editorjs/header";
 import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
+import EXIF from 'exif-js'
+
+/**
+ * 
+ * @param {File} file 
+ * @returns 
+ */
+export const loadImage = (file) => new Promise((res) => {
+  const reader = new FileReader();
+                
+  reader.onload = function(e) {
+      const image = new Image();
+      image.onload = function() {
+          EXIF.getData(image, function() {
+              const exifData = EXIF.getAllTags(this);
+              res(exifData)
+          });
+      };
+      image.src = e.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+})
 
 export const EDITOR_TOOLS = (onAddImage) => ({
   code: Code,
@@ -27,7 +50,8 @@ export const EDITOR_TOOLS = (onAddImage) => ({
          */
         async uploadByFile(file) {
           try {
-            const { body: presignResult } = await fetchExtended(`/api/media?filename=${file.name}`);
+            const exif = await loadImage(file)
+            const { body: presignResult } = await fetchExtended(`/api/media?filename=${file.name}`, {method: 'POST', body: {exif}});
 
             await fetch(presignResult.preSignedUrl, {
               method: "PUT",
