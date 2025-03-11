@@ -7,16 +7,16 @@ import { Media } from "@my-own-blog/db";
 import { Hydration } from "@my-own-blog/core/lib/query/Hydration";
 
 export default async function GalleryPage() {
-  const galleryQuery = await getDehydratedQuery({
-    queryKey: ["gallery"],
-    queryFn: async () => {
-      return (await fetchExtended<Media[]>("/api/gallery")).body;
-    },
-  });
+  // const galleryQuery = await getDehydratedQuery({
+  //   queryKey: ["gallery"],
+  //   queryFn: async () => {
+  //     return (await fetchExtended<Media[]>("/api/gallery")).body;
+  //   },
+  // });
 
   return (
-    <Hydration queries={[galleryQuery]}>
+    // <Hydration queries={[galleryQuery]}>
       <GalleryContainer />
-    </Hydration>
+    // </Hydration>
   );
 }
