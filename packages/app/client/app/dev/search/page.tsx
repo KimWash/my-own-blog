@@ -16,7 +16,7 @@ export default async function Page({
   const query = searchParams?.query?.toString();
   console.log(page, query)
   const dehydratedQuery = await getDehydratedState({
-    queryKey: PostQueryKey.search({ page, type: 'dev', query }),
+    queryKey: PostQueryKey.search({  type: 'dev', query }),
     queryFn: ({ queryKey: [_, page,type, __,query] }) =>
       PostService.fetchPosts(Number(page), type as BlogType, {query: query?.toString() }),
   });

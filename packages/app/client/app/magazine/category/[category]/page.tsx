@@ -19,7 +19,7 @@ export default async function Page({
 
   const category = params.category;
   const dehydratedQuery = await getDehydratedQuery({
-    queryKey: PostQueryKey.search({ category, page, type: "magazine" }),
+    queryKey: PostQueryKey.search({ category, type: "magazine" }),
     queryFn: async ({
       pageParam,
       queryKey: [_, page, type, category, query],
