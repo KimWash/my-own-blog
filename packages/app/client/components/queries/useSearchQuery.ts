@@ -8,7 +8,6 @@ import { PostService } from "../model/PostService";
 import { PostListDto } from "@my-own-blog/core/lib/model/Post";
 import { useTypedInfiniteQuery } from "./useTypedInfiniteQuery";
 export interface PostSearchParam {
-  page: number;
   type: BlogType;
   query?: string;
   category?: string;

@@ -13,7 +13,7 @@ export default async function Home({
 }) {
   const page = searchParams?.page ?? 1;
   const dehydratedState = await getDehydratedState({
-    queryKey: PostQueryKey.paging(Number(page)),
+    queryKey:PostQueryKey.search({type: 'magazine'}),
     queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page), 'magazine'),
   });
   return (
