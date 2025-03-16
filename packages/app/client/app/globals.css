@@ -128,7 +128,7 @@ img.hover-animation:hover {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 200px;
+  height: 400px;
   /* height given for illustration */
   display: flex;
   flex-flow: row wrap;
@@ -146,7 +146,7 @@ img.hover-animation:hover {
   }
 }
 
-.post-card { height: 100%}
+.post-card { height: 50%}
 
 .post-card:hover .image-box {
   transform: scale(1.2) rotate(2deg);
