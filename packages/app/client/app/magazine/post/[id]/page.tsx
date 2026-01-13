@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { id: number } }) {
     queryKey: PostDetailQueryKey(params.id),
     queryFn: ({ queryKey: [_, id] }) => PostService.fetchPost(id),
   });
-  const isApp = headers().get("User-Agent")?.includes("magangzine");
+  const isApp = (await headers()).get("User-Agent")?.includes("magangzine");
   
   return (
     <Hydration queries={[dehydratedQuery]} >

@@ -20,7 +20,7 @@ import "prismjs/components/prism-sql";
 import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 // 3 below for editor-plugin-color-syntax
-import "tui-color-picker/dist/tui-color-picker.css";
+import "../styles/tui-color-picker-patched.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import colorSyntax, {
   PluginOptions,

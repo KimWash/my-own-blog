@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
 
-export function getAbsoluteUrl() {
-  return headers().get('host')
+export async function getAbsoluteUrl() {
+  return (await headers()).get('host')
 }
