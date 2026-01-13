@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import SidebarMenu from "../SidebarMenu";
-import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { MenuItem } from "@my-own-blog/core/types/Menu";
 import menus from "@/asset/menus_temp.json";
 import MenuService from "@my-own-blog/core/service/MenuService";
 
-const SearchBox = dynamic(() => import("../SearchBox"), { ssr: false });
+const SearchBox = dynamic(() => import("../SearchBox"));
 
 export default async function Header() {
 

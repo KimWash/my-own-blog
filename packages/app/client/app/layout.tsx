@@ -8,7 +8,6 @@ import Header from "@/components/dev/Header";
 import Providers from "@my-own-blog/core/lib/Providers";
 import localFont from "next/font/local";
 import { headers } from "next/headers";
-import { useRouter } from "next/navigation";
 import {
   QueryClient,
   QueryClientProvider,
