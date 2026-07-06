@@ -9,6 +9,7 @@ export class PostService {
         tags: { include: { tag: true } },
         medias: { include: { files: true } },
         category: true,
+        postContent: true,
       },
     });
     if (!post) throw new Error("Post not found");

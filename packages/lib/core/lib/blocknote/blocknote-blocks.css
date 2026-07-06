@@ -1,0 +1,54 @@
+.bn-code-block {
+  background: #f6f8fa;
+  border-radius: 6px;
+  padding: 12px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.bn-code-block-editable {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bn-code-block-textarea {
+  width: 100%;
+  min-height: 100px;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.bn-math-block {
+  padding: 8px 0;
+  overflow-x: auto;
+}
+
+.bn-math-block-editable {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bn-math-block-textarea {
+  width: 100%;
+  font-family: monospace;
+  font-size: 14px;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.bn-image-gallery-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.bn-image-gallery-item {
+  position: relative;
+}

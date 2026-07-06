@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { PostDetailDto, TagDto } from "@my-own-blog/core/lib/model/Post";
 import Tag from "@my-own-blog/core/components/Tag";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,20 +24,10 @@ import {
   resetServerContext,
 } from "react-beautiful-dnd";
 
-import { Editor as EditorType } from "@toast-ui/react-editor";
-const Editor = dynamic(() => import("../Editor"), { ssr: false });
-
-import { OutputData } from "@editorjs/editorjs";
-import { isJSONObject } from "@my-own-blog/core/lib/isJSONObject";
-
-function safeJsonParse<T>(jsonString?: string | null) {
-  if (!jsonString) return undefined;
-  try {
-    return JSON.parse(jsonString) as T;
-  } catch (e) {
-    return undefined;
-  }
-}
+import { Block } from "@blocknote/core";
+const BlockNoteEditor = dynamic(() => import("../BlockNoteEditor"), {
+  ssr: false,
+});
 
 interface MenuItem {
   id: string;
@@ -67,13 +57,16 @@ const LeafMenu = ({
   );
 };
 
-const ToastEditor = dynamic(() => import("../ToastEditor"), { ssr: false });
-
 type TagForm = Pick<TagDto, "name" | "id">;
 export type PostForm = Pick<
   PostDetailDto,
-  "content" | "title" | "description" | "update_dt" | "thumbnail_media" | "id"
-> & { category_id: string; tags: (TagForm | TagDto)[]; mediaIds: number[] };
+  "title" | "description" | "update_dt" | "thumbnail_media" | "id"
+> & {
+  postContent: Block[];
+  category_id: string;
+  tags: (TagForm | TagDto)[];
+  mediaIds: number[];
+};
 
 export default function PostEditContainer({
   initialPost,
@@ -86,11 +79,10 @@ export default function PostEditContainer({
   categories: MenuItem[];
   onSubmit: (id: number, post: PostForm) => void;
 }) {
-  const ref = useRef<EditorType>();
   const emptyPost: PostForm = {
     id: 0,
     title: "",
-    content: "",
+    postContent: [],
     update_dt: new Date(),
     description: "",
     thumbnail_media: null,
@@ -99,8 +91,8 @@ export default function PostEditContainer({
     category_id: initialCategory,
   };
 
-  const [content, setContent] = useState<OutputData | undefined>(
-    safeJsonParse<OutputData>(initialPost?.content)
+  const [content, setContent] = useState<Block[]>(
+    (initialPost?.postContent?.content as Block[] | undefined) ?? []
   );
 
   const [post, setPost] = useState(
@@ -274,38 +266,19 @@ export default function PostEditContainer({
             />
           </div>
         </div>
-        {!initialPost ||
-        !initialPost?.content ||
-        isJSONObject(initialPost?.content) ? (
-          <Editor
-            data={content}
-            onChange={setContent}
-            holder={"editor"}
-            addImage={(file) => {
-              setPost((prev) => ({
-                ...prev,
-                mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
-                thumbnail_media: !prev.mediaIds
-                  ? file.mediaId!
-                  : prev.thumbnail_media,
-              }));
-            }}
-          />
-        ) : (
-          <ToastEditor
-            initialValue={initialPost?.content ?? ""}
-            addImage={(file) => {
-              setPost((prev) => ({
-                ...prev,
-                mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
-                thumbnail_media: !prev.mediaIds
-                  ? file.mediaId!
-                  : prev.thumbnail_media,
-              }));
-            }}
-            forwardedRef={ref}
-          />
-        )}
+        <BlockNoteEditor
+          initialContent={content}
+          onChange={setContent}
+          addImage={(file) => {
+            setPost((prev) => ({
+              ...prev,
+              mediaIds: [...(prev.mediaIds ?? []), file.mediaId!],
+              thumbnail_media: !prev.mediaIds
+                ? file.mediaId!
+                : prev.thumbnail_media,
+            }));
+          }}
+        />
       </div>
       <div className="border ml-3 p-3 rounded-lg border-black flex flex-col justify-between">
         <div>
@@ -450,7 +423,7 @@ export default function PostEditContainer({
               onSubmit(post.id ?? -1, {
                 id: post.id,
                 title: post.title!,
-                content: JSON.stringify(content),
+                postContent: content,
                 description: post.description!,
                 mediaIds: post.mediaIds!,
                 thumbnail_media: post.thumbnail_media!,

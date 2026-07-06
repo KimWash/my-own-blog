@@ -11,7 +11,8 @@ export async function GET(
     include: {
       tags: { include: { tag: true } },
       medias: { include: { files: true } },
-      category: true
+      category: true,
+      postContent: true,
     },
   });
   const medias = post?.medias;

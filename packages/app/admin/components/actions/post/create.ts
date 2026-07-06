@@ -2,7 +2,7 @@
 
 import { PostForm } from "@/components/container/PostEditContainer";
 import { TagDto } from "@my-own-blog/core/lib/model/Post";
-import db, { Post } from "@my-own-blog/db";
+import db, { Post, Prisma } from "@my-own-blog/db";
 
 export async function createPost(id: number, post: PostForm) {
   console.log(post);
@@ -10,12 +10,17 @@ export async function createPost(id: number, post: PostForm) {
   const createdPost = await db.post.create({
     data: {
       title: post.title,
-      content: post.content,
       description: post.description,
       is_deleted: false,
       create_dt: new Date(),
       thumbnail_media: post.thumbnail_media,
       category_id: post.category_id,
+      postContent: {
+        create: {
+          content: post.postContent as unknown as Prisma.InputJsonValue,
+          create_dt: new Date(),
+        },
+      },
     },
   });
   if (post.tags) {

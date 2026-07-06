@@ -1,0 +1,6 @@
+/* client(Tailwind) 프리플라이트가 BlockNote/Mantine 뷰어 내부 스타일을 깨는 걸 방지하는 리셋 아일랜드 */
+.bn-viewer-scope,
+.bn-viewer-scope * {
+  all: revert;
+  box-sizing: border-box;
+}

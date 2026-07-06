@@ -1,0 +1,54 @@
+name: Migrate Content to BlockNote
+
+# BlockNote 마이그레이션 전용 워크플로우. master push에는 걸리지 않으며,
+# GitHub Actions 탭에서 수동으로만 실행된다 (프로덕션 DB에 쓰는 작업이므로).
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true면 dry-run만 실행 (DB에 실제로 쓰지 않음)"
+        type: boolean
+        default: true
+
+jobs:
+  migrate:
+    name: Apply PostContent schema migration + content migration
+    runs-on: ubuntu-latest
+    environment: Production
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - name: Clone code from github
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.1.0
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Generate Prisma client
+        run: yarn db generate
+
+      - name: Apply pending schema migrations (PostContent table)
+        run: yarn db migrate:deploy
+
+      - name: Run content migration script
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            yarn db migrate:content --dry-run --confirm-prod | tee migrate-content.log
+          else
+            yarn db migrate:content --confirm-prod | tee migrate-content.log
+          fi
+
+      - name: Upload migration log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: migrate-content-log
+          path: migrate-content.log

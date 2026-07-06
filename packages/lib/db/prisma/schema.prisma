@@ -63,6 +63,16 @@ model Post {
   tags            TagsOnPosts[]
   category        Category?     @relation(fields: [category_id], references: [id])
   category_id     String?       @db.VarChar(100)
+  postContent     PostContent?
+}
+
+model PostContent {
+  id        Int       @id @default(autoincrement())
+  post_id   Int       @unique
+  post      Post      @relation(fields: [post_id], references: [id])
+  content   Json
+  create_dt DateTime? @db.DateTime(0)
+  update_dt DateTime? @db.DateTime(0)
 }
 
 model Category {

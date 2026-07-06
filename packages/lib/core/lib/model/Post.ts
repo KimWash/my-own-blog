@@ -1,5 +1,6 @@
 import { Category } from "@my-own-blog/db";
-import { File, Media, Post, Tag } from "@prisma/client";
+import { File, Media, Post, Prisma, Tag } from "@prisma/client";
+import { Block } from "@blocknote/core";
 
 type NonFunctionKeyNames<T> = Exclude<
   {
@@ -12,13 +13,17 @@ type RemoveFunctions<T> = Pick<T, NonFunctionKeyNames<T>>;
 type PostDto = Pick<
   Post,
   | "title"
-  | "content"
   | "create_dt"
   | "id"
   | "description"
   | "update_dt"
   | "thumbnail_media"
-> & { category: Category };
+> & {
+  category: Category;
+  postContent: { content: Prisma.JsonValue } | null;
+};
+
+export type BlogBlock = Block;
 type MediaDto = RemoveFunctions<Media>;
 type FileDto = RemoveFunctions<File>;
 export type TagDto = RemoveFunctions<Tag>;

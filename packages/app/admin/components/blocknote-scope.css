@@ -1,0 +1,16 @@
+/*
+ * Tailwind/daisyUI 프리플라이트가 BlockNote(Mantine) 내부의 클래스 없는 기본
+ * 엘리먼트(button/input/table 등) 스타일을 초기화해버리는 걸 막기 위한 리셋 아일랜드.
+ * 이 스코프 안에서만 브라우저 기본값으로 되돌리고, 그 위에 BlockNote/Mantine 자체
+ * 스타일시트(@blocknote/core, @blocknote/mantine)가 적용되도록 import 순서를 유지한다.
+ */
+.bn-editor-scope,
+.bn-editor-scope * {
+  all: revert;
+  box-sizing: border-box;
+}
+
+.bn-editor-scope {
+  width: 100%;
+  min-height: 500px;
+}

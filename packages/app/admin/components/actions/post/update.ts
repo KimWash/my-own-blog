@@ -2,11 +2,11 @@
 
 import { PostForm } from "@/components/container/PostEditContainer";
 import { TagDto } from "@my-own-blog/core/lib/model/Post";
-import db, { Post } from "@my-own-blog/db";
+import db, { Post, Prisma } from "@my-own-blog/db";
 
 export type UploadPostDto = Pick<
   Post,
-  "title" | "content" | "thumbnail_media" | "description"
+  "title" | "thumbnail_media" | "description"
 > & {
   mediaIds: number[];
   tags: TagDto[];
@@ -20,10 +20,21 @@ export async function updatePost(id: number, post: PostForm) {
   const updatedPost = await db.post.update({
     data: {
       title: post.title,
-      content: post.content,
       description: post.description,
       update_dt: new Date(),
       thumbnail_media: post.thumbnail_media,
+      postContent: {
+        upsert: {
+          create: {
+            content: post.postContent as unknown as Prisma.InputJsonValue,
+            create_dt: new Date(),
+          },
+          update: {
+            content: post.postContent as unknown as Prisma.InputJsonValue,
+            update_dt: new Date(),
+          },
+        },
+      },
     },
     where: { id },
     include: { tags: { include: { tag: true } } },

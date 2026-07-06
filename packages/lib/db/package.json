@@ -11,15 +11,21 @@
     "push": "prisma db push",
     "pull": "prisma db pull",
     "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "migrate:content": "ts-node --transpile-only scripts/migrateContentToBlockNote.ts",
     "clean": "rimraf -rf ./dist",
     "compile": "tsc"
   },
   "dependencies": {
+    "@blocknote/core": "^0.22.0",
+    "@blocknote/server-util": "^0.22.0",
     "@prisma/client": "^5.12.1"
   },
   "devDependencies": {
+    "@types/node": "^20",
     "prisma": "^5.14.0",
     "rimraf": "^5.0.7",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
 }
