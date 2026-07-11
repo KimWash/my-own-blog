@@ -1,6 +1,5 @@
 "use client";
 
-import usePage from "@my-own-blog/core/lib/usePage";
 import useSearchViewModel from "../../hooks/useSearchViewModel";
 import Image from "next/image";
 import placeHolderImage from "@/asset/placeholder.png";
@@ -8,9 +7,7 @@ import "@my-own-blog/core/lib/date/date.extensions";
 import Tag from "@my-own-blog/core/components/Tag";
 
 export default function PostListContainer({ category }: { category?: string }) {
-  const page = usePage();
   const { data, isLoading } = useSearchViewModel({
-    page,
     type: "magazine",
     category,
   });

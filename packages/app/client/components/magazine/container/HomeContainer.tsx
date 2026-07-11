@@ -97,7 +97,7 @@ export default function HomeContainer() {
   const { data, isLoading } = useHomeViewModel(Number(page), 'magazine');
   if (!data || isLoading) return "loading...";
 
-  const groupedPosts = groupPosts(data);
+  const groupedPosts = groupPosts(data.pages.flat());
 
   return (
     <main className={`flex flex-col flex-1 p-10 bg-orange-50`}>

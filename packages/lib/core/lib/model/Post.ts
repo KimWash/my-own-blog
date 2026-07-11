@@ -20,7 +20,6 @@ type PostDto = Pick<
   | "thumbnail_media"
 > & {
   category: Category;
-  postContent: { content: Prisma.JsonValue } | null;
 };
 
 export type BlogBlock = Block;
@@ -29,6 +28,7 @@ type FileDto = RemoveFunctions<File>;
 export type TagDto = RemoveFunctions<Tag>;
 
 export type PostDetailDto = PostDto & {
+  postContent: { content: Prisma.JsonValue } | null;
   medias: (MediaDto & { files: FileDto[] })[];
   tags: TagDto[];
 };
