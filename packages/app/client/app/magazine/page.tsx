@@ -1,10 +1,8 @@
 import Header from "@/components/magazine/Header";
 import HomeContainer from "@/components/magazine/container/HomeContainer";
-import { PostService } from "@/components/model/PostService";
-import { PostQueryKey } from "@/components/queries/usePostListQuery";
+import { PostListQueryOptions } from "@/components/queries/usePostListQuery";
 import { Hydration } from "@my-own-blog/core/lib/query/Hydration";
-import getDehydratedState from "@my-own-blog/core/lib/query/getDehydratedQuery";
-import { useQueryClient } from "@tanstack/react-query";
+import { getDehydratedInfiniteState } from "@my-own-blog/core/lib/query/getDehydratedQuery";
 
 export default async function Home({
   searchParams,
@@ -12,10 +10,7 @@ export default async function Home({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const page = searchParams?.page ?? 1;
-  const dehydratedState = await getDehydratedState({
-    queryKey:PostQueryKey.search({type: 'magazine'}),
-    queryFn: ({ queryKey: [_, page] }) => PostService.fetchPosts(Number(page), 'magazine'),
-  });
+  const dehydratedState = await getDehydratedInfiniteState(PostListQueryOptions(Number(page), 'magazine'));
   return (
     <>
       <Header />
