@@ -33,4 +33,4 @@ EXPOSE 3001
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+CMD ["sh", "-c", "yarn db push && yarn start"]
