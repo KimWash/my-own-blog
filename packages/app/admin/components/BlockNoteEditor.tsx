@@ -7,15 +7,14 @@ import "./blocknote-scope.css";
 
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { Block } from "@blocknote/core";
-import { blogSchema } from "@my-own-blog/core/lib/blocknote/schema";
+import { blogSchema, BlogBlock, BlogPartialBlock } from "@my-own-blog/core/lib/blocknote/schema";
 import fetchExtended from "@my-own-blog/core/lib/fetchExtended";
 import { File as FileData } from "@my-own-blog/db";
 import { loadImage } from "@/lib/upload/loadImage";
 
 type BlockNoteEditorProps = {
-  initialContent?: Block[];
-  onChange(blocks: Block[]): void;
+  initialContent?: BlogPartialBlock[];
+  onChange(blocks: BlogBlock[]): void;
   addImage: (file: FileData) => void;
 };
 

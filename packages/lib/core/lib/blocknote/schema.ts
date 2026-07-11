@@ -1,4 +1,4 @@
-import { BlockNoteSchema, defaultBlockSpecs } from "@blocknote/core";
+import { Block, BlockNoteSchema, defaultBlockSpecs, PartialBlock } from "@blocknote/core";
 import { codeBlock } from "./blocks/CodeBlock";
 import { mathBlock } from "./blocks/MathBlock";
 import { imageGalleryBlock } from "./blocks/ImageGalleryBlock";
@@ -12,4 +12,14 @@ export const blogSchema = BlockNoteSchema.create({
   },
 });
 
-export type BlogBlock = (typeof blogSchema.blockSchema)[keyof typeof blogSchema.blockSchema];
+export type BlogBlock = Block<
+  typeof blogSchema.blockSchema,
+  typeof blogSchema.inlineContentSchema,
+  typeof blogSchema.styleSchema
+>;
+
+export type BlogPartialBlock = PartialBlock<
+  typeof blogSchema.blockSchema,
+  typeof blogSchema.inlineContentSchema,
+  typeof blogSchema.styleSchema
+>;

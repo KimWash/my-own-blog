@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { MediaService } from "@my-own-blog/core/service/MediaService";
 
+export const dynamic = "force-dynamic";
+
 /**
  * @param {number} id 미디어의 id입니다.
  */

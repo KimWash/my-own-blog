@@ -160,23 +160,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blocknote/mantine@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@blocknote/mantine@npm:0.22.0"
-  dependencies:
-    "@blocknote/core": "npm:^0.22.0"
-    "@blocknote/react": "npm:^0.22.0"
-    "@mantine/core": "npm:^7.10.1"
-    "@mantine/hooks": "npm:^7.10.1"
-    "@mantine/utils": "npm:^6.0.21"
-    react-icons: "npm:^5.2.1"
-  peerDependencies:
-    react: ^18.0 || ^19.0 || >= 19.0.0-rc
-    react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
-  checksum: 10c0/01e433ee442d74aac9cbe540221ab9926b5247b81b833815c5ebe00315a346094abdbbd32402f3aaf46682737d3fcf6554d3da8f87cc5942135e1412b16b8862
-  languageName: node
-  linkType: hard
-
 "@blocknote/mantine@npm:^0.24.0":
   version: 0.24.2
   resolution: "@blocknote/mantine@npm:0.24.2"
@@ -1855,9 +1838,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "admin@workspace:packages/app/admin"
   dependencies:
-    "@blocknote/core": "npm:^0.22.0"
-    "@blocknote/mantine": "npm:^0.22.0"
-    "@blocknote/react": "npm:^0.22.0"
+    "@blocknote/core": "npm:^0.24.0"
+    "@blocknote/mantine": "npm:^0.24.0"
+    "@blocknote/react": "npm:^0.24.0"
     "@fortawesome/fontawesome-svg-core": "npm:^6.5.1"
     "@fortawesome/free-solid-svg-icons": "npm:^6.5.1"
     "@fortawesome/react-fontawesome": "npm:^0.2.0"

@@ -24,7 +24,7 @@ import {
   resetServerContext,
 } from "react-beautiful-dnd";
 
-import { Block } from "@blocknote/core";
+import { BlogBlock } from "@my-own-blog/core/lib/blocknote/schema";
 const BlockNoteEditor = dynamic(() => import("../BlockNoteEditor"), {
   ssr: false,
 });
@@ -62,7 +62,7 @@ export type PostForm = Pick<
   PostDetailDto,
   "title" | "description" | "update_dt" | "thumbnail_media" | "id"
 > & {
-  postContent: Block[];
+  postContent: BlogBlock[];
   category_id: string;
   tags: (TagForm | TagDto)[];
   mediaIds: number[];
@@ -91,8 +91,8 @@ export default function PostEditContainer({
     category_id: initialCategory,
   };
 
-  const [content, setContent] = useState<Block[]>(
-    (initialPost?.postContent?.content as Block[] | undefined) ?? []
+  const [content, setContent] = useState<BlogBlock[]>(
+    (initialPost?.postContent?.content as BlogBlock[] | undefined) ?? []
   );
 
   const [post, setPost] = useState(
