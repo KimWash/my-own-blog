@@ -105,9 +105,21 @@ function makeTable(rows: string[][]): BnBlock {
   };
 }
 
-/** 지원하지 않는 인라인 HTML 태그를 제거하고 텍스트만 남긴다 (best-effort). */
+/** 지원하지 않는 인라인 HTML 태그/엔티티를 제거하고 텍스트만 남긴다 (best-effort). */
 function stripInlineHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, "");
+  return html
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+/** <br> 태그는 제거하면 개행이 사라지므로, 문단을 여러 개로 쪼개는 경계로 취급한다. */
+function splitOnLineBreaks(html: string): string[] {
+  return html.split(/<br\s*\/?>/gi).map(stripInlineHtml);
 }
 
 type EditorJsBlock = { type: string; data: Record<string, any> };
@@ -133,7 +145,7 @@ function convertListItem(
 function convertEditorJsBlock(block: EditorJsBlock, warnings: string[]): BnBlock[] {
   switch (block.type) {
     case "paragraph":
-      return [makeParagraph(stripInlineHtml(block.data.text ?? ""))];
+      return splitOnLineBreaks(block.data.text ?? "").map((text) => makeParagraph(text));
     case "header":
       return [makeHeading(stripInlineHtml(block.data.text ?? ""), block.data.level ?? 2)];
     case "list": {
@@ -144,7 +156,7 @@ function convertEditorJsBlock(block: EditorJsBlock, warnings: string[]): BnBlock
       );
     }
     case "quote":
-      return [makeParagraph(stripInlineHtml(block.data.text ?? ""))];
+      return splitOnLineBreaks(block.data.text ?? "").map((text) => makeParagraph(text));
     case "table":
       return [makeTable(block.data.content ?? [])];
     case "image":

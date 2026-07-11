@@ -56,17 +56,17 @@ export default function PostContainer({
           className="absolute top-0 left-0 right-0 bottom-0 h-full w-full object-cover z-10"
         />
         <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 z-20"></div>
-        <div className="absolute  px-10 py-[200px] flex-col justify-start items-start gap-2.5 flex z-30">
-          <div className="text-white text-2xl font-extrabold ">
+        <div className="absolute inset-x-0 px-6 py-28 md:px-10 md:py-[200px] max-w-3xl flex-col justify-start items-start gap-3 flex z-30">
+          <div className="text-white text-lg md:text-2xl font-extrabold tracking-tight">
             {post.category.name}
           </div>
-          <div className=" text-white text-4xl md:text-[64px] font-bold ">
+          <div className="text-white text-[2rem] leading-tight md:text-[64px] md:leading-[1.1] font-bold tracking-tight break-keep">
             {post.title}
-            </div>
-          <div className="  text-white text-2xl md:text-4xl font-normal ">
+          </div>
+          <div className="text-white text-xl md:text-4xl font-normal leading-snug tracking-tight break-keep">
             {post.description}
           </div>
-          <div className=" text-white text-xl md:text-2xl font-normal ">
+          <div className="text-white text-base md:text-2xl font-normal tracking-tight">
             {post.create_dt?.format("yyyy-MM-dd")}
           </div>
         </div>
@@ -76,8 +76,8 @@ export default function PostContainer({
           <BlockNoteViewer content={post.postContent?.content} />
         </div>
       </div>
-      <div className="self-stretch p-[60px] flex-col justify-center items-center gap-2.5 flex">
-        <div className="self-stretch text-black text-[40px] font-extrabold ">
+      <div className="self-stretch px-6 py-10 md:p-[60px] flex-col justify-center items-center gap-2.5 flex">
+        <div className="self-stretch text-black text-3xl md:text-[40px] font-extrabold ">
           댓글
         </div>
         <div className="self-stretch">
