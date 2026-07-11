@@ -113,6 +113,23 @@ function stripInlineHtml(html: string): string {
 type EditorJsBlock = { type: string; data: Record<string, any> };
 type EditorJsOutput = { blocks: EditorJsBlock[] };
 
+/** EditorJS list 아이템은 평문 string이거나, 중첩 리스트를 담은 { content, items } 객체다. */
+type EditorJsListItem = string | { content?: string; items?: EditorJsListItem[] };
+
+function convertListItem(
+  type: "bulletListItem" | "numberedListItem",
+  item: EditorJsListItem
+): BnBlock {
+  if (typeof item === "string") {
+    return makeListItem(type, stripInlineHtml(item));
+  }
+  const block = makeListItem(type, stripInlineHtml(item.content ?? ""));
+  if (item.items && item.items.length > 0) {
+    block.children = item.items.map((child) => convertListItem(type, child));
+  }
+  return block;
+}
+
 function convertEditorJsBlock(block: EditorJsBlock, warnings: string[]): BnBlock[] {
   switch (block.type) {
     case "paragraph":
@@ -121,9 +138,9 @@ function convertEditorJsBlock(block: EditorJsBlock, warnings: string[]): BnBlock
       return [makeHeading(stripInlineHtml(block.data.text ?? ""), block.data.level ?? 2)];
     case "list": {
       const isOrdered = block.data.style === "ordered";
-      const items: string[] = block.data.items ?? [];
+      const items: EditorJsListItem[] = block.data.items ?? [];
       return items.map((item) =>
-        makeListItem(isOrdered ? "numberedListItem" : "bulletListItem", stripInlineHtml(item))
+        convertListItem(isOrdered ? "numberedListItem" : "bulletListItem", item)
       );
     }
     case "quote":
