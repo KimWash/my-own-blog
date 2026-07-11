@@ -58,57 +58,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blocknote/core@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@blocknote/core@npm:0.22.0"
-  dependencies:
-    "@emoji-mart/data": "npm:^1.2.1"
-    "@tiptap/core": "npm:^2.7.1"
-    "@tiptap/extension-bold": "npm:^2.7.1"
-    "@tiptap/extension-code": "npm:^2.7.1"
-    "@tiptap/extension-collaboration": "npm:^2.7.1"
-    "@tiptap/extension-collaboration-cursor": "npm:^2.7.1"
-    "@tiptap/extension-gapcursor": "npm:^2.7.1"
-    "@tiptap/extension-hard-break": "npm:^2.7.1"
-    "@tiptap/extension-history": "npm:^2.7.1"
-    "@tiptap/extension-horizontal-rule": "npm:^2.7.1"
-    "@tiptap/extension-italic": "npm:^2.7.1"
-    "@tiptap/extension-link": "npm:^2.7.1"
-    "@tiptap/extension-paragraph": "npm:^2.7.1"
-    "@tiptap/extension-strike": "npm:^2.7.1"
-    "@tiptap/extension-table-cell": "npm:^2.7.1"
-    "@tiptap/extension-table-header": "npm:^2.7.1"
-    "@tiptap/extension-table-row": "npm:^2.7.1"
-    "@tiptap/extension-text": "npm:^2.7.1"
-    "@tiptap/extension-underline": "npm:^2.7.1"
-    "@tiptap/pm": "npm:^2.7.1"
-    emoji-mart: "npm:^5.6.0"
-    hast-util-from-dom: "npm:^4.2.0"
-    prosemirror-dropcursor: "npm:^1.8.1"
-    prosemirror-highlight: "npm:^0.9.0"
-    prosemirror-model: "npm:^1.23.0"
-    prosemirror-state: "npm:^1.4.3"
-    prosemirror-tables: "npm:^1.6.1"
-    prosemirror-transform: "npm:^1.10.2"
-    prosemirror-view: "npm:^1.33.7"
-    rehype-format: "npm:^5.0.0"
-    rehype-parse: "npm:^8.0.4"
-    rehype-remark: "npm:^9.1.2"
-    rehype-stringify: "npm:^9.0.3"
-    remark-gfm: "npm:^3.0.1"
-    remark-parse: "npm:^10.0.1"
-    remark-rehype: "npm:^10.1.0"
-    remark-stringify: "npm:^10.0.2"
-    shiki: "npm:^1.22.0"
-    unified: "npm:^10.1.2"
-    uuid: "npm:^8.3.2"
-    y-prosemirror: "npm:1.2.13"
-    y-protocols: "npm:^1.0.6"
-    yjs: "npm:^13.6.15"
-  checksum: 10c0/dee28173af374e4e18b82156af2f3ddb973896496da716cae4e950fdc904b3a83abe37097f076fd7c4e3911a4eb546db51ac8e88488080e751d4b8696ff482b4
-  languageName: node
-  linkType: hard
-
 "@blocknote/core@npm:^0.24.0, @blocknote/core@npm:^0.24.2":
   version: 0.24.2
   resolution: "@blocknote/core@npm:0.24.2"
@@ -177,23 +126,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blocknote/react@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@blocknote/react@npm:0.22.0"
-  dependencies:
-    "@blocknote/core": "npm:^0.22.0"
-    "@floating-ui/react": "npm:^0.26.4"
-    "@tiptap/core": "npm:^2.7.1"
-    "@tiptap/react": "npm:^2.7.1"
-    lodash.merge: "npm:^4.6.2"
-    react-icons: "npm:^5.2.1"
-  peerDependencies:
-    react: ^18.0 || ^19.0 || >= 19.0.0-rc
-    react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
-  checksum: 10c0/cf409be82d550b46b6c355c586e054a1e13ba4204ed3eb07dca3be92795d58f34e9b055a97807d2c1943cedd8ef4cf3a6ce1265cc616174ba609ff4b92be5519
-  languageName: node
-  linkType: hard
-
 "@blocknote/react@npm:^0.24.0, @blocknote/react@npm:^0.24.2":
   version: 0.24.2
   resolution: "@blocknote/react@npm:0.24.2"
@@ -211,12 +143,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blocknote/server-util@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "@blocknote/server-util@npm:0.22.0"
+"@blocknote/server-util@npm:^0.24.0":
+  version: 0.24.2
+  resolution: "@blocknote/server-util@npm:0.24.2"
   dependencies:
-    "@blocknote/core": "npm:^0.22.0"
-    "@blocknote/react": "npm:^0.22.0"
+    "@blocknote/core": "npm:^0.24.2"
+    "@blocknote/react": "npm:^0.24.2"
     "@tiptap/core": "npm:^2.7.1"
     "@tiptap/pm": "npm:^2.7.1"
     jsdom: "npm:^25.0.1"
@@ -226,7 +158,7 @@ __metadata:
   peerDependencies:
     react: ^18.0 || ^19.0 || >= 19.0.0-rc
     react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
-  checksum: 10c0/1cdb89a73f6b8dc1ff05f0206960a0b30e3273ba39b0f74e2fad04fdfbf64253a34c5d07ec4d2213600a0e73ce8855310e1947b9cbdcac51c81119ec44c190c8
+  checksum: 10c0/c4a7931459ca5576d2a5b21754c4651501109111898969d5eef299895d3cd0a00d753b686263c02d7f8e80212d736ad7a8d5a700f283ccc2accfb6bedb2e72b3
   languageName: node
   linkType: hard
 
@@ -778,8 +710,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@my-own-blog/db@workspace:packages/lib/db"
   dependencies:
-    "@blocknote/core": "npm:^0.22.0"
-    "@blocknote/server-util": "npm:^0.22.0"
+    "@blocknote/core": "npm:^0.24.0"
+    "@blocknote/server-util": "npm:^0.24.0"
     "@prisma/client": "npm:^5.12.1"
     "@types/node": "npm:^20"
     prisma: "npm:^5.14.0"
@@ -6626,7 +6558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prosemirror-view@npm:^1.0.0, prosemirror-view@npm:^1.1.0, prosemirror-view@npm:^1.27.0, prosemirror-view@npm:^1.31.0, prosemirror-view@npm:^1.33.7, prosemirror-view@npm:^1.37.0, prosemirror-view@npm:^1.38.0, prosemirror-view@npm:^1.41.4":
+"prosemirror-view@npm:^1.0.0, prosemirror-view@npm:^1.1.0, prosemirror-view@npm:^1.27.0, prosemirror-view@npm:^1.31.0, prosemirror-view@npm:^1.37.0, prosemirror-view@npm:^1.38.0, prosemirror-view@npm:^1.41.4":
   version: 1.42.0
   resolution: "prosemirror-view@npm:1.42.0"
   dependencies:
