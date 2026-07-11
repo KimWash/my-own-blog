@@ -49,7 +49,7 @@ export const imageGalleryBlock = createReactBlockSpec(
         const uploaded: GalleryImage[] = [];
         for (const file of Array.from(files)) {
           const url = await editor.uploadFile?.(file);
-          if (url) uploaded.push({ url });
+          if (typeof url === "string") uploaded.push({ url });
         }
         updateImages([...images, ...uploaded]);
       };
@@ -63,7 +63,7 @@ export const imageGalleryBlock = createReactBlockSpec(
                 onChange={(e) =>
                   editor.updateBlock(block, {
                     type: "imageGallery",
-                    props: { ...block.props, layout: e.target.value },
+                    props: { ...block.props, layout: e.target.value as "row" | "grid" },
                   })
                 }
               >
